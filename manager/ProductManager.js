@@ -1,35 +1,34 @@
-import fs from 'fs'
+import fs from "fs";
 
 export default class ProductManager {
   constructor() {
-    this.path = '../desafios/files/products.json'
+    this.path = "../desafios/files/products.json";
   }
 
-  getProducts = async() => {
+  getProducts = async () => {
     if (fs.existsSync(this.path)) {
       const data = await fs.promises.readFile(this.path, "utf-8");
       const products = JSON.parse(data);
       return products;
     }
     return [];
-  }
+  };
 
-  addProducts = async(product) => {
-    
-    const products = await this.getProducts()
+  addProducts = async (product) => {
+    const products = await this.getProducts();
 
-    const validation = Object.values(product)
-    const empty = validation.some(e => e === undefined)
-    if(empty){
-      console.log('Falta ingresar datos')
-      return null
+    const validation = Object.values(product);
+    const empty = validation.some((e) => e === undefined);
+    if (empty) {
+      console.log("Falta ingresar datos");
+      return null;
     }
 
-    /* for (let i = 0; i < products.length; i++) {
-      if (products[i].code.includes(code)) {
-        throw new Error("Code is repited");
-      }
+    /* const codeValidation = products.some((e) => e.code === code);
+    if (codeValidation) {
+      throw new Error("El codigo esta repetido");
     } */
+
     if (products.length === 0) {
       product.id = 1;
     } else {
@@ -38,23 +37,38 @@ export default class ProductManager {
     }
 
     products.push(product);
-    await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'))
-  }
+    await fs.promises.writeFile(
+      this.path,
+      JSON.stringify(products, null, "\t")
+    );
+  };
 
-  getProductById(productId) {
-    const productIndex = this.products.findIndex(
+  getProductById = async (productId) => {
+    const products = await this.getProducts();
+    const productIndex = products.findIndex(
       (product) => product.id === productId
     );
 
     if (productIndex === -1) {
-      throw new Error("Not Found");
-    } else {
-      const product = this.products[productIndex];
-      console.log(product);
+      throw new Error("Id no encontrado");
     }
-  }
+    const product = products[productIndex];
+    return product;
+  };
 
+  deleteProduct = async (productId) => {
+    const products = await this.getProducts();
+    const productIndex = products.findIndex(
+      (product) => product.id === productId
+    );
+
+    if (productIndex === -1) {
+      throw new Error("Id no encontrado");
+    }
+    products.splice(productIndex, 1);
+    await fs.promises.writeFile(
+      this.path,
+      JSON.stringify(products, null, "\t")
+    );
+  };
 }
-
-
-

@@ -9,12 +9,12 @@
 		"id": 1
 	},
 	{
-		"title": "TV LG",
-		"description": "TV LG 40\"",
-		"price": 1500,
+		"title": "Chevrolet Corsa",
+		"description": "Chevrolet Corsa modelo 2005",
+		"price": 3000,
 		"thumbnail": "imagen.jpg",
-		"code": "t463",
-		"stock": 15,
+		"code": "27437814",
+		"stock": 2,
 		"id": 2
 	}
 ]
