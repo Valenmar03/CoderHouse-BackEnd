@@ -1,0 +1,20 @@
+[
+	{
+		"title": "hol2",
+		"description": "hola TV LG 40\"",
+		"price": 1500,
+		"thumbnail": "imagen.jpg",
+		"code": "675463",
+		"stock": 15,
+		"id": 1
+	},
+	{
+		"title": "TV LG",
+		"description": "TV LG 40\"",
+		"price": 1500,
+		"thumbnail": "imagen.jpg",
+		"code": "t463",
+		"stock": 15,
+		"id": 2
+	}
+]
