@@ -12,18 +12,18 @@ const context = async () => {
     stock: 2,
   };
 
-  //await productManager.addProducts(testProduct)
+  await productManager.addProducts(testProduct)
 
   //await productManager.getProducts();
 
   //const id1 = await productManager.getProductById(2)
   //console.log(id1)
 
-  //await productManager.deleteProduct(5);
+  //await productManager.deleteProduct(6, 5, 4, 3);
 
   //await productManager.updateProduct(2, 'Ford Ranger', 'Ford Ranger', 15000, 'imagen.jpg', '1244h143g32', 1)
 
-  console.log(await productManager.getProducts())
+  //console.log(await productManager.getProducts())
 
 };
 

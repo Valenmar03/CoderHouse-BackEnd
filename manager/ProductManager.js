@@ -24,6 +24,14 @@ export default class ProductManager {
       return null;
     }
 
+
+    console.log(products)
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].code.includes(code)) {
+        throw new Error("Code is repited");
+      }
+    }
+
     /* const codeValidation = products.some((e) => e.code === code);
     if (codeValidation) {
       throw new Error("El codigo esta repetido");
@@ -89,19 +97,23 @@ export default class ProductManager {
     );
   };
 
-  deleteProduct = async (productId) => {
+  deleteProduct = async (...productIds) => {
     const products = await this.getProducts();
-    const productIndex = products.findIndex(
-      (product) => product.id === productId
-    );
+    
+    for (const productId of productIds) {
+      const productIndex = products.findIndex(
+        (product) => product.id === productId
+      );
+      
+      if (productIndex === -1) {
+        throw new Error("Id no encontrado");
+      }
+      products.splice(productIndex, 1);
+      await fs.promises.writeFile(
+        this.path,
+        JSON.stringify(products, null, "\t")
+      );
+    };
+    } 
 
-    if (productIndex === -1) {
-      throw new Error("Id no encontrado");
-    }
-    products.splice(productIndex, 1);
-    await fs.promises.writeFile(
-      this.path,
-      JSON.stringify(products, null, "\t")
-    );
-  };
 }
