@@ -56,6 +56,39 @@ export default class ProductManager {
     return product;
   };
 
+  updateProduct = async (
+    productId,
+    title,
+    description,
+    price,
+    thumbnail,
+    code,
+    stock
+  ) => {
+    const products = await this.getProducts();
+    const productIndex = products.findIndex(
+      (product) => product.id === productId
+    );
+
+    if (productIndex === -1) {
+      throw new Error("Id no encontrado");
+    }
+    const productToUpdate = products[productIndex];
+    productToUpdate.title = title;
+    productToUpdate.description = description;
+    productToUpdate.price = price;
+    productToUpdate.thumbnail = thumbnail;
+    productToUpdate.code = code;
+    productToUpdate.stock = stock;
+
+    products.splice(productIndex, 1, productToUpdate);
+
+    await fs.promises.writeFile(
+      this.path,
+      JSON.stringify(products, null, "\t")
+    );
+  };
+
   deleteProduct = async (productId) => {
     const products = await this.getProducts();
     const productIndex = products.findIndex(

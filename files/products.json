@@ -9,12 +9,12 @@
 		"id": 1
 	},
 	{
-		"title": "Chevrolet Corsa",
-		"description": "Chevrolet Corsa modelo 2005",
-		"price": 3000,
+		"title": "Ford Ranger",
+		"description": "Ford Ranger",
+		"price": 15000,
 		"thumbnail": "imagen.jpg",
-		"code": "27437814",
-		"stock": 2,
+		"code": "1244h143g32",
+		"stock": 1,
 		"id": 2
 	}
 ]
