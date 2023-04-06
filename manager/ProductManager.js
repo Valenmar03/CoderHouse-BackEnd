@@ -24,18 +24,11 @@ export default class ProductManager {
       return null;
     }
 
-
-    console.log(products)
     for (let i = 0; i < products.length; i++) {
-      if (products[i].code.includes(code)) {
+      if (products[i].code.includes(product.code)) {
         throw new Error("Code is repited");
       }
     }
-
-    /* const codeValidation = products.some((e) => e.code === code);
-    if (codeValidation) {
-      throw new Error("El codigo esta repetido");
-    } */
 
     if (products.length === 0) {
       product.id = 1;
@@ -74,6 +67,14 @@ export default class ProductManager {
     stock
   ) => {
     const products = await this.getProducts();
+
+    const validation = Object.values(product);
+    const empty = validation.some((e) => e === undefined);
+    if (empty) {
+      console.log("Falta ingresar datos");
+      return null;
+    }
+    
     const productIndex = products.findIndex(
       (product) => product.id === productId
     );
