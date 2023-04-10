@@ -12,7 +12,7 @@ const context = async () => {
     stock: 2,
   };
 
-  await productManager.addProducts(testProduct)
+  //await productManager.addProducts(testProduct)
 
   //await productManager.getProducts();
 
@@ -21,7 +21,7 @@ const context = async () => {
 
   //await productManager.deleteProduct(6, 5, 4, 3);
 
-  //await productManager.updateProduct(2, 'Ford Ranger', 'Ford Ranger', 15000, 'imagen.jpg', '1244h143g32', 1)
+  await productManager.updateProduct(2, 'Ford F-150', 'Ford F-150 Raptor',  20000, 'imagen.jpg', '124h143g32', 1)
 
   //console.log(await productManager.getProducts())
 

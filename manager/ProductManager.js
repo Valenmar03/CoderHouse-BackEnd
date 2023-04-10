@@ -2,7 +2,7 @@ import fs from "fs";
 
 export default class ProductManager {
   constructor() {
-    this.path = "../desafios/files/products.json";
+    this.path = "../desafio/files/products.json";
   }
 
   getProducts = async () => {
@@ -68,13 +68,21 @@ export default class ProductManager {
   ) => {
     const products = await this.getProducts();
 
+    const product = {
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock,
+    };
+
     const validation = Object.values(product);
     const empty = validation.some((e) => e === undefined);
     if (empty) {
-      console.log("Falta ingresar datos");
-      return null;
+      throw new Error(`Missing data`);
     }
-    
+
     const productIndex = products.findIndex(
       (product) => product.id === productId
     );
@@ -100,12 +108,12 @@ export default class ProductManager {
 
   deleteProduct = async (...productIds) => {
     const products = await this.getProducts();
-    
+
     for (const productId of productIds) {
       const productIndex = products.findIndex(
         (product) => product.id === productId
       );
-      
+
       if (productIndex === -1) {
         throw new Error("Id no encontrado");
       }
@@ -114,7 +122,6 @@ export default class ProductManager {
         this.path,
         JSON.stringify(products, null, "\t")
       );
-    };
-    } 
-
+    }
+  };
 }
