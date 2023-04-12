@@ -11,11 +11,11 @@ app.get('/products', (req, res) => {
     res.send(products)
 })
 
-app.get('/products/:pid', (req, res) => {
+app.get('/products/:pid', async(req, res) => {
     const id = Object.values(req.params)[0]
-    const product = await productManager.getProductById(id)// Revisar el await
-    console.log(id) // Linea para comprobar que el id se esta pasando correctamente
-    res.send(productManager.getProductById(product))
+    const  id2 = parseInt(id)
+    const product = await productManager.getProductById(id2)
+    res.send(product)
 })
 
 app.listen(8080, () => console.log('Listening on Port 8080'))
