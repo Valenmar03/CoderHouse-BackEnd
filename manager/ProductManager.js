@@ -51,7 +51,7 @@ export default class ProductManager {
     );
 
     if (productIndex === -1) {
-      throw new Error("Id no encontrado");
+      console.log("Id no encontrado");
     }
     const product = products[productIndex];
     return product;
