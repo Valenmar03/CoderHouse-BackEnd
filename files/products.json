@@ -25,5 +25,14 @@
 		"code": "27437814",
 		"stock": 2,
 		"id": 3
+	},
+	{
+		"title": "Toyota Hilux",
+		"description": "Toyota Hilux modelo 2020",
+		"price": 15000,
+		"thumbnail": "imagen.jpg",
+		"code": "127814",
+		"stock": 1,
+		"id": 4
 	}
 ]
