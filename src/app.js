@@ -10,7 +10,7 @@ const products = await productManager.getProducts();
 app.get("/products", async (req, res) => {
   const limit = req.query.limit;
   const parseLimit = parseInt(limit);
-  if (!limit) {
+  if (!limit || parseLimit > products.length) {
     res.send(products)
   } else {
     res.send(products.slice(0, parseLimit));
