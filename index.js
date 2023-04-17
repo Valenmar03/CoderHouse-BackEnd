@@ -12,11 +12,11 @@ const context = async () => {
     stock: 1,
   };
 
-  // await productManager.addProducts(testProduct)
+  await productManager.addProducts(testProduct)
 
   //await productManager.deleteProduct(6, 5, 4, 3);
 
-  // await productManager.updateProduct(2, 'Ford F-150', 'Ford F-150 Raptor',  20000, 'imagen.jpg', '124h143g32', 1)
+  // await productManager.updateProduct(1, 'Ford F-150', 'Ford F-150 Raptor',  20000, 'imagen.jpg', '124h143g32', 1)
 
 };
 

@@ -18,9 +18,9 @@ app.get("/products", async (req, res) => {
 });
 
 app.get("/products/:pid", async (req, res) => {
-  const id = Object.values(req.params)[0];
-  const id2 = parseInt(id);
-  const product = await productManager.getProductById(id2);
+  const paramId = Object.values(req.params)[0];
+  const id = parseInt(paramId);
+  const product = await productManager.getProductById(id);
   res.send(product);
 });
 

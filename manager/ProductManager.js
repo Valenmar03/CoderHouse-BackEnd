@@ -14,8 +14,26 @@ export default class ProductManager {
     return [];
   };
 
-  addProducts = async (product) => {
+  addProducts = async ({
+    title,
+    description,
+    price,
+    thumbnail,
+    code,
+    status = true,
+    stock
+  }) => {
     const products = await this.getProducts();
+
+    const product = {
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      status,
+      stock,
+    };
 
     const validation = Object.values(product);
     const empty = validation.some((e) => e === undefined);
