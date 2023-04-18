@@ -64,6 +64,7 @@ export default class CartManager {
     for (let i = 0; i < cart.products.length; i++) {
         if (cart.products[i].id === product.id) {
             cart.products[i].quantity += 1;
+            //cart.products.pop()
         }    
     }
     const productIdQty = {
@@ -82,4 +83,3 @@ export default class CartManager {
 
 const cartManager = new CartManager();
 
-await cartManager.addProductToCart(2, 1)

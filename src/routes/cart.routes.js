@@ -19,4 +19,12 @@ router.get('/:cid', async (req, res) => {
     res.send({status: 'success', payload: cart})
 })
 
+router.post('/:cid/products/:pid', async (req, res) => {
+    const paramId = Object.values(req.params)
+    const cartId = parseInt(paramId[0])
+    const productId = parseInt(paramId[1])
+    await cartManager.addProductToCart(cartId, productId)
+    res.send({status: 'success', message: 'Productd added to Cart successfully'})
+})
+
 export default router
