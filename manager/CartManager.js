@@ -1,9 +1,9 @@
 import fs from "fs";
 import ProductManager from "./ProductManager.js";
 
-const productManager = new ProductManager()
+const productManager = new ProductManager();
 
-const products = await productManager.getProducts()
+const products = await productManager.getProducts();
 
 export default class CartManager {
   constructor() {
@@ -58,28 +58,36 @@ export default class CartManager {
     const carts = await this.getCarts();
     const cart = await this.getCartById(cartId);
     const cartIndex = carts.findIndex((cart) => cart.id === cartId);
-    const product = await productManager.getProductById(productId)
+    const productIndex = cart.products.findIndex((product) => product.id === productId);
+    const product = await productManager.getProductById(productId);
 
-    
-    for (let i = 0; i < cart.products.length; i++) {
-        if (cart.products[i].id === product.id) {
-            cart.products[i].quantity += 1;
-            //cart.products.pop()
-        }    
-    }
-    const productIdQty = {
+    console.log(productIndex);
+    console.log(product.id)
+
+    if(productIndex === -1){
+      const productIdQty = {
         id: product.id,
-        quantity: 1
+        quantity: 1,
+      };
+      
+      cart.products.push(productIdQty)
+    } else {
+
+      for (let i = 0; i < cart.products.length; i++) {
+          if (cart.products[i].id === product.id) {
+              cart.products[i].quantity += 1;
+          }    
+      }
     }
 
-    cart.products.push(productIdQty);
-    console.log(cart)
-    
 
-    carts.splice(cartIndex, 1, cart)
+    console.log(cart);
+
+    carts.splice(cartIndex, 1, cart);
     await fs.promises.writeFile(this.path, JSON.stringify(carts, null, "\t"));
   };
 }
 
 const cartManager = new CartManager();
 
+cartManager.addProductToCart(2, 2)
