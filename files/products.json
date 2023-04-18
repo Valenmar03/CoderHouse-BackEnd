@@ -8,5 +8,16 @@
 		"status": true,
 		"stock": 1,
 		"id": 1
+	},
+	{
+		"title": "Peugeot 207",
+		"description": " Peugeot 207 modelo 2023",
+		"price": 15000,
+		"thumbnail": [],
+		"code": "3254",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 2
 	}
 ]
