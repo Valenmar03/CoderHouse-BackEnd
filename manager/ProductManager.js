@@ -105,7 +105,14 @@ export default class ProductManager {
     const validation = Object.values(product);
     const empty = validation.some((e) => e === undefined);
     if (empty) {
-      throw new Error(`Missing data`);
+      console.log(`Missing data`);
+    }
+
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].code.includes(product.code)) {
+        console.log("Code is repited");
+        return null
+      }
     }
 
     const productIndex = products.findIndex(
@@ -113,7 +120,7 @@ export default class ProductManager {
     );
 
     if (productIndex === -1) {
-      throw new Error("Id no encontrado");
+      console.log("Id no encontrado");
     }
     const productToUpdate = products[productIndex];
     productToUpdate.title = title;
