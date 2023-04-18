@@ -38,5 +38,27 @@
 		"status": true,
 		"stock": 1,
 		"id": 4
+	},
+	{
+		"title": "Peugeot 208",
+		"description": " Peugeot 208 modelo 2023",
+		"price": 15000,
+		"thumbnail": "imagen.jpg",
+		"code": "325asdf4",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 5
+	},
+	{
+		"title": "Peugeot 208",
+		"description": " Peugeot 208 modelo 2023",
+		"price": 15000,
+		"thumbnail": [],
+		"code": "325a4",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 6
 	}
 ]

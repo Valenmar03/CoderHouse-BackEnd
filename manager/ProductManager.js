@@ -18,8 +18,9 @@ export default class ProductManager {
     title,
     description,
     price,
-    thumbnail,
+    thumbnail = [],
     code,
+    category,
     status = true,
     stock
   }) => {
@@ -31,6 +32,7 @@ export default class ProductManager {
       price,
       thumbnail,
       code,
+      category,
       status,
       stock,
     };
@@ -83,6 +85,8 @@ export default class ProductManager {
     price,
     thumbnail,
     code,
+    category,
+    status,
     stock
   ) => {
     const products = await this.getProducts();
@@ -93,6 +97,8 @@ export default class ProductManager {
       price,
       thumbnail,
       code,
+      category,
+      status,
       stock,
     };
 
