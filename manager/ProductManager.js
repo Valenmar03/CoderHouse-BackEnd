@@ -73,6 +73,7 @@ export default class ProductManager {
 
     if (productIndex === -1) {
       console.log("Id no encontrado");
+    return null
     }
     const product = products[productIndex];
     return product;
@@ -157,3 +158,7 @@ export default class ProductManager {
     }
   };
 }
+
+const hola = new ProductManager();
+
+
