@@ -44,7 +44,8 @@ export default class ProductManager {
 
     for (let i = 0; i < products.length; i++) {
       if (products[i].code.includes(product.code)) {
-        throw new Error("Code is repited");
+        console.log("Code is repited");
+        return null
       }
     }
 
