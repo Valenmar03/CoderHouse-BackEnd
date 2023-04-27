@@ -3,7 +3,7 @@
 		"title": "Ford F-150",
 		"description": "Ford F-150 Raptor",
 		"price": 20000,
-		"thumbnail": "imagen.jpg",
+		"thumbnail": [],
 		"code": "124h143g32",
 		"status": true,
 		"stock": 1,
