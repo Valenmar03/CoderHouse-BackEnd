@@ -1,6 +1,20 @@
 <div>
-    <h1>Lista productos</h1>
-    <ul id="products-list"></ul>
+    <h1>Lista thisos</h1>
+    <ul id="prodList">
+        {{#if prod}}
+        {{#each prod}}
+        <li class="prodLi">
+                <h2>{{this.title}}</h2>
+                <img src="{{this.thumbnail}}" alt="{{this.title}}">
+                <p>{{this.description}}</p>
+                <p>Precio: ${{this.price}}</p>
+                <p>Stock: {{this.stock}}</p>
+            </li>
+        {{/each}}
+        {{else}}
+        <p>No se encontraron thisos</p>
+        {{/if}}
+    </ul>
 </div>
 
 <script src="/js/home.js"></script>
