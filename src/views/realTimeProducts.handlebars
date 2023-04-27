@@ -1,10 +1,38 @@
 <div>
     <h1>Listado de productos en vivo</h1>
-    <ul id="product-list">
+    <ul id="product-list"></ul>
 
-    </ul>
+
+
+    <form action="" method="POST" id="addProductForm">
+        <h2>Ingrese todos los campos</h2>
+        
+        <label for="title" class="title">Ingrese el nombre del producto</label>
+        <input type="text" name="title" class="title">
+        
+        <label for="description" class="description">Ingrese una descripcion del producto</label>
+        <input type="text" name="description" class="description">
+        
+        <label for="price" class="price">Ingrese el precio del producto</label>
+        <input type="number" name="price" class="price">
+
+        <label for="thumbnail" class="thumbnail">Ingrese una imagen</label>
+        <input type="file" name="thumbnail" class="thumbnail">
+
+        <label for="code" class="code">Ingrese un codigo de producto</label>
+        <input type="text" name="code" class="code">
+
+        <label for="category" class="category">Ingrese la categoria del producto</label>
+        <input type="text" name="category" class="category">
+
+        <label for="stock" class="stock">Ingrese el stock del producto</label>
+        <input type="text" name="stock" class="stock">
+
+        <button type="submit" id="submit-button">Agregar producto</button>
+    </form> 
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/realTimeProducts.js"></script>

@@ -1,5 +1,7 @@
 const socket = io();
 
+const button = document.getElementById('prod-button')
+
 socket.on("products-list", (data) => {
   const ul = document.getElementById("product-list");
 
@@ -15,3 +17,8 @@ socket.on("products-list", (data) => {
   });
   ul.innerHTML = products;
 });
+
+
+
+
+

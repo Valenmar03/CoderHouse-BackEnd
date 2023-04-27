@@ -7,7 +7,7 @@ fetch("http://localhost:8080/api/products")
     let products;
     products = res.payload;
     products.forEach((product) => {
-      productsList += `<li>
+      productsList += `<li class="prodLi">
                 <h2>${product.title}</h2>
                 <img src="${product.thumbnail}" alt="${product.title}">
                 <p>${product.description}</p>
