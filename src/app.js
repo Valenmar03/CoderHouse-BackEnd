@@ -26,7 +26,6 @@ app.use('/', viewsRouter)
 
 
 const productManager = new ProductManager()
-
 const products = await productManager.getProducts()
 
 const io = new Server(server)
