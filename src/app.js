@@ -22,7 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter)
-app.use('/realTimeProducts', viewsRouter)
+app.use('/', viewsRouter)
+
 
 const productManager = new ProductManager()
 
