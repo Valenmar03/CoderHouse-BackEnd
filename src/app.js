@@ -13,6 +13,7 @@ import __dirname from './utils.js'
 const app = express();
 const PORT = process.env.PORT||8080
 const server = app.listen(PORT, () => console.log("Listening on Port 8080"));
+const io = new Server(server)
 
 app.engine('handlebars', handlebars.engine())
 app.set('views', `${__dirname}/views`)
@@ -30,7 +31,6 @@ app.use('/', viewsRouter)
 const productManager = new ProductManager()
 const products = await productManager.getProducts()
 
-const io = new Server(server)
 
 io.on('connection', socket => {
     console.log('a user connected')

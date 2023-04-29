@@ -10,17 +10,6 @@
 		"id": 1
 	},
 	{
-		"title": "Peugeot 2008",
-		"description": " Peugeot 2008 modelo 2018",
-		"price": 1200,
-		"thumbnail": [],
-		"code": "sdagsdeg",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 2
-	},
-	{
 		"title": "Peugeot 208",
 		"description": " Peugeot 208 modelo 2018",
 		"price": 1200,
@@ -41,5 +30,38 @@
 		"status": true,
 		"stock": 2,
 		"id": 4
+	},
+	{
+		"title": "Ford Ecosport",
+		"description": " Ford Ecosport modelo 2018",
+		"price": 1200,
+		"thumbnail": [],
+		"code": "hjsbvlksan",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 5
+	},
+	{
+		"title": "Ford Ranger",
+		"description": " Ford Ranger modelo 2018",
+		"price": 1200,
+		"thumbnail": [],
+		"code": "kvichaKavaratshkelia",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 6
+	},
+	{
+		"title": "Volkswagen Fox",
+		"description": "Volkswagen Fox modelo 2012",
+		"price": 1200,
+		"thumbnail": [],
+		"code": "victorOsimhen",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 7
 	}
 ]

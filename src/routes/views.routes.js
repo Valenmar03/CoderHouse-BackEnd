@@ -5,7 +5,7 @@ const productManager = new ProductManager()
 
 const router = Router()
 
-router.get('/home', async (req, res) => {
+router.get('/', async (req, res) => {
 
     res.render('home', {
         css: 'home',
