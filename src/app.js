@@ -5,12 +5,14 @@ import { Server } from 'socket.io'
 import productRouter from './routes/products.routes.js'
 import cartRouter from './routes/cart.routes.js'
 import viewsRouter from './routes/views.routes.js'
+
 import ProductManager from "../manager/ProductManager.js";
 
 import __dirname from './utils.js'
 
 const app = express();
-const server = app.listen(8080, () => console.log("Listening on Port 8080"));
+const PORT = process.env.PORT||8080
+const server = app.listen(PORT, () => console.log("Listening on Port 8080"));
 
 app.engine('handlebars', handlebars.engine())
 app.set('views', `${__dirname}/views`)

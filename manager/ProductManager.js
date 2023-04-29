@@ -22,7 +22,7 @@ export default class ProductManager {
     code,
     category,
     status = true,
-    stock
+    stock,
   }) => {
     const products = await this.getProducts();
 
@@ -40,14 +40,12 @@ export default class ProductManager {
     const validation = Object.values(product);
     const empty = validation.some((e) => e === undefined);
     if (empty) {
-      console.log("Falta ingresar datos");
-      return null;
+      return "Missing Data";
     }
 
     for (let i = 0; i < products.length; i++) {
       if (products[i].code.includes(product.code)) {
-        console.log("Code is repited");
-        return null
+        return "Code is repited";
       }
     }
 
@@ -72,8 +70,7 @@ export default class ProductManager {
     );
 
     if (productIndex === -1) {
-      console.log("Id no encontrado");
-    return null
+      return "Id no encontrado";
     }
     const product = products[productIndex];
     return product;
@@ -106,14 +103,7 @@ export default class ProductManager {
     const validation = Object.values(product);
     const empty = validation.some((e) => e === undefined);
     if (empty) {
-      console.log(`Missing data`);
-    }
-
-    for (let i = 0; i < products.length; i++) {
-      if (products[i].code.includes(product.code)) {
-        console.log("Code is repited");
-        return null
-      }
+      return `Missing Data`;
     }
 
     const productIndex = products.findIndex(
@@ -121,8 +111,18 @@ export default class ProductManager {
     );
 
     if (productIndex === -1) {
-      console.log("Id no encontrado");
+      return "Id not Found";
     }
+
+    if (product.code === products[productIndex].code) {
+    } else {
+      for (let i = 0; i < products.length; i++) {
+        if (products[i].code.includes(product.code)) {
+          return "Code is repited";
+        }
+      }
+    }
+
     const productToUpdate = products[productIndex];
     productToUpdate.title = title;
     productToUpdate.description = description;
@@ -148,8 +148,9 @@ export default class ProductManager {
       );
 
       if (productIndex === -1) {
-        throw new Error("Id no encontrado");
+        return "Id not Found"
       }
+      
       products.splice(productIndex, 1);
       await fs.promises.writeFile(
         this.path,
@@ -160,5 +161,3 @@ export default class ProductManager {
 }
 
 const hola = new ProductManager();
-
-

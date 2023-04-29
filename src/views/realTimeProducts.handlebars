@@ -4,29 +4,35 @@
 
 
 
-    <form action="" method="POST" id="addProductForm">
+    <form action="" id="addProductForm">
         <h2>Ingrese todos los campos</h2>
         
         <label for="title" class="title">Ingrese el nombre del producto</label>
-        <input type="text" name="title" class="title">
+        <input type="text" name="title" class="title" id="title">
         
         <label for="description" class="description">Ingrese una descripcion del producto</label>
-        <input type="text" name="description" class="description">
+        <input type="text" name="description" class="description" id="description">
         
         <label for="price" class="price">Ingrese el precio del producto</label>
-        <input type="number" name="price" class="price">
+        <input type="number" name="price" class="price" id="price">
 
         <label for="thumbnail" class="thumbnail">Ingrese una imagen</label>
-        <input type="file" name="thumbnail" class="thumbnail">
+        <input type="file" name="thumbnail" class="thumbnail" id="thumbnail">
 
         <label for="code" class="code">Ingrese un codigo de producto</label>
-        <input type="text" name="code" class="code">
+        <input type="text" name="code" class="code" id="code">
 
         <label for="category" class="category">Ingrese la categoria del producto</label>
-        <input type="text" name="category" class="category">
+        <select name="" id="category" class="category">
+            <option value="Pick-up">Pick-up</option>
+            <option value="SUV">SUV</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Todoterreno">Todoterreno</option>
+        </select>
 
         <label for="stock" class="stock">Ingrese el stock del producto</label>
-        <input type="text" name="stock" class="stock">
+        <input type="text" name="stock" class="stock" id="stock">
 
         <button type="submit" id="submit-button">Agregar producto</button>
     </form> 

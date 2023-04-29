@@ -18,6 +18,9 @@ socket.on("products-list", (data) => {
   ul.innerHTML = products;
 });
 
+const title = document.getElementById('title')
+
+console.log(title.value)
 
 
 

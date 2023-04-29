@@ -8,38 +8,5 @@
 		"status": true,
 		"stock": 1,
 		"id": 1
-	},
-	{
-		"title": "Peugeot 207",
-		"description": " Peugeot 207 modelo 2023",
-		"price": 15000,
-		"thumbnail": [],
-		"code": "3254",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 2
-	},
-	{
-		"title": "Peugeot 2008",
-		"description": " Peugeot 2008 modelo 2023",
-		"price": 17000,
-		"thumbnail": [],
-		"code": "35454",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 3
-	},
-	{
-		"title": "Peugeot 208",
-		"description": " Peugeot 208 modelo 2018",
-		"price": 16000,
-		"thumbnail": [],
-		"code": "aafd",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 4
 	}
 ]
