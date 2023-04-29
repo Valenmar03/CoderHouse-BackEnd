@@ -30,23 +30,22 @@ router.get("/:pid", async (req, res) => {
   const paramId = Object.values(req.params)[0];
   const id = parseInt(paramId);
   const validateProd = await productManager.getProductById(id);
-  if (product === 'Id not Found') {
-    res.status(400).send({ status: "error", error: `${validateProd}` });
-  } else {
-    res.send({ status: "success", payload: product });
+  if (validateProd === "Id not Found") {
+    return res.status(400).send({ status: "error", error: `${validateProd}` });
   }
+  res.send({ status: "success", payload: validateProd });
 });
 
 router.post("/", async (req, res) => {
   const product = req.body;
   const validateProd = await productManager.addProducts(product);
   if (validateProd === "Code is repited") {
-    res.status(400).send({ status: "error", error: `${validateProd}` });
-  } else if (validateProd == "Missing Data") {
-    res.status(400).send({ status: "error", error: `${validateProd}` });
-  } else {
-    res.send({ status: "success", message: "Product added successfully" });
+    return res.status(400).send({ status: "error", error: `${validateProd}` });
   }
+  if (validateProd == "Missing Data") {
+    return res.status(400).send({ status: "error", error: `${validateProd}` });
+  }
+  res.send({ status: "success", message: "Product added successfully" });
 });
 
 router.put("/:pid", async (req, res) => {
@@ -65,25 +64,26 @@ router.put("/:pid", async (req, res) => {
     product.stock
   );
   if (validateProd === "Code is repited") {
-    res.status(400).send({ status: "error", error: `${validateProd}` });
-  } else if (validateProd === "Missing Data") {
-    res.status(400).send({ status: "error", error: `${validateProd}` });
-  } else if (validateProd === 'Id not Found'){
-    res.status(400).send({ status: "error", error: `${validateProd}` });
-  } else {
-  res.send({ status: "success", message: "Product updated successfully" });
+    return res.status(400).send({ status: "error", error: `${validateProd}` });
   }
+  if (validateProd === "Missing Data") {
+    return res.status(400).send({ status: "error", error: `${validateProd}` });
+  }
+  if (validateProd === "Id not Found") {
+    return res.status(400).send({ status: "error", error: `${validateProd}` });
+  }
+
+  res.send({ status: "success", message: "Product updated successfully" });
 });
 
 router.delete("/:pid", async (req, res) => {
   const paramId = Object.values(req.params)[0];
   const id = parseInt(paramId);
   const validateProd = await productManager.deleteProduct(id);
-  if(validateProd === 'Id not Found'){
-    res.status(400).send({ status: "error", error: `${validateProd}` });
-  }else {
-    res.send({ status: "deleted", message: "Product deleted successfully" });
+  if (validateProd === "Id not Found") {
+    return res.status(400).send({ status: "error", error: `${validateProd}` });
   }
+  res.send({ status: "deleted", message: "Product deleted successfully" });
 });
 
 export default router;

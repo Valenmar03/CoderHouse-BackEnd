@@ -8,5 +8,38 @@
 		"status": true,
 		"stock": 1,
 		"id": 1
+	},
+	{
+		"title": "Peugeot 2008",
+		"description": " Peugeot 2008 modelo 2018",
+		"price": 1200,
+		"thumbnail": [],
+		"code": "sdagsdeg",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 2
+	},
+	{
+		"title": "Peugeot 208",
+		"description": " Peugeot 208 modelo 2018",
+		"price": 1200,
+		"thumbnail": [],
+		"code": "hsdfh",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 3
+	},
+	{
+		"title": "Peugeot 208",
+		"description": " Peugeot 208 modelo 2023",
+		"price": 15000,
+		"thumbnail": [],
+		"code": "fdgbnsdf",
+		"category": "cars",
+		"status": true,
+		"stock": 2,
+		"id": 4
 	}
 ]

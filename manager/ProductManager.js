@@ -70,7 +70,7 @@ export default class ProductManager {
     );
 
     if (productIndex === -1) {
-      return "Id no encontrado";
+      return "Id not Found";
     }
     const product = products[productIndex];
     return product;

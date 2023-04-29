@@ -21,7 +21,3 @@ socket.on("products-list", (data) => {
 const title = document.getElementById('title')
 
 console.log(title.value)
-
-
-
-
