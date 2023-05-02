@@ -22,14 +22,14 @@ app.set("view engine", "handlebars");
 app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.use("/api/products", productRouter);
-app.use("/api/carts", cartRouter);
-app.use("/", viewsRouter);
 app.use((req,res,next)=>{
     req.io = io;
     next();
 })
+
+app.use("/api/products", productRouter);
+app.use("/api/carts", cartRouter);
+app.use("/", viewsRouter);
 
 
 io.on("connection", (socket) => {

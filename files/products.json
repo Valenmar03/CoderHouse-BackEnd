@@ -10,72 +10,6 @@
 		"id": 1
 	},
 	{
-		"title": "Volkswagen Amarok",
-		"description": "Volkswagen Amarok modelo 2012",
-		"price": 1200,
-		"thumbnail": [],
-		"code": "gfjdfj",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 2
-	},
-	{
-		"title": "Volkswagen Amarok",
-		"description": "Volkswagen Amarok modelo 2012",
-		"price": 1200,
-		"thumbnail": [],
-		"code": "ghdsfhdsh",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 3
-	},
-	{
-		"title": "Volkswagen Amarok",
-		"description": "Volkswagen Amarok modelo 2012",
-		"price": 1200,
-		"thumbnail": [],
-		"code": "fbhdh",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 4
-	},
-	{
-		"title": "Volkswagen Amarok",
-		"description": "Volkswagen Amarok modelo 2012",
-		"price": 1200,
-		"thumbnail": [],
-		"code": "fgjsdrj",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 5
-	},
-	{
-		"title": "Volkswagen Fox",
-		"description": "Volkswagen Fox modelo 2012",
-		"price": 1200,
-		"thumbnail": [],
-		"code": "sgfdhsdtjh",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 6
-	},
-	{
-		"title": "Volkswagen Fox",
-		"description": "Volkswagen Fox modelo 2012",
-		"price": 1200,
-		"thumbnail": [],
-		"code": "cgnjhfdg",
-		"category": "cars",
-		"status": true,
-		"stock": 1,
-		"id": 7
-	},
-	{
 		"title": "Volkswagen Fox",
 		"description": "Volkswagen Fox modelo 2012",
 		"price": 1200,
@@ -84,6 +18,28 @@
 		"category": "cars",
 		"status": true,
 		"stock": 1,
-		"id": 8
+		"id": 2
+	},
+	{
+		"title": "Volkswagen Fox",
+		"description": "Volkswagen Fox modelo 2012",
+		"price": 1200,
+		"thumbnail": [],
+		"code": "dghsdfgh",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 3
+	},
+	{
+		"title": "Volkswagen Golf",
+		"description": "Volkswagen Golf modelo 2012",
+		"price": 1200,
+		"thumbnail": [],
+		"code": "dfsherhfdhe",
+		"category": "cars",
+		"status": true,
+		"stock": 1,
+		"id": 4
 	}
 ]

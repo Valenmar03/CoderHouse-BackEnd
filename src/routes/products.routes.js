@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
   }
   const products = await productManager.getProducts();
   console.log(products)
-  req.socket.emit("products-list", products);
+  req.io.emit("products-list", products);
   res.send({ status: "success", message: "Product added successfully" });
 });
 
