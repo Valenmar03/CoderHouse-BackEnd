@@ -2,7 +2,7 @@ const socket = io();
 
 const button = document.getElementById('prod-button')
 
-socket.on("products-list", (data) => {
+socket.on("products-list", data => {
   const ul = document.getElementById("product-list");
 
   let products = "";

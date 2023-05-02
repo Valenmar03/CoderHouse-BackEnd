@@ -45,6 +45,9 @@ router.post("/", async (req, res) => {
   if (validateProd == "Missing Data") {
     return res.status(400).send({ status: "error", error: `${validateProd}` });
   }
+  const products = await productManager.getProducts();
+  console.log(products)
+  req.socket.emit("products-list", products);
   res.send({ status: "success", message: "Product added successfully" });
 });
 
