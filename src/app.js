@@ -6,7 +6,7 @@ import productRouter from "./routes/products.routes.js";
 import cartRouter from "./routes/cart.routes.js";
 import viewsRouter from "./routes/views.routes.js";
 
-import ProductManager from "../manager/ProductManager.js";
+import ProductManager from "./dao/fileSystem/manager/ProductManager.js";
 
 import __dirname from "./utils.js";
 

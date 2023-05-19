@@ -7,7 +7,7 @@ const products = await productManager.getProducts();
 
 export default class CartManager {
   constructor() {
-    this.path = "../Desafio/files/carts.json";
+    this.path = "./src/dao/fileSystem/files/carts.json";
   }
 
   createCart = async () => {
