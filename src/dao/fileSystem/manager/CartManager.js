@@ -58,28 +58,28 @@ export default class CartManager {
     const carts = await this.getCarts();
     const cart = await this.getCartById(cartId);
     const cartIndex = carts.findIndex((cart) => cart.id === cartId);
-    const productIndex = cart.products.findIndex((product) => product.id === productId);
+    const productIndex = cart.products.findIndex(
+      (product) => product.id === productId
+    );
     const product = await productManager.getProductById(productId);
 
     console.log(productIndex);
-    console.log(product.id)
+    console.log(product.id);
 
-    if(productIndex === -1){
+    if (productIndex === -1) {
       const productIdQty = {
         id: product.id,
         quantity: 1,
       };
-      
-      cart.products.push(productIdQty)
-    } else {
 
+      cart.products.push(productIdQty);
+    } else {
       for (let i = 0; i < cart.products.length; i++) {
-          if (cart.products[i].id === product.id) {
-              cart.products[i].quantity += 1;
-          }    
+        if (cart.products[i].id === product.id) {
+          cart.products[i].quantity += 1;
+        }
       }
     }
-
 
     console.log(cart);
 

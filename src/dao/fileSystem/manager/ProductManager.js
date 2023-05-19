@@ -148,9 +148,9 @@ export default class ProductManager {
       );
 
       if (productIndex === -1) {
-        return "Id not Found"
+        return "Id not Found";
       }
-      
+
       products.splice(productIndex, 1);
       await fs.promises.writeFile(
         this.path,
