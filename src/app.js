@@ -1,5 +1,6 @@
 import express from "express";
 import handlebars from "express-handlebars";
+import mongoose from "mongoose";
 import { Server } from "socket.io";
 
 import productRouter from "./routes/products.routes.js";
@@ -12,8 +13,9 @@ import __dirname from "./utils.js";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const server = app.listen(PORT, () => console.log("Listening on Port 8080"));
+const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 const io = new Server(server);
+const connection =  mongoose.connect('mongodb+srv://ValenMar03:waZn1UqPdmKITDv3@clustercoder.d2v3oms.mongodb.net/?retryWrites=true&w=majority')
 
 app.engine("handlebars", handlebars.engine());
 app.set("views", `${__dirname}/views`);

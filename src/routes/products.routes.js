@@ -1,13 +1,50 @@
 import { Router } from "express";
 import ProductManager from "../dao/fileSystem/manager/ProductManager.js";
+import ProductManagerMongo from "../dao/mongo/manager/productsManager.js";
 
 const router = Router();
 
-const productManager = new ProductManager();
+//const productManager = new ProductManager();
+const productService = new ProductManagerMongo();
 
-const products = await productManager.getProducts();
+//const products = await productManager.getProducts();
 
 router.get("/", async (req, res) => {
+  const products = await productService.getProducts();
+  res.send({ status: "success", payload: products });
+});
+
+router.get("/:pid", async (req, res) => {
+  const { pid } = req.params;
+  const product = await productService.getProductById({ _id: pid });
+  if (!product)
+    res.status(404).send({ status: "error", error: "Product not found" });
+  res.send({ status: "success", payload: product });
+});
+
+//POST Mongo
+router.post("/", async (req, res) => {
+  const product = req.body;
+  if (
+    !product.title ||
+    !product.description ||
+    !product.price ||
+    !product.code ||
+    !product.category ||
+    !product.stock
+  )
+    return res
+      .status(400)
+      .res.send({ status: "error", error: "Incomplete values" });
+
+  try {
+    await productService.addProducts(product);
+  } catch (error) {
+    res.status(400).send({ message: "error", error: "Code is repited" });
+  }
+});
+
+/* router.get("/", async (req, res) => {
   const limit = req.query.limit;
   const parseLimit = parseInt(limit);
   if (!limit || parseLimit > products.length) {
@@ -24,9 +61,10 @@ router.get("/", async (req, res) => {
       res.status(400).send({ status: "error", error: "Ocurrio un error" });
     }
   }
-});
+}); */
 
-router.get("/:pid", async (req, res) => {
+//GETBYID de FILESYSTEM
+/* router.get("/:pid", async (req, res) => {
   const paramId = Object.values(req.params)[0];
   const id = parseInt(paramId);
   const validateProd = await productManager.getProductById(id);
@@ -34,9 +72,10 @@ router.get("/:pid", async (req, res) => {
     return res.status(400).send({ status: "error", error: `${validateProd}` });
   }
   res.send({ status: "success", payload: validateProd });
-});
+}); */
 
-router.post("/", async (req, res) => {
+//POST de FILESYSTEM
+/* router.post("/", async (req, res) => {
   const product = req.body;
   const validateProd = await productManager.addProducts(product);
   if (validateProd === "Code is repited") {
@@ -49,9 +88,9 @@ router.post("/", async (req, res) => {
   console.log(products)
   req.io.emit("products-list", products);
   res.send({ status: "success", message: "Product added successfully" });
-});
+});  */
 
-router.put("/:pid", async (req, res) => {
+/* router.put("/:pid", async (req, res) => {
   const product = req.body;
   const paramId = Object.values(req.params)[0];
   const id = parseInt(paramId);
@@ -77,9 +116,9 @@ router.put("/:pid", async (req, res) => {
   }
 
   res.send({ status: "success", message: "Product updated successfully" });
-});
+}); */
 
-router.delete("/:pid", async (req, res) => {
+/* router.delete("/:pid", async (req, res) => {
   const paramId = Object.values(req.params)[0];
   const id = parseInt(paramId);
   const validateProd = await productManager.deleteProduct(id);
@@ -87,6 +126,6 @@ router.delete("/:pid", async (req, res) => {
     return res.status(400).send({ status: "error", error: `${validateProd}` });
   }
   res.send({ status: "deleted", message: "Product deleted successfully" });
-});
+}); */
 
 export default router;
