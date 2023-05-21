@@ -2,7 +2,7 @@ import productModel from "../models/product.js"
 
 export default class ProductManagerMongo {
     getProducts = (params) => {
-        return productModel.find(params)
+        return productModel.find(params).lean()
     }
 
     getProductById = (id) => {
@@ -10,14 +10,14 @@ export default class ProductManagerMongo {
     }
 
     addProducts = (product) => {
-        return productModel.create(product)
+        return productModel.create(product).lean()
     }
 
     updateProduct = (id, product) => {
-        return productModel.findByIdAndUpdate(id, { $set: product })
+        return productModel.findByIdAndUpdate(id, { $set: product }).lean()
     }
 
     deleteProduct = (id) => {
-        return productModel.findByIdAndDelete(id)
+        return productModel.findByIdAndDelete(id).lean()
     }
 }
