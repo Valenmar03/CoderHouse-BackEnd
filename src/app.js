@@ -8,6 +8,7 @@ import cartRouter from "./routes/cart.routes.js";
 import viewsRouter from "./routes/views.routes.js";
 
 import ProductManager from "./dao/fileSystem/manager/ProductManager.js";
+import registerChatHandler from "./listeners/chatHandler.js";
 
 import __dirname from "./utils.js";
 
@@ -35,5 +36,5 @@ app.use("/", viewsRouter);
 
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  registerChatHandler(io, socket);
 });
