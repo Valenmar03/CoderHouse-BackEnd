@@ -1,3 +1,7 @@
+body{
+    align-items: center;
+}
+
 #addProductForm {
     margin-top: 20px;
     margin-bottom: 20px;

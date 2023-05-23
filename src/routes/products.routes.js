@@ -4,9 +4,9 @@ import ProductManagerMongo from "../dao/mongo/manager/productsManager.js";
 
 const router = Router();
 
-//const productManager = new ProductManager();
 const productService = new ProductManagerMongo();
 
+//const productManager = new ProductManager();
 //const products = await productManager.getProducts();
 
 router.get("/", async (req, res) => {
@@ -42,6 +42,7 @@ router.post("/", async (req, res) => {
 
   try {
     await productService.addProducts(product);
+    res.send({ status: "success", payload: product})
   } catch (error) {
     res.status(400).send({ message: "error", error: "Code is repited" });
   }

@@ -15,6 +15,16 @@
         <p>No se encontraron productos</p>
         {{/if}}
     </ul>
+
+    {{#if hasPrevPage}}
+    <a href="/?page={{prevPage}}"><button>Pagina Previa</button></a>
+    {{/if}}
+
+    <p>{{page}}</p>
+
+    {{#if hasNextPage}}
+    <a href="/?page={{nextPage}}"><button>Pagina Siguiente</button></a>
+    {{/if}}
 </div>
 
 <script src="/js/home.js"></script>

@@ -2,7 +2,7 @@ import productModel from "../models/product.js"
 
 export default class ProductManagerMongo {
     getProducts = (params) => {
-        return productModel.find(params).lean()
+        return productModel.paginate({}, { params , limit: 10, lean:true})
     }
 
     getProductById = (id) => {
@@ -10,7 +10,7 @@ export default class ProductManagerMongo {
     }
 
     addProducts = (product) => {
-        return productModel.create(product).lean()
+        return productModel.create(product)
     }
 
     updateProduct = (id, product) => {
