@@ -1,20 +1,25 @@
 <div>
     <h1>Lista productos</h1>
-    <ul id="prodList">
-        {{#if prod}}
-        {{#each prod}}
-        <li class="prodLi">
-                <h2>{{this.title}}</h2>
-                <img src="{{this.thumbnail}}" alt="{{this.title}}">
-                <p>{{this.description}}</p>
-                <p>Precio: ${{this.price}}</p>
-                <p>Stock: {{this.stock}}</p>
-            </li>
-        {{/each}}
-        {{else}}
-        <p>No se encontraron productos</p>
-        {{/if}}
-    </ul>
+
+    <div class="contenedor">
+        
+            {{#if prod}}
+            {{#each prod}}
+            <div class="cards">
+
+                    <h2>{{this.title}}</h2>
+                    <img src="{{this.thumbnail}}" alt="{{this.title}}">
+                    <p>{{this.description}}</p>
+                    <p>Precio: ${{this.price}}</p>
+                    <p>Stock: {{this.stock}}</p>
+            </div>
+                
+            {{/each}}
+            {{else}}
+            <p>No se encontraron productos</p>
+            {{/if}}
+        
+    </div>
 
     {{#if hasPrevPage}}
     <a href="/?page={{prevPage}}"><button>Pagina Previa</button></a>
