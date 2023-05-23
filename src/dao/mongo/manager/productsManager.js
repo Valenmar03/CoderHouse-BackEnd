@@ -1,8 +1,8 @@
 import productModel from "../models/product.js"
 
 export default class ProductManagerMongo {
-    getProducts = (params) => {
-        return productModel.paginate({}, { params , limit: 10, lean:true})
+    getProducts = async (params) => {
+        return await productModel.paginate({}, { page:params , limit: 10, lean:true})
     }
 
     getProductById = (id) => {
