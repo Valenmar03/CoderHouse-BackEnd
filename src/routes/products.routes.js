@@ -9,9 +9,15 @@ const productService = new ProductManagerMongo();
 //const productManager = new ProductManager();
 //const products = await productManager.getProducts();
 
+const products = await productService.getProducts();
+
 router.get("/", async (req, res) => {
-  const products = await productService.getProducts();
-  res.send({ status: "success", payload: products });
+  let category = req.query.category 
+  let sort = req.query.sort
+
+    res.send({ status: "success", payload: products });
+   
+  
 });
 
 router.get("/:pid", async (req, res) => {

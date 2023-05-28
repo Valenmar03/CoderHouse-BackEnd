@@ -10,10 +10,10 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const { page = 1 } = req.query;
+  
   const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, ...rest } =
     await productService.getProducts(page);
 
-    console.log(await productService.getProducts(page))
   const products = docs;
   res.render("home", {
     css: "home",

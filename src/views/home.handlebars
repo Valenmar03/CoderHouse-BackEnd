@@ -1,6 +1,19 @@
 <div>
     <h1>Lista productos</h1>
 
+        <p>Seleccione la categoria</p>
+
+        <form action=""> 
+
+                <select name="" id="">    
+                <a href="/?category=suv"><option value="SUV">SUV</option></a>
+                <a href="/?category=hatchback"><option value="Hatchback">Hatchback</option></a>
+                <a href="/?category=sedan"><option value="Sedan">Sedan</option></a>
+                <a href="/?category=todoterreno"><option value="Todoterreno">Todoterreno</option></a>
+                </select>
+                
+        </form>
+        
     <div class="contenedor">
         
             {{#if prod}}
@@ -12,6 +25,7 @@
                     <p>{{this.description}}</p>
                     <p>Precio: ${{this.price}}</p>
                     <p>Stock: {{this.stock}}</p>
+                    <button>Agregar al carrito</button>
             </div>
                 
             {{/each}}
