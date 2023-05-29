@@ -10,9 +10,13 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const { page = 1 } = req.query;
-  
+  const sort = req.query.sort;
+  const category = req.query.category;
+
+  console.log(sort)
+  console.log(category)
   const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, ...rest } =
-    await productService.getProducts(page);
+    await productService.getProducts(page, sort, category);
 
   const products = docs;
   res.render("home", {
