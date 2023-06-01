@@ -39,10 +39,17 @@ export default class CartManagerMongo {
 
     const products = cart.products;
 
-    const newProducts = products.forEach((element) => {
-       console.log(element.product._id)
-    });
+    const ids = []
+    for (let i = 0; i < products.length; i++) {
+      ids.push(products[i].product._id)
+    }
 
-    return newProducts;
+    const productIndex = ids.findIndex(id => id == productId);
+
+    console.log(ids)
+    console.log(productId)
+    return ids
+    return productIndex
+
   };
 }
