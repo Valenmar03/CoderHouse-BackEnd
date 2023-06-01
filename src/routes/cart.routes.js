@@ -41,7 +41,7 @@ router.delete("/:cid", async (req, res) => {
   const cartToDelte = await cartService.deleteCart({ _id: cid });
 
   try {
-    res.send({ status:'success', message:'Cart deleted succesfully' });
+    res.send({ status:'success', message:'Cart deleted successfully' });
   } catch (error) {
     res.status(404).send({ status: 'erros', message: 'Id not found' });
   }
@@ -51,11 +51,11 @@ router.delete("/:cid/products/:pid", async (req, res) => {
   const paramId = Object.values(req.params);
   const cartId = paramId[0];
   const productId = paramId[1];
-  const cart = await cartService.deleteProductOfCart(
+  await cartService.deleteProductOfCart(
     { _id: cartId },
     { _id: productId }
   );
-  res.send({ status: "success", payload: cart });
+  res.send({ status: "success", message: 'Product deleted successfully' });
 });
 
 /* router.post('/', async (req, res) => {

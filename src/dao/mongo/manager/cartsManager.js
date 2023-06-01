@@ -44,12 +44,12 @@ export default class CartManagerMongo {
       ids.push(products[i].product._id)
     }
 
-    const productIndex = ids.findIndex(id => id == productId);
+    const productIndex = ids.findIndex(id => id == productId._id);
 
-    console.log(ids)
-    console.log(productId)
-    return ids
-    return productIndex
+    const newCart = products.slice(productIndex, 1)
 
+    console.log(newCart)
+
+    return await cartModel.findByIdAndUpdate(cartId, {$set: newCart})
   };
 }
