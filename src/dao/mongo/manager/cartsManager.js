@@ -8,30 +8,47 @@ export default class CartManagerMongo {
   };
 
   getCarts = async (params) => {
-    return await cartModel.find().populate().lean();
+    return await cartModel.find().populate("products.product").lean();
   };
 
   getCartById = (cartId) => {
     return cartModel.findById(cartId).populate("products.product").lean();
   };
 
-  addProductToCart = async (cartId, productId) => {
+  addProductToCart = async (cartId, productId, qty) => {
     const product = await productModel.findById(productId).lean();
-    return cartModel
+
+    const cart = await this.getCartById(cartId);
+
+    if(cart){
+      const prodsInCart = cart.products
+      
+      for (let i = 0; i < prodsInCart.length; i++) {
+        
+      }
+
+      const productInCart = prodsInCart.find(({product}) => product._id == productId)
+
+      return productInCart
+      
+
+    }
+
+    /* return cartModel
       .findByIdAndUpdate(cartId, {
         $push: {
-          products: { product: new mongoose.Types.ObjectId(product._id) },
+          products: {
+            product: new mongoose.Types.ObjectId(product._id),
+            qty: qty,
+          },
         },
       })
       .populate("products.product")
-      .lean();
+      .lean(); */
   };
 
   deleteCart = (cartId) => {
-    const cart = cartModel.findByIdAndDelete(cartId).lean();
-
-    if (cart) {
-    }
+    return cartModel.findByIdAndDelete(cartId).lean();
   };
 
   deleteProductOfCart = async (cartId, productId) => {
@@ -39,17 +56,17 @@ export default class CartManagerMongo {
 
     const products = cart.products;
 
-    const ids = []
+    const ids = [];
     for (let i = 0; i < products.length; i++) {
-      ids.push(products[i].product._id)
+      ids.push(products[i].product._id);
     }
 
-    const productIndex = ids.findIndex(id => id == productId._id);
+    const newCart = ids.filter((id) => id != productId._id);
 
-    const newCart = products.slice(productIndex, 1)
+    cart.products = newCart;
 
-    console.log(newCart)
-
-    return await cartModel.findByIdAndUpdate(cartId, {$set: newCart})
+    return await cartModel
+      .findByIdAndUpdate(cartId, { products: newCart })
+      .lean();
   };
 }

@@ -1,8 +1,11 @@
 import { Router } from "express";
 import ProductManager from "../dao/fileSystem/manager/ProductManager.js";
 import ProductManagerMongo from "../dao/mongo/manager/productsManager.js";
+import CartManagerMongo from "../dao/mongo/manager/cartsManager.js";
 
 const productService = new ProductManagerMongo();
+
+const cartService = new CartManagerMongo();
 
 const productManager = new ProductManager();
 
@@ -13,8 +16,8 @@ router.get("/", async (req, res) => {
   const sort = req.query.sort;
   const category = req.query.category;
 
-  console.log(sort)
-  console.log(category)
+  console.log(sort);
+  console.log(category);
   const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, ...rest } =
     await productService.getProducts(page, sort, category);
 
@@ -41,6 +44,15 @@ router.get("/realTimeProducts", async (req, res) => {
 
 router.get("/chat", async (req, res) => {
   res.render("chat");
+});
+
+router.get("/carts/:cid", async (req, res) => {
+  const { cid} = req.params;
+  const cart = await cartService.getCartById({ _id: cid })
+  res.render("carts", {
+    css: "cart",
+    prod: cart.products,
+  });
 });
 
 export default router;
