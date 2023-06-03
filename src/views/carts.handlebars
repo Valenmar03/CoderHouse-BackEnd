@@ -1,7 +1,12 @@
 <div>
 
+    {{#if prod}}
     {{#each prod}}
     <h1>{{{this.product.title}}}</h1>
     <p>{{{this.product.description}}}</p>
     {{/each}}
+    
+    {{else}}
+     <p>Carrito no encontrado</p>
+    {{/if}}
 </div>

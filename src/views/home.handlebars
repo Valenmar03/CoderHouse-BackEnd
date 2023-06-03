@@ -13,27 +13,28 @@
                 </select>
                 
         </form>
-        
-    <div class="contenedor">
-        
-            {{#if prod}}
-            {{#each prod}}
-            <div class="cards">
 
-                    <h2>{{this.title}}</h2>
-                    <img src="{{this.thumbnail}}" alt="{{this.title}}">
-                    <p>{{this.description}}</p>
-                    <p>Precio: ${{this.price}}</p>
-                    <p>Stock: {{this.stock}}</p>
-                    <button>Agregar al carrito</button>
-            </div>
-                
-            {{/each}}
-            {{else}}
-            <p>No se encontraron productos</p>
-            {{/if}}
-        
-    </div>
+                <div class="contenedor">
+                        
+                        {{#if prod}}
+                        {{#each prod}}
+                        <div class="cards">
+                                <a href="/products/{{this._id}}" style="color: black; text-decoration:none">
+                                        <h2>{{this.title}}</h2>
+                                        <img src="{{this.thumbnail}}" alt="{{this.title}}">
+                                        <p>Precio: ${{this.price}}</p>
+                                        <p>Stock: {{this.stock}}</p>
+                                        <button>Agregar al carrito</button>
+                        
+                                </a>
+                        </div>
+                                
+                        {{/each}}
+                        {{else}}
+                        <p>No se encontraron productos</p>
+                        {{/if}}
+                        
+                </div>
 
     {{#if hasPrevPage}}
     <a href="/?page={{prevPage}}"><button>Pagina Previa</button></a>
