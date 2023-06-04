@@ -15,36 +15,32 @@ export default class CartManagerMongo {
     return cartModel.findById(cartId).populate("products.product").lean();
   };
 
-  addProductToCart = async (cartId, productId, qty) => {
+  addProductToCart = async (cartId, productId, quantity) => {
+    console.log(cartId, productId, quantity);
     const product = await productModel.findById(productId).lean();
 
-    const cart = await this.getCartById(cartId);
+    const cart = await cartModel.findOne({ _id: cartId }).lean();
+    const prodToAdd = cart.products.find((e) => e.product == productId);
+    console.log(prodToAdd);
 
-    if(cart){
-      const prodsInCart = cart.products
-      
-      for (let i = 0; i < prodsInCart.length; i++) {
-        
-      }
-
-      const productInCart = prodsInCart.find(({product}) => product._id == productId)
-
-      return productInCart
-      
-
-    }
-
-    /* return cartModel
-      .findByIdAndUpdate(cartId, {
-        $push: {
-          products: {
-            product: new mongoose.Types.ObjectId(product._id),
-            qty: qty,
+    if (prodToAdd) {
+      const newProd = prodToAdd.qty + quantity;
+      prodToAdd.qty = newProd;
+      console.log(cart);
+      return cartModel.updateOne({ _id: cartId }, cart);
+    } else {
+      return cartModel
+        .findByIdAndUpdate(cartId, {
+          $push: {
+            products: {
+              product: new mongoose.Types.ObjectId(product._id),
+              qty: quantity,
+            },
           },
-        },
-      })
-      .populate("products.product")
-      .lean(); */
+        })
+        .populate("products.product")
+        .lean();
+    }
   };
 
   deleteCart = (cartId) => {
