@@ -30,10 +30,11 @@ router.post("/:cid/products/:pid", async (req, res) => {
   const cartId = paramId[0];
   const productId = paramId[1];
   const qty = req.body
+  console.log(qty.qty)
   const cart = await cartService.addProductToCart(
-    { _id: cartId },
-    { _id: productId },
-    { qty: qty }
+    cartId,
+    productId,
+    qty.qty 
   );
   res.send({ status: "success", payload: cart });
 });
