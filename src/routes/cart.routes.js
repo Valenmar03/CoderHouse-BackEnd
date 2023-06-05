@@ -57,8 +57,7 @@ router.delete("/:cid/products/:pid", async (req, res) => {
   const qty = req.body
   const cart = await cartService.deleteProductOfCart(
     { _id: cartId },
-    { _id: productId },
-    { qty: qty } 
+    { _id: productId } 
   );
   res.send({ status: "success", message: cart });
 });

@@ -52,18 +52,21 @@ export default class CartManagerMongo {
     const products = cart.products;
 
     const ids = [];
-    for (let i = 0; i < products.length; i++) {
-      ids.push(products[i].product._id);
+    for (let index = 0; index < products.length; index++) {
+      ids.push(products[index].product._id);
     }
 
-    const newCart = ids.filter((id) => id != productId._id);
+    const productToDelete = ids.findIndex((id) => id == productId._id);
 
-    cart.products = newCart;
-    console.log(newCart);
+    if (productToDelete === -1) {
 
-    return await cartModel
-      .findByIdAndUpdate(cartId, { products: newCart })
-      .populate('products.product')
-      .lean();
+      return 'Product not found'
+      
+    }
+
+    return await cartModel.updateOne(
+      { _id: cartId },
+      { $pull: { products: { product: productId } } }
+    );
   };
 }
