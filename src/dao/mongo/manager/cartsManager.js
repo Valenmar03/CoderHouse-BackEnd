@@ -17,7 +17,6 @@ export default class CartManagerMongo {
 
   addProductToCart = async (cartId, productId, quantity) => {
     const product = await productModel.findById(productId).lean();
-    const cid = cartId;
 
     const cart = await cartModel.findOne({ _id: cartId }).lean();
     const prodToAdd = cart.products.find((e) => e.product == productId);
@@ -26,7 +25,7 @@ export default class CartManagerMongo {
       const newProd = prodToAdd.qty + quantity;
       prodToAdd.qty = newProd;
       const newCart = cartModel.updateOne({ _id: cartId }, cart);
-      return cart;
+      return newCart;
     } else {
       return cartModel
         .findByIdAndUpdate(cartId, {

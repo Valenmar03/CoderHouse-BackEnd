@@ -39,6 +39,19 @@ router.post("/:cid/products/:pid", async (req, res) => {
   res.send({ status: "success", payload: cart });
 });
 
+router.put('/:cid/products/:pid', async (req, res) => {
+  const paramId = Object.values(req.params);
+  const cartId = paramId[0];
+  const productId = paramId[1];
+  const qty = req.body
+  const cart = await cartService.addProductToCart(
+    cartId,
+    productId,
+    qty.qty 
+  );
+  res.send({ status: "success", payload: cart });
+})
+
 router.delete("/:cid", async (req, res) => {
   const { cid } = req.params;
   const cartToDelte = await cartService.deleteCart({ _id: cid });
