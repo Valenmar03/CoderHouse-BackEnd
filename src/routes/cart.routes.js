@@ -43,11 +43,11 @@ router.put('/:cid/products/:pid', async (req, res) => {
   const paramId = Object.values(req.params);
   const cartId = paramId[0];
   const productId = paramId[1];
-  const qty = req.body
-  const cart = await cartService.addProductToCart(
+  const qty = req.body.quantity || 1
+  const cart = await cartService.updateProductToCart(
     cartId,
     productId,
-    qty.qty 
+    qty 
   );
   res.send({ status: "success", payload: cart });
 })
