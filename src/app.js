@@ -42,7 +42,7 @@ app.use(
       mongoUrl: 'mongodb+srv://ValenMar03:waZn1UqPdmKITDv3@clustercoder.d2v3oms.mongodb.net/E-Commerce?retryWrites=true&w=majority',
       ttl: 3600 // Sin ttl se guarda 14 dias
     }),
-    secret: "CoderS3ecretFelis",
+    secret: "E-Commerce",
     resave: false,
     saveUninitialized: false,
   })

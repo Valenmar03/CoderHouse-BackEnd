@@ -22,6 +22,7 @@ router.get("/", async (req, res) => {
   res.render("home", {
     css: "home",
     prod: products,
+    user: req.session.user,
     page: rest.page,
     hasPrevPage,
     hasNextPage,

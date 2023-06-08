@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, request } from "express";
 import UserManagerMongo from "../dao/mongo/manager/userManager.js";
 
 const router = Router();
@@ -18,5 +18,19 @@ router.post("/register", async (req, res) => {
   res.send({ status: "success", payload: result });
 });
 
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await userService.findUser({ email, password });
+  if (!user) {
+    res.status(401).send({ status: "error", error: "Incorrect Credentials" });
+  }
+
+  req.session.user = {
+    name: `${user.first_name} ${user.last_name}`,
+    email: `${user.email}`,
+  };
+  res.send({ status: "success" });
+});
 
 export default router;
