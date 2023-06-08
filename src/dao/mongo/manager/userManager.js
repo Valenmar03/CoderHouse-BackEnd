@@ -7,7 +7,7 @@ export default class UserManagerMongo {
     }
 
     findUser(email, pass){
-        return userModel.findOne(email, pass)
+        return userModel.findOne(email, pass).lean()
     }
 
     deleteUser(userId) {

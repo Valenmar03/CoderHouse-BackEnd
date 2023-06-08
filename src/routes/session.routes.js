@@ -29,8 +29,9 @@ router.post("/login", async (req, res) => {
       role: 'admin'
     }
     console.log(req.session.user);
-    return res.status({ status: "success" , payload: req.session.user })
+    return res.status({ status: "success", message: 'admin' })
   }
+
 
   const user = await userService.findUser({ email, password });
   if (!user) {

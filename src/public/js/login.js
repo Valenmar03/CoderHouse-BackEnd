@@ -16,12 +16,10 @@ form.addEventListener("submit", async (event) => {
 
   if (
     responseData.status === "success" &&
-    responseData.payload.role === 'admin'
+    responseData.message === "You are the admin"
   ) {
-    window.location.replace("/realTimeProducts/");
-  } else if (
-    responseData.status === "success"
-  ) {
+    window.location.replace("/realTimeProducts");
+  } else if (responseData.status === "success") {
     window.location.replace("/");
   }
 });
