@@ -2,16 +2,17 @@ import { Router } from "express";
 import ProductManager from "../dao/fileSystem/manager/ProductManager.js";
 import ProductManagerMongo from "../dao/mongo/manager/productsManager.js";
 import CartManagerMongo from "../dao/mongo/manager/cartsManager.js";
+import { privacy } from "../middlewares/auth.js";
 
 const productService = new ProductManagerMongo();
 
 const cartService = new CartManagerMongo();
 
-const productManager = new ProductManager();
+//const productManager = new ProductManager();
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/",async (req, res) => {
   const { page = 1 } = req.query;
   const sort = req.query.sort;
   const category = req.query.category;
@@ -31,7 +32,7 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.get("/realTimeProducts", async (req, res) => {
+router.get("/realTimeProducts", privacy('ADMIN'), async (req, res) => {
   const result = await productService.getProducts();
   console.log(result);
   res.render("realTimeProducts", {
@@ -40,11 +41,11 @@ router.get("/realTimeProducts", async (req, res) => {
   });
 });
 
-router.get("/chat", async (req, res) => {
+router.get("/chat",privacy('USER'), async (req, res) => {
   res.render("chat");
 });
 
-router.get("/products/:pid", async (req, res) => {
+router.get("/products/:pid", privacy('USER'), async (req, res) => {
   const { pid } = req.params;
   const product = await productService.getProductById({ _id: pid });
   res.render("prodDetails", {
@@ -53,7 +54,7 @@ router.get("/products/:pid", async (req, res) => {
   });
 });
 
-router.get("/carts/:cid", async (req, res) => {
+router.get("/carts/:cid", privacy('USER'), async (req, res) => {
   const { cid } = req.params;
   const cart = await cartService.getCartById({ _id: cid });
   res.render("carts", {
@@ -62,11 +63,11 @@ router.get("/carts/:cid", async (req, res) => {
   });
 });
 
-router.get("/register", async (req, res) => {
+router.get("/register", privacy('NO_AUTH'), async (req, res) => {
   res.render("register");
 });
 
-router.get("/login", async (req, res) => {
+router.get("/login", privacy('NO_AUTH'), async (req, res) => {
   res.render("login");
 });
 

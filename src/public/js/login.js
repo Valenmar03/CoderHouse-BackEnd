@@ -13,8 +13,15 @@ form.addEventListener("submit", async (event) => {
     },
   });
   const responseData = await response.json();
-  
-  if(responseData.status === 'success'){
-    window.location.replace('/')
+
+  if (
+    responseData.status === "success" &&
+    responseData.payload.role === 'admin'
+  ) {
+    window.location.replace("/realTimeProducts/");
+  } else if (
+    responseData.status === "success"
+  ) {
+    window.location.replace("/");
   }
 });

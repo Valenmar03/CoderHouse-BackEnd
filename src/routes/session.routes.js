@@ -1,4 +1,4 @@
-import { Router, request } from "express";
+import { Router } from "express";
 import UserManagerMongo from "../dao/mongo/manager/userManager.js";
 
 const router = Router();
@@ -21,6 +21,17 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
+  if( email === 'adminCoder@coder.com' && password === 'adminCod3r123' ) {
+    req.session.user = {
+      name: 'adminCoder',
+      email: 'adminCoder@coder.com',
+      password: 'adminCod3r123',
+      role: 'admin'
+    }
+    console.log(req.session.user);
+    return res.status({ status: "success" , payload: req.session.user })
+  }
+
   const user = await userService.findUser({ email, password });
   if (!user) {
     res.status(401).send({ status: "error", error: "Incorrect Credentials" });
@@ -29,6 +40,7 @@ router.post("/login", async (req, res) => {
   req.session.user = {
     name: `${user.first_name} ${user.last_name}`,
     email: `${user.email}`,
+    role: `${user.role}`
   };
   res.send({ status: "success" });
 });
