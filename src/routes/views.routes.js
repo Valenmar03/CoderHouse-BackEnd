@@ -46,10 +46,10 @@ router.get("/chat", async (req, res) => {
 router.get("/products/:pid", async (req, res) => {
   const { pid } = req.params;
   const product = await productService.getProductById({ _id: pid });
-  res.render('prodDetails', {
-    css: 'product',
-    prod: product
-  })
+  res.render("prodDetails", {
+    css: "product",
+    prod: product,
+  });
 });
 
 router.get("/carts/:cid", async (req, res) => {
@@ -59,6 +59,14 @@ router.get("/carts/:cid", async (req, res) => {
     css: "cart",
     prod: cart.products,
   });
+});
+
+router.get("/register", async (req, res) => {
+  res.render("register");
+});
+
+router.get("/login", async (req, res) => {
+  res.render("login");
 });
 
 export default router;
