@@ -21,17 +21,16 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  if( email === 'adminCoder@coder.com' && password === 'adminCod3r123' ) {
+  if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
     req.session.user = {
-      name: 'adminCoder',
-      email: 'adminCoder@coder.com',
-      password: 'adminCod3r123',
-      role: 'admin'
-    }
-    console.log(req.session.user);
-    return res.status({ status: "success", message: 'admin' })
-  }
+      name: "adminCoder",
+      email: "adminCoder@coder.com",
+      password: "adminCod3r123",
+      role: "admin",
+    };
 
+    return res.send({ status: "success", message: "admin" });
+  }
 
   const user = await userService.findUser({ email, password });
   if (!user) {
@@ -41,7 +40,7 @@ router.post("/login", async (req, res) => {
   req.session.user = {
     name: `${user.first_name} ${user.last_name}`,
     email: `${user.email}`,
-    role: `${user.role}`
+    role: `${user.role}`,
   };
   res.send({ status: "success" });
 });

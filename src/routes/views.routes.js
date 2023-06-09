@@ -71,4 +71,10 @@ router.get("/login", privacy('NO_AUTH'), async (req, res) => {
   res.render("login");
 });
 
+router.get('/logout', privacy('USER'), async (req, res) => {
+  req.session.destroy(err => {
+    res.redirect('/login')
+  });
+})
+
 export default router;
