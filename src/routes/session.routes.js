@@ -18,7 +18,7 @@ router.post(
 );
 
 router.get("/registerFail", (req, res) => {
-  console.log(req.session.message)
+  console.log(req.session.message);
   res.status(400).send({ status: "error", error: req.session.message });
 });
 
@@ -29,20 +29,35 @@ router.post(
     failureMessage: true,
   }),
   async (req, res) => {
-
     req.session.user = {
       id: req.user.id,
       name: req.user.name,
       email: req.user.email,
-      role: req.user.role
-    }
+      role: req.user.role,
+    };
     res.send({ status: "success" });
   }
 );
 
-router.get('/loginFail', (req, res) => {
-  console.log(req.session.message)
+router.get("/loginFail", (req, res) => {
+  console.log(req.session.message);
   res.status(400).send({ status: "error", error: req.session.message });
-})
+});
+
+router.get("/github", passport.authenticate("github"), (req, res) => {});
+
+router.get("/githubcallback", passport.authenticate("github"), (req, res) => {
+  const user = req.user;
+  console.log(user);
+
+  req.session.user = {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
+
+  res.send({ status: "success" });
+});
 
 export default router;
