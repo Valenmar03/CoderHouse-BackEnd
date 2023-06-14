@@ -10,6 +10,10 @@ export default class UserManagerMongo {
         return userModel.findOne(email, pass).lean()
     }
 
+    existsUser(param){
+        return userModel.findOne(param).lean()
+    }
+
     deleteUser(userId) {
         return userModel.findByIdAndDelete(userId).lean()
     }

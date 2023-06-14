@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { Server } from "socket.io";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import passport from "passport";
 
 import productRouter from "./routes/products.routes.js";
 import cartRouter from "./routes/cart.routes.js";
@@ -14,6 +15,7 @@ import ProductManager from "./dao/fileSystem/manager/ProductManager.js";
 import registerChatHandler from "./listeners/chatHandler.js";
 
 import __dirname from "./utils.js";
+import initializePassportStrategies from "./config/passport.config.js";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -48,10 +50,15 @@ app.use(
   })
 );
 
+app.use(passport.initialize());
+initializePassportStrategies()
+
+
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 app.use("/api/sessions", sessionRouter);
 app.use("/", viewsRouter);
+
 
 io.on("connection", (socket) => {
   registerChatHandler(io, socket);
