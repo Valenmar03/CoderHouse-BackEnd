@@ -20,3 +20,9 @@ socket.on("products-list", data => {
 
 const title = document.getElementById('title')
 
+const logoutBtn = document.getElementById('logout-btn')
+
+logoutBtn.addEventListener('click', async (evt) => {
+    window.location.replace('/logout')
+})
+

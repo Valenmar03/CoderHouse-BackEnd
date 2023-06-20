@@ -2,6 +2,31 @@ body{
     align-items: center;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 10px;
+    background-color: rgb(88, 255, 255);
+}
+
+#logout-btn {
+    background-color: red;
+    width: 20%;
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+    border: none;
+    transition: 0.5s;
+    height: 50px;
+    margin: 10px;
+}
+
+#logout-btn:hover {
+    transform: scale(1.1);
+}
+
 #addProductForm {
     margin-top: 20px;
     margin-bottom: 20px;
