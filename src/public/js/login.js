@@ -13,10 +13,12 @@ form.addEventListener("submit", async (event) => {
     },
   });
   const responseData = await response.json();
+  console.log(responseData);
+
 
   if (
     responseData.status === "success" &&
-    responseData.message === "You are the admin"
+    responseData.message === "Admin is login"
   ) {
     window.location.replace("/realTimeProducts");
   } else if (responseData.status === "success") {

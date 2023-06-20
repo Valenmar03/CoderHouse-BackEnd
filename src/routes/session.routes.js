@@ -35,13 +35,21 @@ router.post(
       email: req.user.email,
       role: req.user.role,
     };
-    res.send({ status: "success" });
+    if (req.session.user.role === "admin") {
+      res.send({ status: "success", message: "Admin is login" });
+    }else {
+      res.send({ status: 'success' })
+    }
   }
 );
 
 router.get("/loginFail", (req, res) => {
-  console.log(req.session.message);
-  res.status(400).send({ status: "error", error: req.session.message });
+  res
+    .status(400)
+    .send({
+      status: "error",
+      error: req.session.messages[req.session.messages.length - 1],
+    });
 });
 
 router.get("/github", passport.authenticate("github"), (req, res) => {});

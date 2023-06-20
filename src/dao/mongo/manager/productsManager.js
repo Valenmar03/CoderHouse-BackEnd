@@ -1,6 +1,11 @@
 import productModel from "../models/product.js";
 
 export default class ProductManagerMongo {
+
+  getAllProducts = async (params) => {
+    return productModel.find().lean()
+  }
+
   getProducts = async (page, sort, category) => {
     if (category !== undefined) {
       return await productModel.paginate(

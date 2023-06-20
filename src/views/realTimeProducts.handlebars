@@ -1,24 +1,4 @@
 <div class="contenedor">
-    <h1>Listado de productos en vivo</h1>
-    <ul id="product-list">
-        {{#if prod}}
-        {{#each prod}}
-        <li class="prodLi">
-                <h2>{{this.title}}</h2>
-                <img src="{{this.thumbnail}}" alt="{{this.title}}">
-                <p>{{this.description}}</p>
-                <p>Precio: ${{this.price}}</p>
-                <p>Stock: {{this.stock}}</p>
-            </li>
-        {{/each}}
-        {{else}}
-        <p>No se encontraron productos</p>
-        {{/if}}
-    </ul>
-    </ul>
-
-
-
     <form action="" id="addProductForm">
         <h2>Ingrese todos los campos</h2>
         
@@ -50,6 +30,28 @@
 
         <button type="submit" id="submit-button">Agregar producto</button>
     </form> 
+    <h1>Listado de productos en vivo</h1>
+    <div class="cards-contenedor">
+
+        {{#if prod}}
+        {{#each prod}}
+            <div class="cards">
+                <h2>{{this.title}}</h2>
+                <img src="{{this.thumbnail}}" alt="{{this.title}}">
+                <p>{{this.description}}</p>
+                <p>Precio: ${{this.price}}</p>
+                <p>Stock: {{this.stock}}</p>
+            </div>
+            
+        {{/each}}
+        {{else}}
+        <p>No se encontraron productos</p>
+        {{/if}}
+    </div>
+    
+
+
+
 </div>
 
 

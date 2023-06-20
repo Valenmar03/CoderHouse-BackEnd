@@ -1,10 +1,18 @@
-<div>
-    <h1>Binvenido {{{user.name}}}</h1>
+<div class="header">
+        <h1>Bienvenido {{{user.name}}}</h1>
+
+        {{#if user}}
+        <button id="logout-btn">Cerrar sesion</button>
+                
+        {{/if}}
+
+</div>
+<div class="contenedor">
 
         <h2>Lista de productos</h2>
 
         <p>Seleccione la categoria</p>
-        <button id="logout-btn">Cerrar sesion</button>
+
 
         <form action=""> 
 
@@ -17,27 +25,26 @@
                 
         </form>
 
-                <div class="contenedor">
+        <div class="cards-contenedor">
                         
-                        {{#if prod}}
-                        {{#each prod}}
-                        <div class="cards">
-                                <a href="/products/{{this._id}}" style="color: black; text-decoration:none">
-                                        <h2>{{this.title}}</h2>
-                                        <img src="{{this.thumbnail}}" alt="{{this.title}}">
-                                        <p>Precio: ${{this.price}}</p>
-                                        <p>Stock: {{this.stock}}</p>
-                                        <button>Agregar al carrito</button>
-                        
-                                </a>
-                        </div>
-                                
-                        {{/each}}
-                        {{else}}
-                        <p>No se encontraron productos</p>
-                        {{/if}}
-                        
+                 {{#if prod}}
+                {{#each prod}}
+                 <div class="cards">
+                        <a href="/products/{{this._id}}" style="color: black; text-decoration:none">
+                                <h2>{{this.title}}</h2>
+                                <img src="{{this.thumbnail}}" alt="{{this.title}}">
+                                <p>Precio: ${{this.price}}</p>
+                                <p>Stock: {{this.stock}}</p>
+                                <button>Agregar al carrito</button>
+                        </a>
                 </div>
+                                
+                {{/each}}
+                {{else}}
+                <p>No se encontraron productos</p>
+                {{/if}}
+                        
+        </div>
 
     {{#if hasPrevPage}}
     <a href="/?page={{prevPage}}"><button>Pagina Previa</button></a>

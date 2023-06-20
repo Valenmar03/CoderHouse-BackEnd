@@ -49,25 +49,24 @@ const initializePassportStrategies = () => {
     new LocalStrategy(
       { usernameField: "email" },
       async (email, password, done) => {
-        if (email === "adminCoder@coder.com" && password === "adminCod3r123") {
+        if (email === "adminCoder@coder.com" && password === "123") {
           const user = {
             id: 0,
             name: "adminCoder",
             email: "adminCoder@coder.com",
-            password: "adminCod3r123",
+            password: "123",
             role: "admin",
           };
 
-          return done(null, user);
+          return done(null, user, { message: 'You are the admin'});
         }
 
         let user;
         user = await userService.findUser({ email });
-        if (!user) {
-          done(null, false, { message: "Incorrect Credentials" });
-        }
+        if (!user)
+          return done(null, false, { message: "Incorrect Credentials" });
 
-        const validPassword = validatePassword(password, user.password);
+        const validPassword = await validatePassword(password, user.password);
 
         if (!validPassword)
           return done(null, false, { message: "Incorrect Password" });
@@ -78,7 +77,7 @@ const initializePassportStrategies = () => {
           role: user.role,
           id: user._id,
         };
-        console.log(user)
+
         return done(null, user);
       }
     )
@@ -95,7 +94,7 @@ const initializePassportStrategies = () => {
       async (accessToken, refreshToken, profile, done) => {
         try {
           const { name, email } = profile._json;
-          let user
+          let user;
           user = await userService.existsUser({ email });
 
           if (!user) {
@@ -112,8 +111,8 @@ const initializePassportStrategies = () => {
             name: user.first_name,
             email: user.email,
             id: user._id,
-            role: user.role
-          }
+            role: user.role,
+          };
 
           done(null, user);
         } catch (err) {

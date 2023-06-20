@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(88, 255, 255);
+}
+
+h1 {
+    padding: 10px;
+}
+
+#logout-btn {
+    background-color: red;
+    width: 10%;
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+    border: none;
+    transition: 0.5s;
+    height: 50px;
+    margin: 10px;
+}
+
+#logout-btn:hover {
+    transform: scale(1.1);
+}

@@ -33,11 +33,10 @@ router.get("/",async (req, res) => {
 });
 
 router.get("/realTimeProducts", privacy('ADMIN'), async (req, res) => {
-  const result = await productService.getProducts();
-  console.log(result);
+  const result = await productService.getAllProducts();
   res.render("realTimeProducts", {
     css: "realTimeProducts",
-    prod: result.docs,
+    prod: result,
   });
 });
 

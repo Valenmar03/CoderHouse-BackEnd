@@ -1,17 +1,21 @@
-<div>
-    <h1>Logueate</h1>
+<div class="LoginPageContainer">
+    <div class="LoginRegisterPage">
+        <form id="loginForm">
+        
+        <h1>Logueate</h1>
 
-    <form id="loginForm">
 
-        <label>Email</label>
-        <input type="text" name="email">
+            <p>Email</p>
+            <input type="text" name="email">
 
-        <label>Contraseña</label>
-        <input type="password" name="password">
+            <p>Contraseña</p>
+            <input type="password" name="password">
 
-        <input type="submit">
-    </form>
-</div>
+            <input type="submit" style="display: block; margin: 10px 0px">
+    <p>O puedes registrarte utilizando <a href="/api/sessions/github">GitHub</a></p>
+        </form>
+    </div>
 
-<p>O puedes registrarte utilizando <a href="/api/sessions/github">GitHub</a></p>
+</div>    
+
 <script src="/js/login.js"></script>
