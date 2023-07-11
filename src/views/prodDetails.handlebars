@@ -1,18 +1,16 @@
 <div>
 
-<button><a href="/">Volver a productos</a></button>
+<button class="returnHome-btn"><a href="/">Volver a productos</a></button>
 {{#if prod}}
     <h1>{{{prod.title}}}</h1>
 
     <P>{{{prod.description}}}</P>
+    <img src="./Images/car.jpg" alt="{{prod.title}}">
     <P>Precio: ${{{prod.price}}}</P>
 
 {{else}}
     <p>No se encontraron productos</p>
 {{/if}}
 
-<button>Agregar al Carrito</button>
-    
-    
-    
+<button>Agregar al Carrito</button>  
 </div>

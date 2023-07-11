@@ -62,6 +62,12 @@ router.get("/carts/:cid", privacy('USER'), async (req, res) => {
   });
 });
 
+router.get('/profile', privacy('USER'), async (req, res) => {
+  res.render('profile', {
+    user: req.session.user
+  })
+})
+
 router.get("/register", privacy('NO_AUTH'), async (req, res) => {
   res.render("register");
 });

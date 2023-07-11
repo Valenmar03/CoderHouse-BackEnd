@@ -75,6 +75,8 @@ router.delete("/:cid/products/:pid", async (req, res) => {
   res.send({ status: "success", message: cart });
 });
 
+
+
 /* router.post('/', async (req, res) => {
     await cartManager.createCart()
     res.send({status: 'success', message: 'Cart created successfully'})    
