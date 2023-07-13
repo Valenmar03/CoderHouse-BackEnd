@@ -1,15 +1,7 @@
 import { Router } from "express";
-import ProductManager from "../dao/fileSystem/manager/ProductManager.js";
-import ProductManagerMongo from "../dao/mongo/manager/productsManager.js";
 import productsController from "../controllers/products.controller.js";
 
 const router = Router();
-
-
-//const productManager = new ProductManager();
-//const products = await productManager.getProducts();
-//const productService = new ProductManagerMongo();
-
 
 router.get("/", productsController.getProducts);
 router.get("/:pid", productsController.getProductById);

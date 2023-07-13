@@ -1,13 +1,7 @@
 import { Router } from "express";
-import CartManager from "../dao/fileSystem/manager/CartManager.js";
-import CartManagerMongo from "../dao/mongo/manager/cartsManager.js";
 import cartController from "../controllers/cart.controller.js";
 
 const router = Router();
-
-//const cartManager = new CartManager()
-//const carts = cartManager.getCarts()
-//const cartService = new CartManagerMongo();
 
 router.post("/", cartController.createCart);
 router.get("/", cartController.getAllCarts);
