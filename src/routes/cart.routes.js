@@ -1,81 +1,21 @@
 import { Router } from "express";
 import CartManager from "../dao/fileSystem/manager/CartManager.js";
 import CartManagerMongo from "../dao/mongo/manager/cartsManager.js";
+import cartController from "../controllers/cart.controller.js";
 
 const router = Router();
 
 //const cartManager = new CartManager()
 //const carts = cartManager.getCarts()
+//const cartService = new CartManagerMongo();
 
-const cartService = new CartManagerMongo();
-
-router.post("/", async (req, res) => {
-  const cart = await cartService.createCart();
-  res.send({ status: "success", payload: cart });
-});
-
-router.get("/", async (req, res) => {
-  const carts = await cartService.getCarts();
-  res.send({ status: "success", payload: carts });
-});
-
-router.get("/:cid", async (req, res) => {
-  const { cid } = req.params;
-  const cart = await cartService.getCartById({ _id: cid });
-  res.send({ status: "success", payload: cart });
-});
-
-router.post("/:cid/products/:pid", async (req, res) => {
-  const paramId = Object.values(req.params);
-  const cartId = paramId[0];
-  const productId = paramId[1];
-  const qty = req.body
-  console.log(qty.qty)
-  const cart = await cartService.addProductToCart(
-    cartId,
-    productId,
-    qty.qty 
-  );
-  res.send({ status: "success", payload: cart });
-});
-
-router.put('/:cid/products/:pid', async (req, res) => {
-  const paramId = Object.values(req.params);
-  const cartId = paramId[0];
-  const productId = paramId[1];
-  const qty = req.body.quantity || 1
-  const cart = await cartService.updateProductToCart(
-    cartId,
-    productId,
-    qty 
-  );
-  res.send({ status: "success", payload: cart });
-})
-
-router.delete("/:cid", async (req, res) => {
-  const { cid } = req.params;
-  const cartToDelte = await cartService.deleteCart({ _id: cid });
-
-  try {
-    res.send({ status: "success", message: "Cart deleted successfully" });
-  } catch (error) {
-    res.status(404).send({ status: "erros", message: "Id not found" });
-  }
-});
-
-router.delete("/:cid/products/:pid", async (req, res) => {
-  const paramId = Object.values(req.params);
-  const cartId = paramId[0];
-  const productId = paramId[1];
-  const qty = req.body
-  const cart = await cartService.deleteProductOfCart(
-    { _id: cartId },
-    { _id: productId } 
-  );
-  res.send({ status: "success", message: cart });
-});
-
-
+router.post("/", cartController.createCart);
+router.get("/", cartController.getAllCarts);
+router.get("/:cid", cartController.getCartById);
+router.post("/:cid/products/:pid", cartController.addProductIntoCart);
+router.put("/:cid/products/:pid", cartController.updateProductOnCart);
+router.delete("/:cid", cartController.deleteCart);
+router.delete("/:cid/products/:pid", cartController.deleteProdOfCart);
 
 /* router.post('/', async (req, res) => {
     await cartManager.createCart()
