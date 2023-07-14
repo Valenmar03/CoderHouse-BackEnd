@@ -16,6 +16,7 @@ import registerChatHandler from "./listeners/chatHandler.js";
 
 import __dirname from "./utils.js";
 import initializePassportStrategies from "./config/passport.config.js";
+import config from "./config/env.config.js";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -39,9 +40,8 @@ app.use((req, res, next) => {
 
 app.use(
   session({
-    
     store: new MongoStore({
-      mongoUrl: 'mongodb+srv://ValenMar03:waZn1UqPdmKITDv3@clustercoder.d2v3oms.mongodb.net/E-Commerce?retryWrites=true&w=majority',
+      mongoUrl: config.mongoUrl,
       ttl: 3600 // Sin ttl se guarda 14 dias
     }),
     secret: "E-Commerce",

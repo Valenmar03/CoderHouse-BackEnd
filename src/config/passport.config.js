@@ -3,6 +3,7 @@ import local from "passport-local";
 import GithubStrategy from "passport-github2";
 import UserManagerMongo from "../dao/mongo/manager/userManager.js";
 import { createHash, validatePassword } from "../utils.js";
+import config from "./env.config.js"
 
 const LocalStrategy = local.Strategy;
 const userService = new UserManagerMongo();
@@ -53,8 +54,8 @@ const initializePassportStrategies = () => {
           const user = {
             id: 0,
             name: "adminCoder",
-            email: "adminCoder@coder.com",
-            password: "123",
+            email: config.adminEmail,
+            password: config.adminPassword,
             role: "admin",
           };
 
