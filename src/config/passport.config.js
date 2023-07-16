@@ -4,6 +4,7 @@ import GithubStrategy from "passport-github2";
 import UserManagerMongo from "../dao/mongo/manager/userManager.js";
 import { createHash, validatePassword } from "../utils.js";
 import config from "./env.config.js"
+import ViewUserDTO from "../dto/viewUserDTO.js";
 
 const LocalStrategy = local.Strategy;
 const userService = new UserManagerMongo();
@@ -72,12 +73,7 @@ const initializePassportStrategies = () => {
         if (!validPassword)
           return done(null, false, { message: "Incorrect Password" });
 
-        user = {
-          name: `${user.first_name} ${user.last_name}`,
-          email: user.email,
-          role: user.role,
-          id: user._id,
-        };
+        user = new ViewUserDTO(user);
 
         return done(null, user);
       }

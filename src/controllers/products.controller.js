@@ -84,5 +84,4 @@ export default {
     addProduct,
     updateProduct,
     deleteProduct,
-    
 }

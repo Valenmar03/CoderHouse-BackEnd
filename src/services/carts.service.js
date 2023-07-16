@@ -1,11 +1,15 @@
-import CartManagerMongo from "../dao/mongo/manager/cartsManager.js"
 
-export default class CartsService {
+export default class CartRepository{
     constructor(dao){
         this.dao = dao
     }
 
-    getCarts = () => {
+    getAllCarts = () => {
+        console.log(this.dao)
         return this.dao.getCarts()
     }
 }
+
+const hola = new CartRepository()
+
+hola.getAllCarts()

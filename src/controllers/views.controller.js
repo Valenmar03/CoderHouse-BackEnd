@@ -1,5 +1,6 @@
 import ProductManagerMongo from "../dao/mongo/manager/productsManager.js";
 import CartManagerMongo from "../dao/mongo/manager/cartsManager.js";
+import ViewUserDTO from "../dto/viewUserDTO.js";
 
 const productService = new ProductManagerMongo();
 const cartService = new CartManagerMongo();
