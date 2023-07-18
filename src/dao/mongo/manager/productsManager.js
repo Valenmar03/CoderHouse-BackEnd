@@ -1,10 +1,9 @@
 import productModel from "../models/product.js";
 
 export default class ProductManagerMongo {
-
   getAll = async (params) => {
-    return productModel.find().lean()
-  }
+    return productModel.find().lean();
+  };
 
   get = async (page, sort, category) => {
     if (category !== undefined) {
@@ -32,7 +31,7 @@ export default class ProductManagerMongo {
     return productModel.findByIdAndUpdate(id, { $set: product }).lean();
   };
 
-  delete = (id) => {
-    return productModel.findByIdAndDelete(id).lean();
+  delete = (prodId) => {
+    return productModel.findByIdAndDelete(prodId).lean();
   };
 }
