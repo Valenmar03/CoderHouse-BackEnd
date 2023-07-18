@@ -30,7 +30,7 @@ const addProduct = async (req, res) => {
   )
     return res
       .status(400)
-      .res.send({ status: "error", error: "Incomplete values" });
+      .send({ status: "error", error: "Incomplete values" });
 
   try {
     await productsService.addProducts(product);

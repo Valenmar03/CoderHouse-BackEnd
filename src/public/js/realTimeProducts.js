@@ -58,5 +58,8 @@ form.addEventListener("submit",async (evt) => {
   })
   const responseData = await response.json()
   console.log(responseData)
-
+  if(responseData.error === 'Incomplete values'){
+    const errorMsg = document.getElementById('error-msg')
+    errorMsg.innerText = 'Complete All Values!'
+  }
 });

@@ -32,10 +32,12 @@
         <label for="stock" class="stock">Ingrese el stock del producto</label>
         <input type="number" name="stock" class="stock" id="stock">
 
+        <p id="error-msg" style="color: red;"></p>
+
         <button type="submit" id="submit-button">Agregar producto</button>
     </form> 
     <h1>Listado de productos en vivo</h1>
-    <div class="cards-contenedor">
+    <div class="cards-contenedor" id="product-list">
 
         {{#if prod}}
         {{#each prod}}
