@@ -5,7 +5,7 @@ import GithubStrategy from "passport-github2";
 import { createHash, validatePassword } from "../utils.js";
 import config from "./env.config.js";
 import ViewUserDTO from "../dto/viewUserDTO.js";
-import { userService } from "../services/repositories.js";
+import { cartService, userService } from "../services/repositories.js";
 
 const LocalStrategy = local.Strategy;
 
@@ -30,14 +30,18 @@ const initializePassportStrategies = () => {
 
           const hashedPassword = await createHash(password);
 
+          const cart = await cartService.createCart()
+
           const user = {
             first_name,
             last_name,
             email,
             password: hashedPassword,
+            cart: cart._id
           };
 
           const result = await userService.createUser(user);
+          await cartService.updateCart(cart._id, result._id)
           done(null, result, { message: "User created successfully" });
         } catch (error) {
           done(error);

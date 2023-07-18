@@ -7,6 +7,10 @@ export default class CartManagerMongo {
     return await cartModel.create(params);
   };
 
+  update = async (cartId, userId) => {
+    return await cartModel.findByIdAndUpdate(cartId,{ user: userId});
+  };
+
   get = async (params) => {
     return await cartModel.find().populate("products.product").lean();
   };
@@ -84,9 +88,7 @@ export default class CartManagerMongo {
     const productToDelete = ids.findIndex((id) => id == productId._id);
 
     if (productToDelete === -1) {
-
-      return 'Product not found'
-      
+      return "Product not found";
     }
 
     return await cartModel.updateOne(
