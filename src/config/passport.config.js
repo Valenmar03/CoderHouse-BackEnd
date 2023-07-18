@@ -1,13 +1,13 @@
 import passport from "passport";
 import local from "passport-local";
 import GithubStrategy from "passport-github2";
-import UserManagerMongo from "../dao/mongo/manager/userManager.js";
+
 import { createHash, validatePassword } from "../utils.js";
-import config from "./env.config.js"
+import config from "./env.config.js";
 import ViewUserDTO from "../dto/viewUserDTO.js";
+import { userService } from "../services/repositories.js";
 
 const LocalStrategy = local.Strategy;
-const userService = new UserManagerMongo();
 
 const initializePassportStrategies = () => {
   passport.use(
@@ -60,7 +60,7 @@ const initializePassportStrategies = () => {
             role: "admin",
           };
 
-          return done(null, user, { message: 'You are the admin'});
+          return done(null, user, { message: "You are the admin" });
         }
 
         let user;
