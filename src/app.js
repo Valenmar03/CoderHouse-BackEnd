@@ -10,6 +10,7 @@ import productRouter from "./routes/products.routes.js";
 import cartRouter from "./routes/cart.routes.js";
 import sessionRouter from "./routes/session.routes.js";
 import viewsRouter from "./routes/views.routes.js";
+import ticketsRouter from "./routes/tickets.routes.js";
 
 import ProductManager from "./dao/fileSystem/manager/ProductManager.js";
 import registerChatHandler from "./listeners/chatHandler.js";
@@ -54,6 +55,7 @@ initializePassportStrategies()
 
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
+app.use("/api/tickets", ticketsRouter);
 app.use("/api/sessions", sessionRouter);
 app.use("/", viewsRouter);
 
