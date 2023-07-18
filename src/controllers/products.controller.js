@@ -19,6 +19,7 @@ const getProductById = async (req, res) => {
 
 const addProduct = async (req, res) => {
   const product = req.body;
+  product.code = Math.floor(Math.random() * 1000000 + 1)
   if (
     !product.title ||
     !product.description ||
