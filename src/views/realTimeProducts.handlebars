@@ -23,7 +23,7 @@
 
         <label for="category" class="category">Ingrese la categoria del producto</label>
         <select name="" id="category" class="category">
-            <option value="remera">Remeras</option>
+            <option value="remeras">Remeras</option>
             <option value="buzos">Buzos</option>
             <option value="pantalones">Pantalones</option>
             <option value="zapatillas">Zapatillas</option>
@@ -43,7 +43,7 @@
         {{#each prod}}
             <div class="cards">
                 <h2>{{this.title}}</h2>
-                <img src="./Images/car.jpg" alt="{{this.title}}">
+                <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
                 <p>{{this.description}}</p>
                 <p>Precio: ${{this.price}}</p>
                 <p>Stock: {{this.stock}}</p>

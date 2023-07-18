@@ -9,8 +9,8 @@ export default class ProductsRepository {
         return this.dao.getAll()
     }
     
-    getProducts(){
-        return this.dao.get()
+    getProducts(page, sort, category){
+        return this.dao.get(page, sort, category)
     }
 
     getProductById(prodId){

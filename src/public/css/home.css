@@ -2,12 +2,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 98.9%;
     padding: 0px 10px;
     background-color: rgb(88, 255, 255);
 }
 
 h1 {
+    padding: 10px;
+}
+
+.contenedor {
+    padding: 5px 20px;
+}
+
+.paginate {
+    display: flex;
+    bottom: 5px;
+    align-items: center;
+}
+
+.page {
     padding: 10px;
 }
 
@@ -34,3 +48,13 @@ h1 {
     transform: scale(1.1);
 }
 
+button {
+    background-color: rgb(88, 255, 255);
+    border-radius: 5px;
+    border: none;
+    transition: 0.2s;
+    padding: 10px;
+}
+button:hover {
+    transform: scale(1.1);
+}

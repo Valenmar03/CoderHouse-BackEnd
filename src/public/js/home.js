@@ -4,6 +4,8 @@ const registerBtn = document.getElementById('register-btn')
 const profileBtn = document.getElementById('profile-btn')
 
 
+
+
 console.log(logoutBtn)
 if(logoutBtn){
     logoutBtn.addEventListener('click', async (evt) => {

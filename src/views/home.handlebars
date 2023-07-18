@@ -18,20 +18,17 @@
 
 <div class="contenedor">
 
-        <h2>Lista de productos</h2>
-
         <p>Seleccione la categoria</p>
 
 
-        <form action=""> 
-
-                <select name="" id="">    
-                <a href="/?category=suv"><option value="SUV">SUV</option></a>
-                <a href="/?category=hatchback"><option value="Hatchback">Hatchback</option></a>
-                <a href="/?category=sedan"><option value="Sedan">Sedan</option></a>
-                <a href="/?category=todoterreno"><option value="Todoterreno">Todoterreno</option></a>
+        <form action="POST"> 
+                <select name="" id="">
+                <option value="none">Sin categoria</option>    
+                <a href="/?category=remera"><option value="remeras">Remeras</option></a>
+                <a href="/?category=buzos"><option value="buzos">Buzos</option></a>
+                <a href="/?category=pantalones"><option value="pantalones">Pantalones</option></a>
+                <a href="/?category=zapatillas"><option value="zapatillas">Zapatillas</option></a>
                 </select>
-                
         </form>
 
         <div class="cards-contenedor">
@@ -41,7 +38,7 @@
                  <div class="cards">
                         <a href="/products/{{this._id}}" style="color: black; text-decoration:none">
                                 <h2>{{this.title}}</h2>
-                                <img src="./Images/car.jpg" alt="{{this.title}}">
+                                <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
                                 <p>Precio: ${{this.price}}</p>
                                 <p>Stock: {{this.stock}}</p>
                                 <button>Agregar al carrito</button>
@@ -55,15 +52,18 @@
                         
         </div>
 
-    {{#if hasPrevPage}}
-    <a href="/?page={{prevPage}}"><button>Pagina Previa</button></a>
-    {{/if}}
+        <div class="paginate">
 
-    <p>{{page}}</p>
+                {{#if hasPrevPage}}
+                <a href="/?page={{prevPage}}"><button>Pagina Previa</button></a>
+                {{/if}}
 
-    {{#if hasNextPage}}
-    <a href="/?page={{nextPage}}"><button>Pagina Siguiente</button></a>
-    {{/if}}
+                        <p class="page">{{page}}</p>
+
+                {{#if hasNextPage}}
+                <a href="/?page={{nextPage}}"><button>Pagina Siguiente</button></a>
+                {{/if}}       
+        </div>
 </div>
 
 <script src="/js/home.js"></script>
