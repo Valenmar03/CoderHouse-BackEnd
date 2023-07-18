@@ -1,16 +1,14 @@
-import ProductManagerMongo from "../dao/mongo/manager/productsManager.js";
-
-const productService = new ProductManagerMongo();
+import { productsService } from "../services/repositories.js";
 
 const getProducts = async (req, res) => {
     const category = req.query.category
-    const products = await productService.getProducts();
+    const products = await productsService.getProducts();
       res.send({ status: "success", payload: products }); 
 }
 
 const getProductById = async (req, res) => {
     const { pid } = req.params;
-    const product = await productService.getProductById({ _id: pid });
+    const product = await productsService.getProductById({ _id: pid });
     if (!product)
       return res
         .status(404)
@@ -34,17 +32,17 @@ const addProduct = async (req, res) => {
         .res.send({ status: "error", error: "Incomplete values" });
   
     try {
-      await productService.addProducts(product);
+      await productsService.addProducts(product);
       res.send({ status: "success", payload: product})
     } catch (error) {
-      res.status(400).send({ message: "error", error: "Code is repited" });
+      res.status(400).send({ message: "error", error: error });
     }
 }
 
 const updateProduct = async (req, res) => {
     const product = req.body;
     const { pid } = req.params;
-    const productToUpdate = await productService.updateProduct(pid, product);
+    const productToUpdate = await productsService.updateProduct(pid, product);
     if (!productToUpdate)
       return res
         .status(404)
@@ -67,7 +65,7 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
     const { pid } = req.params;
-    const product = await productService.deleteProduct(pid);
+    const product = await productsService.deleteProduct(pid);
     if (!product)
       return res
         .status(404)

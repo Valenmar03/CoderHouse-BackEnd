@@ -1,13 +1,11 @@
-import CartManagerMongo from "../dao/mongo/manager/cartsManager.js";
-
-const cartService = new CartManagerMongo();
+import { cartService } from "../services/repositories.js";
 
 const createCart = async (req, res) => {
     const cart = await cartService.createCart();
     res.send({ status: "success", payload: cart });
 }
 
-const getAllCarts = async (req, res) => {
+const getCarts = async (req, res) => {
     const carts = await cartService.getCarts();
     res.send({ status: "success", payload: carts });
 }
@@ -37,7 +35,7 @@ const updateProductOnCart = async (req, res) => {
     const cartId = paramId[0];
     const productId = paramId[1];
     const qty = req.body.quantity || 1
-    const cart = await cartService.updateProductToCart(
+    const cart = await cartService.updateProductQty(
       cartId,
       productId,
       qty 
@@ -61,7 +59,7 @@ const deleteProdOfCart = async (req, res) => {
     const cartId = paramId[0];
     const productId = paramId[1];
     const qty = req.body
-    const cart = await cartService.deleteProductOfCart(
+    const cart = await cartService.deleteProductInCart(
       { _id: cartId },
       { _id: productId } 
     );
@@ -72,7 +70,7 @@ const deleteProdOfCart = async (req, res) => {
 
 export default {
     createCart,
-    getAllCarts,
+    getCarts,
     getCartById,
     addProductIntoCart,
     updateProductOnCart,

@@ -2,11 +2,11 @@ import productModel from "../models/product.js";
 
 export default class ProductManagerMongo {
 
-  getAllProducts = async (params) => {
+  getAll = async (params) => {
     return productModel.find().lean()
   }
 
-  getProducts = async (page, sort, category) => {
+  get = async (page, sort, category) => {
     if (category !== undefined) {
       return await productModel.paginate(
         { category: category },
@@ -20,19 +20,19 @@ export default class ProductManagerMongo {
     );
   };
 
-  getProductById = (id) => {
+  getById = (id) => {
     return productModel.findOne(id).lean();
   };
 
-  addProducts = (product) => {
+  add = (product) => {
     return productModel.create(product);
   };
 
-  updateProduct = (id, product) => {
+  update = (id, product) => {
     return productModel.findByIdAndUpdate(id, { $set: product }).lean();
   };
 
-  deleteProduct = (id) => {
+  delete = (id) => {
     return productModel.findByIdAndDelete(id).lean();
   };
 }

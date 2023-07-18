@@ -1,16 +1,12 @@
-import ProductManagerMongo from "../dao/mongo/manager/productsManager.js";
-import CartManagerMongo from "../dao/mongo/manager/cartsManager.js";
-import ViewUserDTO from "../dto/viewUserDTO.js";
+import { cartService, productsService } from "../services/repositories.js";
 
-const productService = new ProductManagerMongo();
-const cartService = new CartManagerMongo();
 
 const homePage = async (req, res) => {
   const { page = 1 } = req.query;
   const sort = req.query.sort;
   const category = req.query.category;
   const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, ...rest } =
-    await productService.getProducts(page, sort, category);
+    await productsService.getProducts(page, sort, category);
 
   const products = docs;
   res.render("home", {
@@ -26,7 +22,7 @@ const homePage = async (req, res) => {
 };
 
 const realTimeProductsPage = async (req, res) => {
-  const result = await productService.getAllProducts();
+  const result = await productsService.getAllProducts();
   res.render("realTimeProducts", {
     css: "realTimeProducts",
     prod: result,
@@ -39,7 +35,7 @@ const chatPage = async (req, res) => {
 
 const productDetailPage = async (req, res) => {
   const { pid } = req.params;
-  const product = await productService.getProductById({ _id: pid });
+  const product = await productsService.getProductById({ _id: pid });
   res.render("prodDetails", {
     css: "product",
     prod: product,

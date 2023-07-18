@@ -3,19 +3,19 @@ import productModel from "../models/product.js";
 import mongoose from "mongoose";
 
 export default class CartManagerMongo {
-  createCart = async (params) => {
+  create = async (params) => {
     return await cartModel.create(params);
   };
 
-  getCarts = async (params) => {
+  get = async (params) => {
     return await cartModel.find().populate("products.product").lean();
   };
 
-  getCartById = (cartId) => {
+  getById = (cartId) => {
     return cartModel.findById(cartId).populate("products.product").lean();
   };
 
-  addProductToCart = async (cartId, productId, quantity) => {
+  addProduct = async (cartId, productId, quantity) => {
     const product = await productModel.findById(productId).lean();
 
     const cart = await cartModel.findOne({ _id: cartId }).lean();
@@ -41,7 +41,7 @@ export default class CartManagerMongo {
     }
   };
 
-  updateProductToCart = async (cartId, productId, quantity) => {
+  updateProduct = async (cartId, productId, quantity) => {
     const product = await productModel.findById(productId).lean();
 
     const cart = await cartModel.findOne({ _id: cartId }).lean();
@@ -67,12 +67,12 @@ export default class CartManagerMongo {
     }
   };
 
-  deleteCart = (cartId) => {
+  delete = (cartId) => {
     return cartModel.findByIdAndDelete(cartId).lean();
   };
 
-  deleteProductOfCart = async (cartId, productId) => {
-    const cart = await this.getCartById(cartId);
+  deleteProduct = async (cartId, productId) => {
+    const cart = await this.getById(cartId);
 
     const products = cart.products;
 
