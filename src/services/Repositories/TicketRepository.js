@@ -5,8 +5,16 @@ export default class TicketRepository {
         this.dao = dao;
     }
 
-    createTicket(amount, purchaser){
-        return this.dao.create(amount, purchaser)
+    createTicket(ticket){
+        return this.dao.create(ticket)
+    }
+
+    findTicketById(ticketId){
+        return this.dao.findBy(ticketId)
+    }
+
+    updateTicket(ticketId, amount){
+        return this.dao.update(ticketId, amount)
     }
 
     getTicketById(ticketId){

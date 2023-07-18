@@ -13,8 +13,8 @@ export default class UserRepository {
         return this.dao.find(email, pass)
     }
 
-    existsUser(email){
-        return this.dao.exists(email)
+    findUserBy(param){
+        return this.dao.findBy(param)
     }
 
     deleteUser(userId){

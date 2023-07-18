@@ -8,11 +8,9 @@ const schema = new mongoose.Schema({
         unique: true
     },
     amount: Number,
+        
     purchaser: String, 
-    cart: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: 'Carts'
-    } 
+        
 },{timestamps: {createdAt: 'purchase_datetime', updatedAt: 'updated_at'}})
 
 

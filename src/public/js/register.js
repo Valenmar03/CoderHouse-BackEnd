@@ -1,4 +1,5 @@
 const form = document.getElementById("registerForm");
+const completeValues = document.getElementById("complete-values");
 
 form.addEventListener("submit", async (evt) => {
   evt.preventDefault();
@@ -17,5 +18,7 @@ form.addEventListener("submit", async (evt) => {
 
   if (responseData.status === "success") {
     window.location.replace("/login");
+  }else if(responseData.status === 'error'){
+    completeValues.innerText = 'Completa todos los campos!'
   }
 });

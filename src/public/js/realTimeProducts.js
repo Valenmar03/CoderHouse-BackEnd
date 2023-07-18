@@ -60,6 +60,6 @@ form.addEventListener("submit",async (evt) => {
   console.log(responseData)
   if(responseData.error === 'Incomplete values'){
     const errorMsg = document.getElementById('error-msg')
-    errorMsg.innerText = 'Complete All Values!'
+    errorMsg.innerText = 'Completa todos los campos!'
   }
 });

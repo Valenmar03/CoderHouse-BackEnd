@@ -10,7 +10,7 @@ export default class UserManagerMongo {
         return userModel.findOne(email, pass).lean()
     }
 
-    exists(param){
+    findBy(param){
         return userModel.findOne(param).lean()
     }
 

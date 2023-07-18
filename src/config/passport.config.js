@@ -24,7 +24,7 @@ const initializePassportStrategies = () => {
               .send({ status: "error", error: "Incomplete values" });
           }
 
-          const exists = await userService.existsUser({ email });
+          const exists = await userService.findUserBy({ email });
           if (exists)
             return done(null, false, { message: "User already exists" });
 
