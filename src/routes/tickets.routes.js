@@ -6,5 +6,6 @@ const router = Router()
 router.post('/:cid', ticketController.createTicket)
 router.get('/', ticketController.getTickets)
 router.post('/:cid/purchase', ticketController.purchase)
+router.delete('/:tid', ticketController.deleteTicket)
 
 export default router

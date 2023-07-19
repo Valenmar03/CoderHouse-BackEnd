@@ -78,6 +78,7 @@ const initializePassportStrategies = () => {
           return done(null, false, { message: "Incorrect Password" });
 
         user = new ViewUserDTO(user);
+        console.log(user)
 
         return done(null, user);
       }

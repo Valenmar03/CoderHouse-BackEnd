@@ -1,0 +1,55 @@
+.cart-card {
+    display: flex ;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 20px;
+    background-color: white;
+    border: solid black 1px;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: black 10px;
+}
+
+.qty {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 200px;
+}
+
+#buy-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.buy-btn{
+    margin: 20px;
+    height: 50px;
+    width: 10%;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    font-size: large;
+    background-color: rgb(88, 255, 255);
+    transition: 0.4s;
+}
+.buy-btn:hover{
+    scale: 1.2;
+}
+
+button{
+    padding: 2px;
+}
+
+.qty-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    font-weight: bold;
+    font-size: large;
+    background-color: rgb(88, 255, 255);
+    transition: 0.2s;
+}
+.qty-btn:hover {
+    background-color: rgb(38, 104, 104);
+}

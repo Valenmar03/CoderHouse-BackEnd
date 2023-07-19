@@ -7,7 +7,9 @@
                 {{#if user}}
                         <button id="profile-btn" class="header-btn">Perfil</button>
                         <p style="font-size: larger;">|</p>
-                        <button id="logout-btn" class="header-btn">Cerrar sesion</button>                        
+                        <button id="logout-btn" class="header-btn">Cerrar sesion</button> 
+                        <p style="font-size: larger;">|</p>                       
+                        <a href="/carts/{{user.cart}}"><button id="cart-btn" class="header-btn">Carrito</button></a>
                 {{else}}
                         <button id="login-btn" class="header-btn">Inicia sesion</button>
                         <button id="register-btn" class="header-btn">Registrate</button>

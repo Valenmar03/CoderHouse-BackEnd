@@ -1,11 +1,26 @@
 <div>
+    <a href="/"><button class="returnHome-btn" style="color: black;">Productos</button></a>
+
 
     {{#if prod}}
     {{#each prod}}
-    <h1>{{{this.product.title}}}</h1>
-    <p>{{{this.product.description}}}</p>
+    <div class="cart-card">
+        <h2>{{{this.product.title}}}</h2>
+        <p>{{{this.product.description}}}</p>
+        <div class="qty">
+        <p>{{{this.qty}}}</p>
+            <div>
+                <button class="qty-btn">+</button>
+                <button class="qty-btn">-</button>
+            </div>
+
+        </div>
+    </div>
     {{/each}}
-    
+    <div id="buy-btn">
+        <button class="buy-btn">Finalizar comprar</button>
+    </div>
+
     {{else}}
      <p>Carrito no encontrado</p>
     {{/if}}

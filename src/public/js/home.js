@@ -14,7 +14,6 @@ if(logoutBtn){
     profileBtn.addEventListener('click', async (evt) => {
         window.location.replace('/profile')
     })
-
 }else {
     loginBtn.addEventListener('click', async (evt) => {
         window.location.replace('/login')

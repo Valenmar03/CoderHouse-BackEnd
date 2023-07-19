@@ -83,8 +83,16 @@ const purchase = async (req, res) => {
   res.send({ status: "success", payload: newTicket });
 };
 
+
+const deleteTicket= async (req, res) => {
+    const { tid } = req.params;
+    const ticket = await ticketService.deleteTicket({ _id: tid })
+    res.send({ status: "success", message: 'Ticket deleted successfully'});
+}
+
 export default {
   createTicket,
   getTickets,
   purchase,
+  deleteTicket
 };
