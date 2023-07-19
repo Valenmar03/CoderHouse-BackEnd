@@ -7,10 +7,12 @@ const schema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    amount: Number,
-        
+    amount: Number,    
     purchaser: String, 
-        
+    cart: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Carts'
+    }
 },{timestamps: {createdAt: 'purchase_datetime', updatedAt: 'updated_at'}})
 
 

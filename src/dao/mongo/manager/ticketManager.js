@@ -6,15 +6,15 @@ export default class TicketMangerMongo {
       };
 
     get = async () => {
-        return await ticketModel.find().lean();
+        return await ticketModel.find().populate('cart').lean();
     }
 
-    findBy = async (ticketId) => {
-        return await ticketModel.findById(ticketId);
+    findBy = async (value) => {
+        return await ticketModel.findOne({cart: {$gte: value}}).populate('cart').lean();
     }
 
     update = async (ticketId, amount) => {
-        return await ticketModel.findByIdAndUpdate(ticketId, { amount: amount})
+        return await ticketModel.findByIdAndUpdate(ticketId, amount).lean()
     }
 
     delete = async (ticketId) => {

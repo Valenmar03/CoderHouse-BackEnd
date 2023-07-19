@@ -71,6 +71,14 @@ export default class CartManagerMongo {
     }
   };
 
+  deleteProducts= async(cartId) => {
+    const cart = await this.getById(cartId);
+
+    const products = cart.products;
+
+    return cartModel.updateOne({ _id: cartId }, { $set : { products: [] }})
+  }
+
   delete = (cartId) => {
     return cartModel.findByIdAndDelete(cartId).lean();
   };

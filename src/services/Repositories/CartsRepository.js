@@ -27,6 +27,10 @@ export default class CartRepository {
     updateProductQty(cartId, prodId, quantity){
         return this.dao.updateProduct(cartId, prodId, quantity)
     }
+
+    deleteAllProducts(cartId){
+        return this.dao.deleteProducts(cartId)
+    }
     
     deleteCart(cartId){
         return this.dao.delete(cartId)

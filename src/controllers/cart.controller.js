@@ -21,7 +21,6 @@ const addProductIntoCart = async (req, res) => {
     const cartId = paramId[0];
     const productId = paramId[1];
     const qty = req.body
-    console.log(qty.qty)
     const cart = await cartService.addProductToCart(
       cartId,
       productId,
@@ -63,6 +62,7 @@ const deleteProdOfCart = async (req, res) => {
       { _id: cartId },
       { _id: productId } 
     );
+    console.log(productId)
     res.send({ status: "success", message: cart });
 }
 
