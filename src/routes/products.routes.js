@@ -9,6 +9,8 @@ router.post("/", productsController.addProduct);
 router.put("/:pid", productsController.updateProduct);
 router.delete("/", productsController.deleteProduct);
 
+router.post('/mockingproducts', productsController.mockProds)
+
 /* router.get("/", async (req, res) => {
   const limit = req.query.limit;
   const parseLimit = parseInt(limit);

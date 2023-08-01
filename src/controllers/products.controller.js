@@ -1,5 +1,7 @@
 import { productsService } from "../services/repositories.js";
 
+import { generateMockProds } from "../mocks/products.mock.js";
+
 const getProducts = async (req, res) => {
   const category = req.query.category;
   const products = await productsService.getProducts();
@@ -77,10 +79,20 @@ const deleteProduct = async (req, res) => {
   res.send({ status: "success", message: "Product/s deleted succesfully" });
 };
 
+const mockProds = async (req, res) => {
+  const products = []
+  for (let i = 0; i < 100; i++) {
+    products.push(generateMockProds())
+  }
+  res.send({ status: "success", payload: products });
+};
+
+
 export default {
   getProducts,
   getProductById,
   addProduct,
   updateProduct,
   deleteProduct,
+  mockProds
 };
