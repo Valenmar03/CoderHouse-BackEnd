@@ -9,6 +9,6 @@ export const productErrorIncompleteValues = (product) => {
 }
 
 export const productErrorProdNotFound = (product) => {
-    return `El id de product ingresado no es correcto`
+    return `El Id de producto ingresado no es correcto`
 }
 

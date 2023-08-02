@@ -7,7 +7,7 @@ const register = async (req, res) => {
 
 const registerFail = (req, res) => {
     res.status(400).send({ status: "error", error: req.session.message });
-  }
+}
 
 const login = async (req, res) => {
     req.session.user = {

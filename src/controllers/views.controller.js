@@ -36,24 +36,53 @@ const chatPage = async (req, res) => {
   });
 };
 
-const productDetailPage = async (req, res) => {
-  const { pid } = req.params;
-  const product = await productsService.getProductById({ _id: pid });
-  res.render("prodDetails", {
-    css: "product",
-    title: product.title,
-    prod: product,
-  });
+const productDetailPage = async (req, res, next) => {
+  try {
+    const { pid } = req.params;
+    const product = await productsService.getProductById({ _id: pid });
+    if (!product) {
+      ErrorService.createError({
+        name: "Error buscando producto",
+        cause: productErrorProdNotFound(),
+        message: "Producto no encontrado",
+        code: EErrors.NOT_FOUND,
+        status: 404,
+      });
+    }
+    res.render("prodDetails", {
+      css: "product",
+      title: product.title,
+      prod: product,
+    });
+    
+  } catch (error) {
+    next(error);
+  }
 };
 
-const cartPage = async (req, res) => {
-  const { cid } = req.params;
-  const cart = await cartService.getCartById({ _id: cid });
-  res.render("carts", {
-    css: "cart",
-    title: "Carrito",
-    prod: cart.products,
-  });
+const cartPage = async (req, res, next) => {
+  try {
+    const { cid } = req.params;
+    const cart = await cartService.getCartById({ _id: cid });
+    if (!cart) {
+      ErrorService.createError({
+        name: "Error buscando carrito",
+        cause: cartErrorNotFound(),
+        message: "Carrito no encontrado",
+        code: EErrors.NOT_FOUND,
+        status: 404,
+      });
+    }
+    
+    res.render("carts", {
+      css: "cart",
+      title: "Carrito",
+      prod: cart.products,
+    });
+    
+  } catch (error) {
+    next(error)  
+  }
 };
 
 const profilePage = async (req, res) => {
