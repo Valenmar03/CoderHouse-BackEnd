@@ -14,6 +14,7 @@ import ticketsRouter from "./routes/tickets.routes.js";
 
 import ProductManager from "./dao/fileSystem/manager/ProductManager.js";
 import registerChatHandler from "./listeners/chatHandler.js";
+import errorHandler from './middlewares/error.js'
 
 import __dirname from "./utils.js";
 import initializePassportStrategies from "./config/passport.config.js";
@@ -59,6 +60,7 @@ app.use("/api/tickets", ticketsRouter);
 app.use("/api/sessions", sessionRouter);
 app.use("/", viewsRouter);
 
+app.use(errorHandler)
 
 io.on("connection", (socket) => {
   registerChatHandler(io, socket);

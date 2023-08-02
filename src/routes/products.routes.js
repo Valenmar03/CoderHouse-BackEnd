@@ -7,7 +7,7 @@ router.get("/", productsController.getProducts);
 router.get("/:pid", productsController.getProductById);
 router.post("/", productsController.addProduct);
 router.put("/:pid", productsController.updateProduct);
-router.delete("/", productsController.deleteProduct);
+router.delete("/:pid", productsController.deleteProduct);
 
 router.post('/mockingproducts', productsController.mockProds)
 

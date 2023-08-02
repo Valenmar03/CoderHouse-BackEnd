@@ -1,3 +1,4 @@
+import EErrors from "../constants/EErrors.js"
 
 export default class ErrorService {
     static createError = ({name = 'Error', cause, message, code = 1, status = 400}) => {
