@@ -1,6 +1,9 @@
 import { productsService } from "../services/repositories.js";
 
 import { generateMockProds } from "../mocks/products.mock.js";
+import ErrorService from "../services/errorService.js";
+import { productErrorIncompleteValues } from "../constants/productsErrors.js";
+import EErrors from "../constants/EErrors.js";
 
 const getProducts = async (req, res) => {
   const category = req.query.category;
@@ -21,7 +24,7 @@ const getProductById = async (req, res) => {
 
 const addProduct = async (req, res) => {
   const product = req.body;
-  product.code = Math.floor(Math.random() * 1000000 + 1)
+  product.code = Math.floor(Math.random() * 1000000 + 1);
   if (
     !product.title ||
     !product.description ||
@@ -29,17 +32,18 @@ const addProduct = async (req, res) => {
     !product.code ||
     !product.category ||
     !product.stock
-  )
-    return res
-      .status(400)
-      .send({ status: "error", error: "Incomplete values" });
-
-  try {
-    await productsService.addProducts(product);
-    res.send({ status: "success", payload: product });
-  } catch (error) {
-    res.status(400).send({ message: "error", error: error });
+  ) {
+    const err = ErrorService.createError({
+      name: "Error de creacion de producto",
+      cause: productErrorIncompleteValues(product),
+      message: "Falta completar campos",
+      code: EErrors.INCOMPLETE_VALUES,
+      status: 400,
+    });
+    return res.send({ status: "error", error: err });
   }
+  await productsService.addProducts(product);
+  res.send({ status: "success", payload: product });
 };
 
 const updateProduct = async (req, res) => {
@@ -80,13 +84,12 @@ const deleteProduct = async (req, res) => {
 };
 
 const mockProds = async (req, res) => {
-  const products = []
+  const products = [];
   for (let i = 0; i < 100; i++) {
-    products.push(generateMockProds())
+    products.push(generateMockProds());
   }
   res.send({ status: "success", payload: products });
 };
-
 
 export default {
   getProducts,
@@ -94,5 +97,5 @@ export default {
   addProduct,
   updateProduct,
   deleteProduct,
-  mockProds
+  mockProds,
 };
