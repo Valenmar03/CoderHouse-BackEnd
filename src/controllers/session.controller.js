@@ -33,7 +33,6 @@ const loginFail = (req, res) => {
 
 const github = (req, res) => {
     const user = req.user;
-    console.log(user);
   
     req.session.user = {
       id: user._id,

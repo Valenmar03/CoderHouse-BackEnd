@@ -13,6 +13,7 @@ import viewsRouter from "./routes/views.routes.js";
 import ticketsRouter from "./routes/tickets.routes.js";
 
 import ProductManager from "./dao/fileSystem/manager/ProductManager.js";
+import attachLogger from "./middlewares/logger.js";
 import registerChatHandler from "./listeners/chatHandler.js";
 import errorHandler from './middlewares/error.js'
 
@@ -53,6 +54,7 @@ app.use(
 app.use(passport.initialize());
 initializePassportStrategies()
 
+app.use(attachLogger);
 
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);

@@ -1,7 +1,7 @@
 import { productsService } from "../services/repositories.js";
 
 import { generateMockProds } from "../mocks/products.mock.js";
-import ErrorService from "../services/errorService.js";
+import ErrorService from "../services/error.service.js";
 import {
   productErrorIncompleteValues,
   productErrorProdNotFound,

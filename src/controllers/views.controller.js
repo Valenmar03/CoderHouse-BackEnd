@@ -1,4 +1,5 @@
 import { cartService, productsService } from "../services/repositories.js";
+import ErrorService from "../services/error.service.js";
 
 const homePage = async (req, res) => {
   const { page = 1 } = req.query;

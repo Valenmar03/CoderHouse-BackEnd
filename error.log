@@ -1,0 +1,6 @@
+{"level":"error","message":"Falta completar campos"}
+{"code":1,"level":"error","name":"Error de creacion de producto","status":400}
+{"level":"error","message":"status: 400\n    Error de creacion de producto: Falta completar campos"}
+{"level":"error","message":"status: 400 Error de creacion de producto: Falta completar campos"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}

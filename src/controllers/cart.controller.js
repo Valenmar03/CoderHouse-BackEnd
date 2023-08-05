@@ -1,5 +1,5 @@
 import { cartErrorNotFound } from "../constants/cartErrors.js";
-import ErrorService from "../services/errorService.js";
+import ErrorService from "../services/error.service.js";
 import { cartService, productsService } from "../services/repositories.js";
 import EErrors from "../constants/EErrors.js";
 import { productErrorProdNotFound } from "../constants/productsErrors.js";
