@@ -14,6 +14,10 @@ export default class UserManagerMongo {
         return userModel.findOne(param).lean()
     }
 
+    update(id, newUser){
+        return userModel.findByIdAndUpdate(id, { $set: newUser })
+    }
+
     delete(userId) {
         return userModel.findByIdAndDelete(userId).lean()
     }

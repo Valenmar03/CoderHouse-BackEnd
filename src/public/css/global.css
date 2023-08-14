@@ -47,7 +47,7 @@ button{
     padding: 5px;
 }
 
-.LoginRegisterPage {
+.forms {
     font-size: 1em;
     font-weight: bold;
     padding: 0px 20px;    
@@ -67,6 +67,11 @@ button{
 }
 
 #registerForm {
+    padding: 0px 0px 20px 0px;
+    text-align: left;
+}
+
+#changePassForm {
     padding: 0px 0px 20px 0px;
     text-align: left;
 }

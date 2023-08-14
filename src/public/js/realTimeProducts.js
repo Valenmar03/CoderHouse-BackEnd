@@ -47,7 +47,6 @@ form.addEventListener("submit",async (evt) => {
     category,
     stock,
   };
-  console.log(product)
 
   const response = await fetch('/api/products', {
     method: 'POST',
@@ -58,7 +57,7 @@ form.addEventListener("submit",async (evt) => {
   })
   const responseData = await response.json()
   console.log(responseData)
-  if(responseData.error === 'Incomplete values'){
+  if(responseData.error === 'Error de creacion de producto'){
     const errorMsg = document.getElementById('error-msg')
     errorMsg.innerText = 'Completa todos los campos!'
   }

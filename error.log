@@ -4,3 +4,8 @@
 {"level":"error","message":"status: 400 Error de creacion de producto: Falta completar campos"}
 {"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
 {"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"Error: Failed to lookup view \"restorePass\" in views directory \"C:\\Users\\valen\\OneDrive\\Escritorio\\BackEnd CoderHouse\\Desafios\\Desafio\\src/views\". Status: undefined"}
+{"level":"error","message":"Error: Failed to lookup view \"restorePass\" in views directory \"C:\\Users\\valen\\OneDrive\\Escritorio\\BackEnd CoderHouse\\Desafios\\Desafio\\src/views\". Status: undefined"}
+{"level":"error","message":"Error: Failed to lookup view \"restorePass\" in views directory \"C:\\Users\\valen\\OneDrive\\Escritorio\\BackEnd CoderHouse\\Desafios\\Desafio\\src/views\". Status: undefined"}

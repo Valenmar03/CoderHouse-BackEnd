@@ -16,6 +16,10 @@ export default class UserRepository {
     findUserBy(param){
         return this.dao.findBy(param)
     }
+    
+    updateUser(email, user){
+        return this.dao.update(email, user)
+    }
 
     deleteUser(userId){
         return this.dao.delete(userId)

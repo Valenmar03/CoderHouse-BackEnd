@@ -1,6 +1,8 @@
 import { cartService, productsService } from "../services/repositories.js";
 import ErrorService from "../services/error.service.js";
 
+
+
 const homePage = async (req, res) => {
   const { page = 1 } = req.query;
   const sort = req.query.sort;
@@ -112,6 +114,19 @@ const logoutPage = async (req, res) => {
   });
 };
 
+const mailingPage = async (req, res) => {
+  res.render('mailing',
+    {title: 'Restablecer Contraseña'})
+}
+
+const restorePasswordPage = async (req, res) => {
+  res.render('changePassword', {
+    title: 'Cambiar Contraseña'
+  })
+}
+
+
+
 export default {
   homePage,
   realTimeProductsPage,
@@ -122,4 +137,6 @@ export default {
   registerPage,
   loginPage,
   logoutPage,
+  mailingPage,
+  restorePasswordPage,
 };

@@ -13,5 +13,7 @@ router.get('/profile', privacy('USER','ADMIN'), viewsController.profilePage);
 router.get("/register", privacy('NO_AUTH'), viewsController.registerPage);
 router.get("/login", privacy('NO_AUTH'), viewsController.loginPage);
 router.get('/logout', privacy('USER'), viewsController.logoutPage);
+router.get('/mailing', privacy('NO_AUTH'), viewsController.mailingPage);
+router.get('/changePassword', privacy('USER'), viewsController.restorePasswordPage);
 
 export default router;

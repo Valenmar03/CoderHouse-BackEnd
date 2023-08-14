@@ -7,5 +7,7 @@ export default {
     persistence: process.env.PERSISTENCE,
     mongoUrl: process.env.MONGO_URL,
     adminEmail: process.env.ADMIN_EMAIL,
-    adminPassword: process.env.ADMIN_PASS
+    adminPassword: process.env.ADMIN_PASS,
+    sendEmail: process.env.SEND_EMAIL,
+    sendPass: process.env.SEND_PASS
 }
