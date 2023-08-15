@@ -1,7 +1,9 @@
-const form = document.getElementById("changePassForm");
+const form = document.getElementById("restorePassForm");
 
 form.addEventListener("submit", async (evt) => {
   evt.preventDefault();
+
+  const email = document.getElementById("email").value;
   const pass1 = document.getElementById("new-pass1").value;
   const pass2 = document.getElementById("new-pass2").value;
 
@@ -10,9 +12,10 @@ form.addEventListener("submit", async (evt) => {
     pass2,
   };
 
-  const response = await fetch("/api/mailing/changePass", {
+  const userToRestore = { email, passwords }
+  const response = await fetch("/api/mailing/restorePass", {
     method: "POST",
-    body: JSON.stringify(passwords),
+    body: JSON.stringify(userToRestore),
     headers: {
       "Content-Type": "application/json",
     },

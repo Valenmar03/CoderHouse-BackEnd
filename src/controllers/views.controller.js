@@ -115,14 +115,24 @@ const logoutPage = async (req, res) => {
 };
 
 const mailingPage = async (req, res) => {
-  res.render('mailing',
+  res.render('sendMailToRestore',
     {title: 'Restablecer Contraseña'})
 }
 
-const restorePasswordPage = async (req, res) => {
+const changePasswordPage = async (req, res) => {
   res.render('changePassword', {
     title: 'Cambiar Contraseña'
   })
+}
+
+const mailSended = async (req, res) => {
+  res.render('mailSended', {
+    title: 'Correo enviado'
+  })
+}
+
+const restorePassword = async (req, res) => {
+  res.render('restorePassword', {title: 'Restablecer contraseña'})
 }
 
 
@@ -138,5 +148,7 @@ export default {
   loginPage,
   logoutPage,
   mailingPage,
-  restorePasswordPage,
+  changePasswordPage,
+  mailSended,
+  restorePassword
 };
