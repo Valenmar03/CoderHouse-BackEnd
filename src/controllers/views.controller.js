@@ -11,7 +11,7 @@ const homePage = async (req, res) => {
     await productsService.getProducts(page, sort, category);
 
   const products = docs;
-  res.render("home", {
+  res.render("mainPages/home", {
     css: "home",
     title: "Home",
     prod: products,
@@ -26,7 +26,7 @@ const homePage = async (req, res) => {
 
 const realTimeProductsPage = async (req, res) => {
   const result = await productsService.getAllProducts();
-  res.render("realTimeProducts", {
+  res.render("mainPages/realTimeProducts", {
     css: "realTimeProducts",
     title: "Administrador",
     prod: result,
@@ -34,7 +34,7 @@ const realTimeProductsPage = async (req, res) => {
 };
 
 const chatPage = async (req, res) => {
-  res.render("chat", {
+  res.render("chat/chat", {
     title: "Chat",
   });
 };
@@ -97,13 +97,13 @@ const profilePage = async (req, res) => {
 };
 
 const registerPage = async (req, res) => {
-  res.render("register", {
+  res.render("registerLogin/register", {
     title: "Registrate",
   });
 };
 
 const loginPage = async (req, res) => {
-  res.render("login", {
+  res.render("registerLogin/login", {
     title: "Inicia Sesión",
   });
 };
@@ -114,25 +114,25 @@ const logoutPage = async (req, res) => {
   });
 };
 
-const mailingPage = async (req, res) => {
-  res.render('sendMailToRestore',
+const restoreRequest = async (req, res) => {
+  res.render('password/restoreRequest',
     {title: 'Restablecer Contraseña'})
 }
 
 const changePasswordPage = async (req, res) => {
-  res.render('changePassword', {
+  res.render('password/changePassword', {
     title: 'Cambiar Contraseña'
   })
 }
 
 const mailSended = async (req, res) => {
-  res.render('mailSended', {
+  res.render('password/mailSended', {
     title: 'Correo enviado'
   })
 }
 
 const restorePassword = async (req, res) => {
-  res.render('restorePassword', {title: 'Restablecer contraseña'})
+  res.render('password/restorePassword', {title: 'Restablecer contraseña'})
 }
 
 
@@ -147,7 +147,7 @@ export default {
   registerPage,
   loginPage,
   logoutPage,
-  mailingPage,
+  restoreRequest,
   changePasswordPage,
   mailSended,
   restorePassword

@@ -13,7 +13,7 @@ router.get('/profile', privacy('USER','ADMIN'), viewsController.profilePage);
 router.get("/register", privacy('NO_AUTH'), viewsController.registerPage);
 router.get("/login", privacy('NO_AUTH'), viewsController.loginPage);
 router.get('/logout', privacy('USER'), viewsController.logoutPage);
-router.get('/sendMailToRestore', privacy('NO_AUTH'), viewsController.mailingPage);
+router.get('/restoreRequest', privacy('NO_AUTH'), viewsController.restoreRequest);
 router.get('/changePassword', privacy('USER'), viewsController.changePasswordPage);
 router.get('/mailSended', viewsController.mailSended)
 router.get('/restorePassword', privacy('NO_AUTH'),viewsController.restorePassword)

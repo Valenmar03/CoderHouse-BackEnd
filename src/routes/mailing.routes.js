@@ -5,7 +5,7 @@ const router = new Router();
 
 router.get('/sendChangePass', mailingController.sendMailToChange)
 router.post('/changePass', mailingController.changePass)
-router.post('/sendMailToRestore', mailingController.sendMailToRestore)
+router.post('/restoreRequest', mailingController.restoreRequest)
 router.post('/restorePass', mailingController.restorePass)
 
 

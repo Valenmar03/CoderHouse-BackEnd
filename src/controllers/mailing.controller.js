@@ -43,21 +43,30 @@ const changePass = async (req, res) => {
   res.send({status: 'success', message: 'La contraseña fue cambiada correctamente'})
 }
 
-const sendMailToRestore = async (req, res) => {
+const restoreRequest = async (req, res) => {
   const email = req.body.email
+  const user = await userService.findUser({ email })
+  if(!user){
+    return res.send({status: 'error', error: 'No hay un usuario asociado a este correo'})
+  }
+
+  req.session.email = email
+
   const result = await transport.sendMail({
     from: `Tienda de ropa <${envConfig.sendEmail}>`,
     to: email,
-    subject: "Cambiar contraseña",
+    subject: "Restablecer la contraseña",
     html: `
       <a href="http://localhost:${envConfig.port}/restorePassword">Ingrese aquí</a>`,
   });
-  res.redirect('/mailSended')
+  res.send({status: 'success'})
 }
 
 const restorePass = async (req, res) => {
-  const email = req.body.email
+  const email = req.session.email
+  console.log(email)
   const passwords = req.body.passwords
+  console.log(passwords)
   
   const user = await userService.findUser({ email })
   const id = user._id
@@ -73,12 +82,12 @@ const restorePass = async (req, res) => {
   user.password = hashedPass
   const newUser = await userService.updateUser(id, user)
 
-  res.send({status: 'success', message: 'Todo ok'})
+  res.send({status: 'success', message: 'Contrasela restablecida correctamente'})
 }
 
 export default {
   sendMailToChange,
   changePass,
-  sendMailToRestore,
+  restoreRequest,
   restorePass
 }
