@@ -54,6 +54,7 @@ const addProduct = async (req, res, next) => {
         status: 400,
       });
     }
+    console.log(req.session)
     res.send({ status: "success", payload: product });
     await productsService.addProducts(product);
   } catch (error) {

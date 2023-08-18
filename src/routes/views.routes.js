@@ -5,16 +5,16 @@ import { privacy } from "../middlewares/auth.js";
 const router = Router();
 
 router.get("/", viewsController.homePage);
-router.get("/realTimeProducts", privacy('ADMIN'), viewsController.realTimeProductsPage);
-router.get("/chat",privacy('USER'), viewsController.chatPage);
-router.get("/products/:pid", privacy('USER'), viewsController.productDetailPage);
-router.get("/carts/:cid", privacy('USER'), viewsController.cartPage);
-router.get('/profile', privacy('USER','ADMIN'), viewsController.profilePage);
+router.get("/realTimeProducts", privacy('PREMIUM-ADMIN'), viewsController.realTimeProductsPage);
+router.get("/chat",privacy('USER-PREMIUM'), viewsController.chatPage);
+router.get("/products/:pid", privacy('USER-PREMIUM'), viewsController.productDetailPage);
+router.get("/carts/:cid", privacy('USER-PREMIUM'), viewsController.cartPage);
+router.get('/profile', privacy('LOGUED'), viewsController.profilePage);
 router.get("/register", privacy('NO_AUTH'), viewsController.registerPage);
 router.get("/login", privacy('NO_AUTH'), viewsController.loginPage);
-router.get('/logout', privacy('USER'), viewsController.logoutPage);
+router.get('/logout', privacy('LOGUED'), viewsController.logoutPage);
 router.get('/restoreRequest', privacy('NO_AUTH'), viewsController.restoreRequest);
-router.get('/changePassword', privacy('USER'), viewsController.changePasswordPage);
+router.get('/changePassword', privacy('USER-PREMIUM'), viewsController.changePasswordPage);
 router.get('/mailSended', viewsController.mailSended)
 router.get('/restorePassword', privacy('NO_AUTH'),viewsController.restorePassword)
 

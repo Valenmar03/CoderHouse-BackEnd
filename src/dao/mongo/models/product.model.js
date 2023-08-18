@@ -20,7 +20,12 @@ const schema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    stock: Number
+    stock: Number,
+    owner: {
+        type: String,
+        ref: 'Users',
+        default: 'admin'
+    }
 }, {timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'}})
 
 

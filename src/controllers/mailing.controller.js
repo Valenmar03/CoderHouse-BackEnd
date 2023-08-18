@@ -50,8 +50,6 @@ const restoreRequest = async (req, res) => {
     return res.send({status: 'error', error: 'No hay un usuario asociado a este correo'})
   }
 
-  req.session.email = email
-
   const result = await transport.sendMail({
     from: `Tienda de ropa <${envConfig.sendEmail}>`,
     to: email,
@@ -59,14 +57,13 @@ const restoreRequest = async (req, res) => {
     html: `
       <a href="http://localhost:${envConfig.port}/restorePassword">Ingrese aquí</a>`,
   });
+  
   res.send({status: 'success'})
 }
 
 const restorePass = async (req, res) => {
   const email = req.session.email
-  console.log(email)
   const passwords = req.body.passwords
-  console.log(passwords)
   
   const user = await userService.findUser({ email })
   const id = user._id
