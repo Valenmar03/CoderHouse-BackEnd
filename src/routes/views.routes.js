@@ -17,5 +17,7 @@ router.get('/restoreRequest', privacy('NO_AUTH'), viewsController.restoreRequest
 router.get('/changePassword', privacy('USER-PREMIUM'), viewsController.changePasswordPage);
 router.get('/mailSended', viewsController.mailSended)
 router.get('/restorePassword', viewsController.restorePassword)
+router.get('/upgradeUser',privacy('USER'), viewsController.upgradeUser)
+router.get('/changeRole', privacy('USER-PREMIUM'), viewsController.changeRole)
 
 export default router;

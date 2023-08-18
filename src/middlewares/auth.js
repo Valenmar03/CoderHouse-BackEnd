@@ -17,6 +17,11 @@ export const privacy = (types) => {
         else res.redirect("/login");
         break
 
+      case 'USER':
+        if(user && user.role === 'user') next()
+        else res.redirect('/login')
+      break  
+
       case "NO_AUTH":
         if (!user) next();
         else res.redirect("/");

@@ -8,7 +8,6 @@ router.get("/:pid", productsController.getProductById);
 router.post("/", productsController.addProduct);
 router.put("/:pid", productsController.updateProduct);
 router.delete("/:pid", productsController.deleteProduct);
-
 router.post('/mockingproducts', productsController.mockProds)
 
 /* router.get("/", async (req, res) => {

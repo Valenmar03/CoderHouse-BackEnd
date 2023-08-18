@@ -1,7 +1,9 @@
-import { cartService, productsService } from "../services/repositories.js";
+import {
+  cartService,
+  productsService,
+  userService,
+} from "../services/repositories.js";
 import ErrorService from "../services/error.service.js";
-
-
 
 const homePage = async (req, res) => {
   const { page = 1 } = req.query;
@@ -57,7 +59,6 @@ const productDetailPage = async (req, res, next) => {
       title: product.title,
       prod: product,
     });
-    
   } catch (error) {
     next(error);
   }
@@ -76,23 +77,29 @@ const cartPage = async (req, res, next) => {
         status: 404,
       });
     }
-    
+
     res.render("carts", {
       css: "cart",
       title: "Carrito",
       prod: cart.products,
     });
-    
   } catch (error) {
-    next(error)  
+    next(error);
   }
 };
 
 const profilePage = async (req, res) => {
   const user = req.session.user;
+  let premium;
+  if (user.role === "premium") {
+    premium = true;
+  } else {
+    premium = null;
+  }
   res.render("profile", {
     title: `Perfil de ${user.name}`,
     user: user,
+    premium: premium,
   });
 };
 
@@ -115,27 +122,65 @@ const logoutPage = async (req, res) => {
 };
 
 const restoreRequest = async (req, res) => {
-  res.render('password/restoreRequest',
-    {title: 'Restablecer Contraseña'})
-}
+  res.render("password/restoreRequest", { title: "Restablecer Contraseña" });
+};
 
 const changePasswordPage = async (req, res) => {
-  res.render('password/changePassword', {
-    title: 'Cambiar Contraseña'
-  })
-}
+  res.render("password/changePassword", {
+    title: "Cambiar Contraseña",
+  });
+};
 
 const mailSended = async (req, res) => {
-  res.render('password/mailSended', {
-    title: 'Correo enviado'
-  })
-}
+  res.render("password/mailSended", {
+    title: "Correo enviado",
+  });
+};
 
 const restorePassword = async (req, res) => {
-  res.render('password/restorePassword', {title: 'Restablecer contraseña'})
+  res.render("password/restorePassword", { title: "Restablecer contraseña" });
+};
+
+const upgradeUser = async (req, res) => {
+  res.render("upgradeUser", {
+    title: "Hazte Premium",
+  });
+};
+
+const changeRole = async (req, res) => {
+  const { id } = req.session.user;
+  const user = await userService.findUserBy({ _id: id });
+  let premium 
+
+  if (user.role === "premium") {
+    user.role = 'user'
+    req.session.user.role = 'user'
+    const newUser = await userService.updateUser(user._id, user);
+    premium = null
+  } else if (user.role === "user") {
+    user.role = "premium";
+    req.session.user.role = 'premium'
+    const newUser = await userService.updateUser(user._id, user);
+    premium = true
+  }
+
+  res.render("changeRole", {
+    title: "Eres Premium!",
+    premium,
+  });
+};
+
+const makeUser = async (req, res) => {
+  const { id } = req.session.user;
+  const user = await userService.findUserBy({ _id: id });
+
+  if(user.role === "user") {
+    return res.redirect('/profile')
+  }else if (user.role === 'premium'){
+    user.role = 'user'
+    const newUser = await userService.updateUser(user._id, user);
+  }
 }
-
-
 
 export default {
   homePage,
@@ -150,5 +195,7 @@ export default {
   restoreRequest,
   changePasswordPage,
   mailSended,
-  restorePassword
+  restorePassword,
+  upgradeUser,
+  changeRole,
 };

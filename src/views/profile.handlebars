@@ -3,3 +3,12 @@
 <h1>{{user.name}}</h1>
 
 <a href="/api/mailing/sendChangePass">Cambiar contraseña</a>
+
+
+{{#if premium}}
+    <button><a href="/createProduct">Vender Producto</a></button>
+
+    <button><a href="/changeRole">No quiero ser premium</a></button>
+{{else}}
+    <button><a href="/upgradeUser">Hazte premium!</a></button>
+{{/if}}
