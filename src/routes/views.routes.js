@@ -16,6 +16,6 @@ router.get('/logout', privacy('LOGUED'), viewsController.logoutPage);
 router.get('/restoreRequest', privacy('NO_AUTH'), viewsController.restoreRequest);
 router.get('/changePassword', privacy('USER-PREMIUM'), viewsController.changePasswordPage);
 router.get('/mailSended', viewsController.mailSended)
-router.get('/restorePassword', privacy('NO_AUTH'),viewsController.restorePassword)
+router.get('/restorePassword', viewsController.restorePassword)
 
 export default router;

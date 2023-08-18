@@ -1,4 +1,5 @@
 const form = document.getElementById("restorePassForm");
+const errorMsg = document.getElementById("error-msg");
 
 form.addEventListener("submit", async (evt) => {
   evt.preventDefault();
@@ -22,12 +23,14 @@ form.addEventListener("submit", async (evt) => {
   const responseData = await response.json();
   console.log(responseData);
   if (responseData.error === "Las contraseñas no coinciden") {
-    const errorMsg = document.getElementById("error-msg");
     errorMsg.innerText = "Las contraseñas no coinciden";
-  } else if (responseData.error === "Esta es tu contraseña actual") {
-    const errorMsg = document.getElementById("error-msg");
+  } else if (responseData.error === "Esta es tu contraseña actual") {  
     errorMsg.innerText = "Esta es tu contraseña actual";
-  } else if (responseData.status == "success") {
+  } else if(responseData.error === 'El link de cambio de contraseña expiro'){
+    errorMsg.innerText = "El link de cambio de contraseña expiro";
+  }else if(responseData.error === 'Usuario no encontrado'){
+    errorMsg.innerText = "Usuario no registrado";
+  }else if (responseData.status == "success") {
     window.location.replace("/login");
   }
 });

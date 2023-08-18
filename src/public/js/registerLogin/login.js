@@ -23,5 +23,8 @@ form.addEventListener("submit", async (event) => {
     window.location.replace("/realTimeProducts");
   } else if (responseData.status === "success") {
     window.location.replace("/");
+  }else if (responseData.status === "error") {
+    const errorMsg = document.getElementById('error-msg')
+    errorMsg.innerText = 'Correo o contraseña incorrectos'
   }
 });

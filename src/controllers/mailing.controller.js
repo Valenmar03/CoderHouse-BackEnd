@@ -50,6 +50,13 @@ const restoreRequest = async (req, res) => {
     return res.send({status: 'error', error: 'No hay un usuario asociado a este correo'})
   }
 
+  req.session.cookie.maxAge = 1000*3600
+  req.session.user = user
+
+
+  console.log(req.session.cookie)
+
+
   const result = await transport.sendMail({
     from: `Tienda de ropa <${envConfig.sendEmail}>`,
     to: email,
@@ -62,13 +69,23 @@ const restoreRequest = async (req, res) => {
 }
 
 const restorePass = async (req, res) => {
-  const email = req.session.email
+
+  if(!req.session.user){
+    return res.send({status: 'error', error: 'El link de cambio de contraseña expiro'})
+  }
+  console.log(req.session)
+  const email = req.session.user.email
   const passwords = req.body.passwords
   
   const user = await userService.findUser({ email })
+  if(!user){
+    return res.send({status: 'error', error: 'Usuario no encontrado'})
+  }
   const id = user._id
 
   const validPassword = await validatePassword(passwords.pass1, user.password);
+
+  
   if(passwords.pass1 !== passwords.pass2) {
     return res.send({status: 'error', error: 'Las contraseñas no coinciden'})
   }
@@ -79,7 +96,7 @@ const restorePass = async (req, res) => {
   user.password = hashedPass
   const newUser = await userService.updateUser(id, user)
 
-  res.send({status: 'success', message: 'Contrasela restablecida correctamente'})
+  res.send({status: 'success', message: 'Contraseña restablecida correctamente'})
 }
 
 export default {

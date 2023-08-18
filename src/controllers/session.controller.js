@@ -1,6 +1,4 @@
 
-
-
 const register = async (req, res) => {
     res.send({ status: "success", message: "Registered" });
 }
