@@ -11,6 +11,10 @@ h1 {
     padding: 10px;
 }
 
+.header-title {
+    width: 80%;
+
+}
 .contenedor {
     padding: 5px 20px;
 }
@@ -42,7 +46,6 @@ h1 {
     height: 50px;
     margin: 10px;
 }
-
 
 .header-btn:hover {
     transform: scale(1.1);

@@ -39,7 +39,6 @@ const addProduct = async (req, res, next) => {
     const product = req.body;
 
     const session = req.session.user;
-    console.log(session)
     if (session.role === "premium") {
       const id = req.session.user.id;
       const user = await userService.findUserBy({ _id: id });
@@ -119,9 +118,9 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
+    const productToDelete = await productsService.getProductById({ _id: pid})
 
-    const product = await productsService.deleteProduct({ _id: pid });
-    if (!product) {
+    if (!productToDelete) {
       ErrorService.createError({
         name: "Error buscando producto",
         cause: productErrorProdNotFound(),
@@ -130,6 +129,8 @@ const deleteProduct = async (req, res, next) => {
         status: 404,
       });
     }
+    const deletedProduct = await productsService.deleteProduct({ _id: pid });
+    
     res.send({ status: "success", message: "Product deleted succesfully" });
   } catch (error) {
     next(error);

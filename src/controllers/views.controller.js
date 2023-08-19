@@ -4,9 +4,7 @@ import {
   userService,
 } from "../services/repositories.js";
 import ErrorService from "../services/error.service.js";
-import {
-  productErrorProdNotFound,
-} from "../constants/productsErrors.js";
+import { productErrorProdNotFound } from "../constants/productsErrors.js";
 import EErrors from "../constants/EErrors.js";
 
 const homePage = async (req, res) => {
@@ -32,7 +30,7 @@ const homePage = async (req, res) => {
 
 const realTimeProductsPage = async (req, res) => {
   const user = req.session.user;
-  console.log(user)
+  console.log(user);
   if (user.role === "admin") {
     const result = await productsService.getAllProducts();
     res.render("mainPages/realTimeProducts", {
@@ -89,46 +87,47 @@ const deleteProductsPage = async (req, res) => {
       admin: null,
     });
   }
-}
+};
 
-const deleteProdRequestPage = async(req, res) => {
+const deleteProdRequestPage = async (req, res) => {
   const { pid } = req.params;
-    const email = req.session.user.email;
-    if (req.session.user.role === "admin") {
-      const product = await productsService.deleteProduct({ _id: pid });
-      if (!product) {
-
-        ErrorService.createError({
-          name: "Error buscando producto",
-          cause: productErrorProdNotFound(),
-          message: "Producto no encontrado",
-          code: EErrors.NOT_FOUND,
-          status: 404,
-        });
-      }
-      return res.redirect('/deleteProducts');
+  const email = req.session.user.email;
+  if (req.session.user.role === "admin") {
+    const product = await productsService.deleteProduct({ _id: pid });
+    if (!product) {
+      ErrorService.createError({
+        name: "Error buscando producto",
+        cause: productErrorProdNotFound(),
+        message: "Producto no encontrado",
+        code: EErrors.NOT_FOUND,
+        status: 404,
+      });
     }
+    return res.redirect("/deleteProducts");
+  }
 
-    const productToDelete = await productsService.getProductById({ _id: pid });
-    console.log(productToDelete)
+  const productToDelete = await productsService.getProductById({ _id: pid });
+  console.log(productToDelete);
 
-    if (productToDelete.owner === email) {
-      const product = await productsService.deleteProduct({ _id: pid });
-      if (!product) {
-        ErrorService.createError({
-          name: "Error buscando producto",
-          cause: productErrorProdNotFound(),
-          message: "Producto no encontrado",
-          code: EErrors.NOT_FOUND,
-          status: 404,
-        });
-      }
-      return res.redirect('/deleteProducts');
+  if (productToDelete.owner === email) {
+    const product = await productsService.deleteProduct({ _id: pid });
+    if (!product) {
+      ErrorService.createError({
+        name: "Error buscando producto",
+        cause: productErrorProdNotFound(),
+        message: "Producto no encontrado",
+        code: EErrors.NOT_FOUND,
+        status: 404,
+      });
     }
+    return res.redirect("/deleteProducts");
+  }
 
-    res.send({status: 'error', error: 'Este no producto no es tuyo, no puedes eliminarlo'})
-
-}
+  res.send({
+    status: "error",
+    error: "Este no producto no es tuyo, no puedes eliminarlo",
+  });
+};
 
 const chatPage = async (req, res) => {
   res.render("chat/chat", {
@@ -233,7 +232,9 @@ const mailSendedPage = async (req, res) => {
 };
 
 const restorePasswordPage = async (req, res) => {
-  res.render("password/restorePassword", { title: "Restablecer contraseña" });
+  res.render("password/restorePassword", {
+    title: "Restablecer contraseña",
+  });
 };
 
 const upgradeUserPage = async (req, res) => {
@@ -283,5 +284,5 @@ export default {
   upgradeUserPage,
   changeRolePage,
   deleteProductsPage,
-  deleteProdRequestPage
+  deleteProdRequestPage,
 };
