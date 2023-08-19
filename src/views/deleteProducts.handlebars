@@ -1,1 +1,43 @@
+<a href="/realTimeProducts"><button class="returnHome-btn" style="color: black;">Volver</button></a>
 <h1>Eliminar productos</h1>
+
+{{#if admin}}
+    <div class="cards-contenedor" id="product-list">
+
+            {{#if prod}}
+            {{#each prod}}
+                <div class="cards-delete">
+                    <h2>{{this.title}}</h2>
+                    <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
+                    <p>{{this.description}}</p>
+                    <p>Precio: ${{this.price}}</p>
+                    <p>Stock: {{this.stock}}</p>
+                    <a href="/deleteProdRequest/{{this._id}}" style="color: black;"><button>Eliminar Producto</button></a>
+                </div>
+                
+            {{/each}}
+            {{else}}
+            <p>No se encontraron productos</p>
+            {{/if}}
+        </div>
+{{else}}
+    <div class="cards-contenedor" id="product-list">
+
+            {{#if prod}}
+            {{#each prod}}
+                <div class="cards">
+                    <h2>{{this.title}}</h2>
+                    <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
+                    <p>{{this.description}}</p>
+                    <p>Precio: ${{this.price}}</p>
+                    <p>Stock: {{this.stock}}</p>
+                    <a href="/deleteProdRequest/{{this._id}}" style="color: black;"><button>Eliminar Producto</button></a>
+                </div>
+                
+            {{/each}}
+            {{else}}
+                <p>No se encontraron productos</p>
+            {{/if}}
+        </div>
+{{/if}}
+

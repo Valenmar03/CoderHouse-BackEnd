@@ -13,11 +13,13 @@ router.get('/profile', privacy('LOGUED'), viewsController.profilePage);
 router.get("/register", privacy('NO_AUTH'), viewsController.registerPage);
 router.get("/login", privacy('NO_AUTH'), viewsController.loginPage);
 router.get('/logout', privacy('LOGUED'), viewsController.logoutPage);
-router.get('/restoreRequest', privacy('NO_AUTH'), viewsController.restoreRequest);
+router.get('/restoreRequest', privacy('NO_AUTH'), viewsController.restoreRequestPage);
 router.get('/changePassword', privacy('USER-PREMIUM'), viewsController.changePasswordPage);
-router.get('/mailSended', viewsController.mailSended)
-router.get('/restorePassword', viewsController.restorePassword)
-router.get('/upgradeUser',privacy('USER'), viewsController.upgradeUser)
-router.get('/changeRole', privacy('USER-PREMIUM'), viewsController.changeRole)
+router.get('/mailSended', viewsController.mailSendedPage)
+router.get('/restorePassword', viewsController.restorePasswordPage)
+router.get('/upgradeUser',privacy('USER'), viewsController.upgradeUserPage)
+router.get('/changeRole', privacy('USER-PREMIUM'), viewsController.changeRolePage)
+router.get('/deleteproducts', privacy('PREMIUM-ADMIN'), viewsController.deleteProductsPage)
+router.get('/deleteProdRequest/:pid', privacy('PREMIUM-ADMIN'), viewsController.deleteProdRequestPage)
 
 export default router;

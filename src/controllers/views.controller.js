@@ -4,6 +4,10 @@ import {
   userService,
 } from "../services/repositories.js";
 import ErrorService from "../services/error.service.js";
+import {
+  productErrorProdNotFound,
+} from "../constants/productsErrors.js";
+import EErrors from "../constants/EErrors.js";
 
 const homePage = async (req, res) => {
   const { page = 1 } = req.query;
@@ -28,6 +32,7 @@ const homePage = async (req, res) => {
 
 const realTimeProductsPage = async (req, res) => {
   const user = req.session.user;
+  console.log(user)
   if (user.role === "admin") {
     const result = await productsService.getAllProducts();
     res.render("mainPages/realTimeProducts", {
@@ -56,10 +61,73 @@ const realTimeProductsPage = async (req, res) => {
   }
 };
 
-const deleteProducts = async (req, res) => {
-  res.render('deleteProducts', {
-    title: 'Eliminar Productos'
-  })
+const deleteProductsPage = async (req, res) => {
+  const user = req.session.user;
+  if (user.role === "admin") {
+    const result = await productsService.getAllProducts();
+    res.render("deleteProducts", {
+      css: "deleteProducts",
+      title: "Crear Producto",
+      prod: result,
+      user: user,
+      admin: true,
+    });
+  } else {
+    const dbUser = await userService.findUserBy({ _id: user.id });
+
+    let result = [];
+    for (let i = 0; i < dbUser.products.length; i++) {
+      const product = await productsService.getProductById(dbUser.products[i]);
+      result.push(product);
+    }
+
+    res.render("deleteProducts", {
+      css: "deleteProducts",
+      title: "Crear Producto",
+      prod: result,
+      user: user,
+      admin: null,
+    });
+  }
+}
+
+const deleteProdRequestPage = async(req, res) => {
+  const { pid } = req.params;
+    const email = req.session.user.email;
+    if (req.session.user.role === "admin") {
+      const product = await productsService.deleteProduct({ _id: pid });
+      if (!product) {
+
+        ErrorService.createError({
+          name: "Error buscando producto",
+          cause: productErrorProdNotFound(),
+          message: "Producto no encontrado",
+          code: EErrors.NOT_FOUND,
+          status: 404,
+        });
+      }
+      return res.redirect('/deleteProducts');
+    }
+
+    const productToDelete = await productsService.getProductById({ _id: pid });
+    console.log(productToDelete)
+
+    if (productToDelete.owner === email) {
+      const product = await productsService.deleteProduct({ _id: pid });
+      if (!product) {
+        ErrorService.createError({
+          name: "Error buscando producto",
+          cause: productErrorProdNotFound(),
+          message: "Producto no encontrado",
+          code: EErrors.NOT_FOUND,
+          status: 404,
+        });
+      }
+      return res.redirect('/deleteProducts');
+    }
+
+    res.send({status: 'error', error: 'Este no producto no es tuyo, no puedes eliminarlo'})
+
 }
 
 const chatPage = async (req, res) => {
@@ -148,7 +216,7 @@ const logoutPage = async (req, res) => {
   });
 };
 
-const restoreRequest = async (req, res) => {
+const restoreRequestPage = async (req, res) => {
   res.render("password/restoreRequest", { title: "Restablecer Contraseña" });
 };
 
@@ -158,23 +226,23 @@ const changePasswordPage = async (req, res) => {
   });
 };
 
-const mailSended = async (req, res) => {
+const mailSendedPage = async (req, res) => {
   res.render("password/mailSended", {
     title: "Correo enviado",
   });
 };
 
-const restorePassword = async (req, res) => {
+const restorePasswordPage = async (req, res) => {
   res.render("password/restorePassword", { title: "Restablecer contraseña" });
 };
 
-const upgradeUser = async (req, res) => {
+const upgradeUserPage = async (req, res) => {
   res.render("upgradeUser", {
     title: "Hazte Premium",
   });
 };
 
-const changeRole = async (req, res) => {
+const changeRolePage = async (req, res) => {
   const { id } = req.session.user;
   const user = await userService.findUserBy({ _id: id });
   let premium;
@@ -198,18 +266,6 @@ const changeRole = async (req, res) => {
   });
 };
 
-const makeUser = async (req, res) => {
-  const { id } = req.session.user;
-  const user = await userService.findUserBy({ _id: id });
-
-  if (user.role === "user") {
-    return res.redirect("/profile");
-  } else if (user.role === "premium") {
-    user.role = "user";
-    const newUser = await userService.updateUser(user._id, user);
-  }
-};
-
 export default {
   homePage,
   realTimeProductsPage,
@@ -220,10 +276,12 @@ export default {
   registerPage,
   loginPage,
   logoutPage,
-  restoreRequest,
+  restoreRequestPage,
   changePasswordPage,
-  mailSended,
-  restorePassword,
-  upgradeUser,
-  changeRole,
+  mailSendedPage,
+  restorePasswordPage,
+  upgradeUserPage,
+  changeRolePage,
+  deleteProductsPage,
+  deleteProdRequestPage
 };

@@ -17,3 +17,8 @@
 {"level":"error","message":"CastError: Cast to ObjectId failed for value \"0\" (type number) at path \"_id\" for model \"Users\". Status: undefined"}
 {"level":"error","message":"CastError: Cast to ObjectId failed for value \"0\" (type number) at path \"_id\" for model \"Users\". Status: undefined"}
 {"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: id is not defined. Status: undefined"}

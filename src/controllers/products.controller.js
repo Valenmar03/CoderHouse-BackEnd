@@ -39,6 +39,7 @@ const addProduct = async (req, res, next) => {
     const product = req.body;
 
     const session = req.session.user;
+    console.log(session)
     if (session.role === "premium") {
       const id = req.session.user.id;
       const user = await userService.findUserBy({ _id: id });
@@ -66,6 +67,8 @@ const addProduct = async (req, res, next) => {
     const newProduct = await productsService.addProducts(product);
 
     if (session.role === "premium") {
+      const id = req.session.user.id;
+      const user = await userService.findUserBy({ _id: id });
       user.products.push(newProduct._id);
       const newUser = await userService.updateUser(id, user);
     }
@@ -116,40 +119,18 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
-    const email = req.session.user.email;
-    if (req.session.user.role === "admin") {
-      const product = await productsService.deleteProduct({ _id: pid });
-      if (!product) {
 
-        ErrorService.createError({
-          name: "Error buscando producto",
-          cause: productErrorProdNotFound(),
-          message: "Producto no encontrado",
-          code: EErrors.NOT_FOUND,
-          status: 404,
-        });
-      }
-      res.send({ status: "success", message: "Product deleted succesfully" });
+    const product = await productsService.deleteProduct({ _id: pid });
+    if (!product) {
+      ErrorService.createError({
+        name: "Error buscando producto",
+        cause: productErrorProdNotFound(),
+        message: "Producto no encontrado",
+        code: EErrors.NOT_FOUND,
+        status: 404,
+      });
     }
-
-    const productToDelete = await productsService.getProductById({ _id: pid });
-
-    if (productToDelete.owner === email) {
-      const product = await productsService.deleteProduct({ _id: pid });
-      if (!product) {
-        ErrorService.createError({
-          name: "Error buscando producto",
-          cause: productErrorProdNotFound(),
-          message: "Producto no encontrado",
-          code: EErrors.NOT_FOUND,
-          status: 404,
-        });
-      }
-      res.send({ status: "success", message: "Product deleted succesfully" });
-    }
-
-    res.send({status: 'error', error: 'Este no producto no es tuyo, no puedes eliminarlo'})
-
+    res.send({ status: "success", message: "Product deleted succesfully" });
   } catch (error) {
     next(error);
   }
