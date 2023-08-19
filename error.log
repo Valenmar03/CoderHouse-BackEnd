@@ -11,3 +11,9 @@
 {"level":"error","message":"Error: Failed to lookup view \"restorePass\" in views directory \"C:\\Users\\valen\\OneDrive\\Escritorio\\BackEnd CoderHouse\\Desafios\\Desafio\\src/views\". Status: undefined"}
 {"level":"error","message":"Error: Failed to lookup view \"login\" in views directory \"C:\\Users\\valen\\OneDrive\\Escritorio\\BackEnd CoderHouse\\Desafios\\Desafio\\src/views\". Status: undefined"}
 {"level":"error","message":"Error: Failed to lookup view \"login\" in views directory \"C:\\Users\\valen\\OneDrive\\Escritorio\\BackEnd CoderHouse\\Desafios\\Desafio\\src/views\". Status: undefined"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'push'). Status: undefined"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"0\" (type number) at path \"_id\" for model \"Users\". Status: undefined"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"0\" (type number) at path \"_id\" for model \"Users\". Status: undefined"}
+{"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}

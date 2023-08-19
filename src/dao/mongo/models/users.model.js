@@ -14,6 +14,10 @@ const schema = new mongoose.Schema({
     cart: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Carts'
+    },
+    products: {
+        type: Array, 
+        default: []
     }
 },{timestamps:true})
 

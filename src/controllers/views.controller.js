@@ -27,13 +27,40 @@ const homePage = async (req, res) => {
 };
 
 const realTimeProductsPage = async (req, res) => {
-  const result = await productsService.getAllProducts();
-  res.render("mainPages/realTimeProducts", {
-    css: "realTimeProducts",
-    title: "Administrador",
-    prod: result,
-  });
+  const user = req.session.user;
+  if (user.role === "admin") {
+    const result = await productsService.getAllProducts();
+    res.render("mainPages/realTimeProducts", {
+      css: "realTimeProducts",
+      title: "Crear Producto",
+      prod: result,
+      user: user,
+      admin: true,
+    });
+  } else {
+    const dbUser = await userService.findUserBy({ _id: user.id });
+
+    let result = [];
+    for (let i = 0; i < dbUser.products.length; i++) {
+      const product = await productsService.getProductById(dbUser.products[i]);
+      result.push(product);
+    }
+
+    res.render("mainPages/realTimeProducts", {
+      css: "realTimeProducts",
+      title: "Crear Producto",
+      prod: result,
+      user: user,
+      admin: null,
+    });
+  }
 };
+
+const deleteProducts = async (req, res) => {
+  res.render('deleteProducts', {
+    title: 'Eliminar Productos'
+  })
+}
 
 const chatPage = async (req, res) => {
   res.render("chat/chat", {
@@ -150,18 +177,19 @@ const upgradeUser = async (req, res) => {
 const changeRole = async (req, res) => {
   const { id } = req.session.user;
   const user = await userService.findUserBy({ _id: id });
-  let premium 
+  let premium;
 
   if (user.role === "premium") {
-    user.role = 'user'
-    req.session.user.role = 'user'
+    user.role = "user";
+    req.session.user.role = "user";
+    user.products = [];
     const newUser = await userService.updateUser(user._id, user);
-    premium = null
+    premium = null;
   } else if (user.role === "user") {
     user.role = "premium";
-    req.session.user.role = 'premium'
+    req.session.user.role = "premium";
     const newUser = await userService.updateUser(user._id, user);
-    premium = true
+    premium = true;
   }
 
   res.render("changeRole", {
@@ -174,13 +202,13 @@ const makeUser = async (req, res) => {
   const { id } = req.session.user;
   const user = await userService.findUserBy({ _id: id });
 
-  if(user.role === "user") {
-    return res.redirect('/profile')
-  }else if (user.role === 'premium'){
-    user.role = 'user'
+  if (user.role === "user") {
+    return res.redirect("/profile");
+  } else if (user.role === "premium") {
+    user.role = "user";
     const newUser = await userService.updateUser(user._id, user);
   }
-}
+};
 
 export default {
   homePage,

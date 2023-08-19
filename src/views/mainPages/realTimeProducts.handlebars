@@ -1,7 +1,7 @@
 <div class="contenedor">
     
     <div class="header">
-        <h1>Administrador</h1>
+        <h1>{{user.name}}</h1>
         <button id="logout-btn" style="display: block;">Cerrar sesion</button>
 
     </div>
@@ -36,24 +36,51 @@
 
         <button type="submit" id="submit-button">Agregar producto</button>
     </form> 
-    <h1>Listado de productos en vivo</h1>
-    <div class="cards-contenedor" id="product-list">
 
-        {{#if prod}}
-        {{#each prod}}
-            <div class="cards">
-                <h2>{{this.title}}</h2>
-                <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
-                <p>{{this.description}}</p>
-                <p>Precio: ${{this.price}}</p>
-                <p>Stock: {{this.stock}}</p>
-            </div>
-            
-        {{/each}}
-        {{else}}
-        <p>No se encontraron productos</p>
-        {{/if}}
-    </div>
+    {{#if admin}}
+        <h1>Listado de productos en vivo</h1>
+        <button><a href="/deleteProducts">Eliminar productos</a></button>
+        <div class="cards-contenedor" id="product-list">
+
+            {{#if prod}}
+            {{#each prod}}
+                <div class="cards">
+                    <h2>{{this.title}}</h2>
+                    <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
+                    <p>{{this.description}}</p>
+                    <p>Precio: ${{this.price}}</p>
+                    <p>Stock: {{this.stock}}</p>
+                </div>
+                
+            {{/each}}
+            {{else}}
+            <p>No se encontraron productos</p>
+            {{/if}}
+        </div>
+    
+    {{else}}
+        <h1>Tus productos</h1>
+        <button><a href="/deleteProducts">Eliminar productos</a></button>
+
+        <div class="cards-contenedor" id="product-list">
+
+            {{#if prod}}
+            {{#each prod}}
+                <div class="cards">
+                    <h2>{{this.title}}</h2>
+                    <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
+                    <p>{{this.description}}</p>
+                    <p>Precio: ${{this.price}}</p>
+                    <p>Stock: {{this.stock}}</p>
+                </div>
+                
+            {{/each}}
+            {{else}}
+            <p>No se encontraron productos</p>
+            {{/if}}
+        </div>
+
+    {{/if}}
     
 
 

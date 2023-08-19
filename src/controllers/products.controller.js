@@ -1,4 +1,4 @@
-import { productsService } from "../services/repositories.js";
+import { productsService, userService } from "../services/repositories.js";
 
 import { generateMockProds } from "../mocks/products.mock.js";
 import ErrorService from "../services/error.service.js";
@@ -37,7 +37,16 @@ const getProductById = async (req, res, next) => {
 const addProduct = async (req, res, next) => {
   try {
     const product = req.body;
+
+    const session = req.session.user;
+    if (session.role === "premium") {
+      const id = req.session.user.id;
+      const user = await userService.findUserBy({ _id: id });
+      product.owner = user.email;
+    }
+
     product.code = Math.floor(Math.random() * 1000000 + 1);
+
     if (
       !product.title ||
       !product.description ||
@@ -54,9 +63,14 @@ const addProduct = async (req, res, next) => {
         status: 400,
       });
     }
-    console.log(req.session)
+    const newProduct = await productsService.addProducts(product);
+
+    if (session.role === "premium") {
+      user.products.push(newProduct._id);
+      const newUser = await userService.updateUser(id, user);
+    }
+
     res.send({ status: "success", payload: product });
-    await productsService.addProducts(product);
   } catch (error) {
     next(error);
   }
@@ -102,8 +116,11 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
-      const product = await productsService.deleteProduct({ _id: pid});
-      if (!product)
+    const email = req.session.user.email;
+    if (req.session.user.role === "admin") {
+      const product = await productsService.deleteProduct({ _id: pid });
+      if (!product) {
+
         ErrorService.createError({
           name: "Error buscando producto",
           cause: productErrorProdNotFound(),
@@ -111,9 +128,27 @@ const deleteProduct = async (req, res, next) => {
           code: EErrors.NOT_FOUND,
           status: 404,
         });
-    
+      }
+      res.send({ status: "success", message: "Product deleted succesfully" });
+    }
 
-    res.send({ status: "success", message: "Product deleted succesfully" });
+    const productToDelete = await productsService.getProductById({ _id: pid });
+
+    if (productToDelete.owner === email) {
+      const product = await productsService.deleteProduct({ _id: pid });
+      if (!product) {
+        ErrorService.createError({
+          name: "Error buscando producto",
+          cause: productErrorProdNotFound(),
+          message: "Producto no encontrado",
+          code: EErrors.NOT_FOUND,
+          status: 404,
+        });
+      }
+      res.send({ status: "success", message: "Product deleted succesfully" });
+    }
+
+    res.send({status: 'error', error: 'Este no producto no es tuyo, no puedes eliminarlo'})
 
   } catch (error) {
     next(error);
