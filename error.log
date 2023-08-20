@@ -22,3 +22,15 @@
 {"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
 {"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
 {"level":"error","message":"ReferenceError: id is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: paramId is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: paramId is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: cartId is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: cartId is not defined. Status: undefined"}
+{"level":"error","message":"Error buscando carrito: Carrito no encontrado. Status: 404"}
+{"level":"error","message":"ReferenceError: i is not defined. Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading '0'). Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
+{"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}

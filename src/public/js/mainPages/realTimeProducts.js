@@ -60,5 +60,7 @@ form.addEventListener("submit",async (evt) => {
   if(responseData.error === 'Error de creacion de producto'){
     const errorMsg = document.getElementById('error-msg')
     errorMsg.innerText = 'Completa todos los campos!'
+  } else if(responseData.status === 'success'){
+    window.location.reload()
   }
 });

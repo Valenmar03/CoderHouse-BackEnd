@@ -35,12 +35,13 @@ const getCartById = async (req, res, next) => {
 
 const addProductIntoCart = async (req, res, next) => {
   try {
-    const paramId = Object.values(req.params);
-    const cartId = paramId[0];
-    const productId = paramId[1];
-    const qty = req.body;
-    const cart = await cartService.getCartById({ _id: cartId });
-    const product = await productsService.getProductById({ _id: productId });
+    const data = req.body
+    const stock = data.stock
+    const pid = data.prod
+    const session = req.session.user
+    const cid = session.cart
+    const cart = await cartService.getCartById({ _id: cid });
+    const product = await productsService.getProductById({ _id: pid });
     if (!cart) {
       ErrorService.createError({
         name: "Error buscando carrito",
@@ -59,13 +60,24 @@ const addProductIntoCart = async (req, res, next) => {
         status: 404,
       });
     }
+    console.log(session.email)
+    console.log(product.owner)
+    if(session.email === product.owner){
+      return res.send({status: 'error', error: 'No puede agregar un producto que te pertenece'})
+    }
+
+    for (let i = 0; i < cart.products.length; i++) {
+      if(cart.products[i].product._id == pid && cart.products[i].qty > stock){
+        return res.send({status: 'error', error: 'No hay mas stock de este producto'})
+      }  
+    }
 
     const newCart = await cartService.addProductToCart(
-      cartId,
-      productId,
-      qty.qty
+      cid,
+      pid,
+      1
     );
-    res.send({ status: "success", payload: newCart });
+    res.send({ status: "success", payload: 'Producto añadido correctamente' });
   } catch (error) {
     next(error);
   }

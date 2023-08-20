@@ -38,6 +38,10 @@ const addProduct = async (req, res, next) => {
   try {
     const product = req.body;
 
+    if(product.category === ' '){
+      product.category = null
+    }
+    console.log(product.category)
     const session = req.session.user;
     if (session.role === "premium") {
       const id = req.session.user.id;
