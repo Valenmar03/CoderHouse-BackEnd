@@ -9,7 +9,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/requestBodies/createUser'
+              $ref: '#components/requestBodies/CreateUser'
       responses:
         "200":
           description: El usuario se crea correctamente
@@ -22,15 +22,201 @@ paths:
                     type: string
                     description: Estado de la peticion
                   payload:
-                    type: array
+                    type: object
                     items:
                      $ref: '#components/schemas/User'
+    get:
+      summary:
+      tags:
+        - Users
+      responses:
+        "200": 
+          description: Se obtienen los usuarios correctamente
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  status: 
+                    type: string
+                    description: Estado de la peticion
+                  payload:
+                    type: array
+                    items: 
+                      $ref: '#components/schemas/User'
+  /api/users/userEmail:                    
+    get:
+      summary:
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/GetUserByEmail'
+      responses:
+        "200":
+          description: Se obtienen el usuario correctamente
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                properties: 
+                  status: 
+                    type: string
+                    description: Estado de la peticion
+                  payload: 
+                    type: object
+                    items:
+                      $ref: '#components/schemas/User'
+  /api/users/{uid}:
+    get:
+      summary:
+      tags:
+        - Users
+      parameters: 
+      - name: uid
+        in: path
+        required: true
+        description: Id de usuario
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Devuelve el usuario con el id proporcionado correctamente 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status:
+                    type: string
+                    description: Estado de la peticion
+                  payload:
+                    type: object
+                    items:
+                      $ref: '#components/schemas/User'
+        "404":
+          description: El usuario no fue encontrado
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la peticion
+    put:
+      summary:
+      tags:
+        - Users
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        description: Id de usuario
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:  
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/UpdateUser'
+      responses:
+        "200":
+          description: Actualiza al usuario
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: 
+                    type: string
+                    description: Estado de la peticion
+                  payload:
+                    type: object
+                    items:
+                      $ref: '#components/schemas/User'
+        "404":
+          description: El usuario no fue encontrado
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la peticion
+    delete:
+      summary:
+      tags:
+        - Users
+      parameters: 
+      - name: uid
+        in: path
+        required: true
+        description: Id de usuario
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Devuelve el usuario con el id proporcionado correctamente 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status:
+                    type: string
+                    description: Estado de la peticion
+        "404":
+          description: El usuario no fue encontrado
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la peticion
+
+
 
 
 
 components: 
+  schemas:
+    User:
+      type: object
+    properties: 
+      first_name: 
+        type: string
+        description: Nombre del usuario
+      last_name:
+        type: string
+        description: Apellido del usuario
+      email: 
+        type: string
+        description: Email del usuario (unico)
+      password:
+        type: string
+        description: Password del usuario hasheado
+      role:
+        type: string
+        description: Role del usuario
+      _id: 
+        type: string
+        description: Id autogenerado por mongo
+      cart:
+        type: string
+        description: Id del carrito asociado al usuario
+      products:
+        type: array
+        description: Arreglo con los products creados por el usuario
   requestBodies:
-    createUser: 
+    CreateUser: 
       type: object
       properties: 
         first_name:
@@ -45,3 +231,21 @@ components:
         password: 
           type: string
           description: Password hasheado del usuario a crear
+    GetUserByEmail:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Correo del usuario a obtener
+        password:
+          type: string
+          description: Password sin hashear del usuario a obtener
+    UpdateUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Nuevo nombre del usuario
+        last_name: 
+          type: string
+          description: Nuevo apellido del usuario
