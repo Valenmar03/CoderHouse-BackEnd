@@ -6,6 +6,10 @@ export default class UserManagerMongo {
         return userModel.create(user)
     }
 
+    get(){
+        return userModel.find().lean()
+    }
+
     find(email, pass){
         return userModel.findOne(email, pass).lean()
     }

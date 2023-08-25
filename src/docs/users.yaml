@@ -1,0 +1,47 @@
+paths: 
+  /api/users:
+    post: 
+      summary: 
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/createUser'
+      responses:
+        "200":
+          description: El usuario se crea correctamente
+          content: 
+            application/json:
+              schema: 
+                type: object
+                properties: 
+                  status: 
+                    type: string
+                    description: Estado de la peticion
+                  payload:
+                    type: array
+                    items:
+                     $ref: '#components/schemas/User'
+
+
+
+components: 
+  requestBodies:
+    createUser: 
+      type: object
+      properties: 
+        first_name:
+          type: string
+          description: Nombre del usuario a crear
+        last_name:
+          type: string
+          description: Apellido del usuario a crear
+        email: 
+          type: string
+          description: Correo del usuario a crear
+        password: 
+          type: string
+          description: Password hasheado del usuario a crear

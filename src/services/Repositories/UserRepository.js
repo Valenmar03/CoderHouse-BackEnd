@@ -8,6 +8,10 @@ export default class UserRepository {
     createUser(user) {
         return this.dao.create(user)
     }
+    
+    getUsers(){
+        return this.dao.get()
+    }
 
     findUser(email, pass){
         return this.dao.find(email, pass)
