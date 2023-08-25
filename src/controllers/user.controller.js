@@ -1,5 +1,5 @@
 import { userService, cartService } from "../services/repositories.js";
-import { validatePassword } from '../utils.js'
+import { createHash, validatePassword } from '../utils.js'
 
 
 const createUser = async(req, res) =>{
@@ -10,12 +10,14 @@ const createUser = async(req, res) =>{
 
     const cart = await cartService.createCart()
 
+    const hashedPassword = await createHash(password)
+
     const user = {
         first_name, 
         last_name,
         cart,
         email,
-        password
+        hashedPassword
     }
 
     const createdUser = await userService.createUser(user)
