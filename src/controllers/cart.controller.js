@@ -3,6 +3,7 @@ import ErrorService from "../services/error.service.js";
 import { cartService, productsService } from "../services/repositories.js";
 import EErrors from "../constants/EErrors.js";
 import { productErrorProdNotFound } from "../constants/productsErrors.js";
+import CartRepository from "../services/Repositories/CartsRepository.js";
 
 const createCart = async (req, res) => {
   const cart = await cartService.createCart();
@@ -35,11 +36,11 @@ const getCartById = async (req, res, next) => {
 
 const addProductIntoCart = async (req, res, next) => {
   try {
-    const data = req.body
-    const stock = data.stock
-    const pid = data.prod
-    const session = req.session.user
-    const cid = session.cart
+    const data = req.body;
+    const stock = data.stock;
+    const pid = data.prod;
+    const session = req.session.user;
+    const cid = session.cart;
     const cart = await cartService.getCartById({ _id: cid });
     const product = await productsService.getProductById({ _id: pid });
     if (!cart) {
@@ -60,24 +61,24 @@ const addProductIntoCart = async (req, res, next) => {
         status: 404,
       });
     }
-    console.log(session.email)
-    console.log(product.owner)
-    if(session.email === product.owner){
-      return res.send({status: 'error', error: 'No puede agregar un producto que te pertenece'})
+    if (session.email === product.owner) {
+      return res.send({
+        status: "error",
+        error: "No puede agregar un producto que te pertenece",
+      });
     }
 
     for (let i = 0; i < cart.products.length; i++) {
-      if(cart.products[i].product._id == pid && cart.products[i].qty > stock){
-        return res.send({status: 'error', error: 'No hay mas stock de este producto'})
-      }  
+      if (cart.products[i].product._id == pid && cart.products[i].qty > stock) {
+        return res.send({
+          status: "error",
+          error: "No hay mas stock de este producto",
+        });
+      }
     }
 
-    const newCart = await cartService.addProductToCart(
-      cid,
-      pid,
-      1
-    );
-    res.send({ status: "success", payload: 'Producto añadido correctamente' });
+    const newCart = await cartService.addProductToCart(cid, pid, 1);
+    res.send({ status: "success", payload: "Producto añadido correctamente" });
   } catch (error) {
     next(error);
   }
@@ -88,7 +89,7 @@ const updateProductOnCart = async (req, res, next) => {
     const paramId = Object.values(req.params);
     const cartId = paramId[0];
     const productId = paramId[1];
-    const qty = req.body.quantity || 1;
+    const qty = req.body.qty || 1;
 
     const cart = await cartService.getCartById({ _id: cartId });
     if (!cart) {
@@ -111,7 +112,27 @@ const updateProductOnCart = async (req, res, next) => {
       });
     }
 
-    const newCart = await cartService.updateProductQty(cartId, productId, qty);
+    let productRepeatPosition;
+    for (let i = 0; i < cart.products.length; i++) {
+      if (cart.products[i].product.code === product.code) {
+        productRepeatPosition = i;
+      }
+    }
+
+    let newQty;
+    if (!productRepeatPosition) {
+      newQty = qty;
+    } else {
+      newQty = cart.products[productRepeatPosition].qty + qty;
+    }
+
+    const updateCart = await cartService.updateProductQty(
+      cartId,
+      productId,
+      newQty
+    );
+    const newCart = await cartService.getCartById({ _id: cartId });
+
     res.send({ status: "success", payload: newCart });
   } catch (error) {
     next(error);

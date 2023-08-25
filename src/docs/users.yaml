@@ -190,31 +190,31 @@ components:
   schemas:
     User:
       type: object
-    properties: 
-      first_name: 
-        type: string
-        description: Nombre del usuario
-      last_name:
-        type: string
-        description: Apellido del usuario
-      email: 
-        type: string
-        description: Email del usuario (unico)
-      password:
-        type: string
-        description: Password del usuario hasheado
-      role:
-        type: string
-        description: Role del usuario
-      _id: 
-        type: string
-        description: Id autogenerado por mongo
-      cart:
-        type: string
-        description: Id del carrito asociado al usuario
-      products:
-        type: array
-        description: Arreglo con los products creados por el usuario
+      properties: 
+        first_name: 
+          type: string
+          description: Nombre del usuario
+        last_name:
+          type: string
+          description: Apellido del usuario
+        email: 
+          type: string
+          description: Email del usuario (unico)
+        password:
+          type: string
+          description: Password del usuario hasheado
+        role:
+          type: string
+          description: Role del usuario
+        _id: 
+          type: string
+          description: Id autogenerado por mongo
+        cart:
+          type: string
+          description: Id del carrito asociado al usuario
+        products:
+          type: array
+          description: Arreglo con los products creados por el usuario
   requestBodies:
     CreateUser: 
       type: object

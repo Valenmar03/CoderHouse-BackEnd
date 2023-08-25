@@ -1,0 +1,206 @@
+paths:
+  /api/carts:
+    post:
+      summary:
+      tags:
+        - Carts
+      responses:
+        "200":
+          description:
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status: 
+                    type: string
+                    description: Estado de la peticion
+                  payload:
+                    type: object
+                    items: 
+                      $ref: '#components/schemas/Cart'
+    get:
+      summary: 
+      tags: 
+        - Carts
+      responses:
+        "200": 
+          description:
+          content: 
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la peticion
+                  payload:
+                    type: array
+  /api/carts/{cid}:
+    get:
+      summary: 
+      tags:
+        - Carts
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Id del carrito
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Devuelve el carrito con el Id proporcionado
+          content: 
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status: 
+                    type: string
+                    description: Estado de la peticion
+                  payload: 
+                    type: object
+                    items: 
+                      $ref: '#components/schemas/Cart'
+        "404":
+          description: El carrito no fue encontrado
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la peticion
+    delete: 
+      summary:
+      tags: 
+        - Carts
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Id del carrito
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Elimina el carrito con el Id proporcionado
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status: 
+                    type: string
+                    description: Estado de la peticion
+                  message:
+                    type: string
+        "404":
+          description: El carrito no fue encontrado
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la peticion
+  /api/cart/{cid}/products/{pid}:
+    put:
+      summary:
+      tags:
+        - Carts
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Id de carrito
+        schema:
+          type: string
+      - name: pid
+        in: path
+        required: true
+        description: Id de producto
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Agrega el producto al carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:   
+                  status: 
+                    type: string
+                    description: Estado de la peticion
+                  message:
+                    type: string
+        "404":
+          description: El carrito o producto no fue encontrado
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la peticion  
+    delete:
+      summary:
+      tags:
+        - Carts
+      parameters:
+      - name: cid
+        in: path
+        required: true
+        description: Id de carrito
+        schema:
+          type: string
+      - name: pid
+        in: path
+        required: true
+        description: Id de producto
+        schema:
+          type: string
+      responses:
+        "200":
+          description: El producto se elimina correctamente del carrito
+          content:  
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  status: 
+                    type: string
+                    description: Estado de la peticion
+                  message:
+                    type: string
+        "404":
+            description: El carrito o producto no fue encontrado
+            content:
+              application/json:
+                schema: 
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      description: Estado de la peticion
+
+
+components: 
+  schemas:
+    Cart: 
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Id del carrito autogenerado por mongo
+        products: 
+          type: array
+          description: Productos agregados al carrito                   
+        user: 
+          type: string
+          description: Id del usuario asociado al carrito

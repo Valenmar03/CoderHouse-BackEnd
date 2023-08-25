@@ -34,3 +34,8 @@
 {"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
 {"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
 {"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'qty'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'qty'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'qty'). Status: undefined"}
+{"level":"error","message":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'MongoClient'\n    |     property 's' -> object with constructor 'Object'\n    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'\n    --- property 'client' closes the circle. Status: undefined"}
+{"level":"error","message":"TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'MongoClient'\n    |     property 's' -> object with constructor 'Object'\n    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'\n    --- property 'client' closes the circle. Status: undefined"}
