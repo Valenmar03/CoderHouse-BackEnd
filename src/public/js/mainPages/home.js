@@ -33,6 +33,8 @@ for (let i = 0; i < addToCartbtn.length; i++) {
     } else if (responseData.error === 'No puede agregar un producto que te pertenece'){
         errorMsg[i].innerText = 'No puede agregar un producto que te pertenece'
         addCart[i].outerHTML = ''
+    } else if(responseData.error === 'Sesion no iniciada'){
+      window.location.replace('/login')
     }
   });
 }

@@ -5,10 +5,12 @@
     {{#if prod}}
     {{#each prod}}
     <div class="cart-card">
-        <h2>{{{this.product.title}}}</h2>
-        <p>{{{this.product.description}}}</p>
+        <img src="./Images/{{this.product.category}}.jpg" alt="{{this.product.category}}" style="height: 100px; width:100px">
+        <h2>{{{this.product.description}}}</h2>
+        <p>Stock: {{{this.product.stock}}}</p>
+        <p>Precio: {{{this.product.price}}}</p>
         <div class="qty">
-        <p>{{{this.qty}}}</p>
+        <p>Cantidad: {{{this.qty}}}</p>
             <div>
                 <button class="qty-btn">+</button>
                 <button class="qty-btn">-</button>

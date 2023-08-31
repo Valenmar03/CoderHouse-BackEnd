@@ -24,7 +24,7 @@ const createTicket = async (req, res, next) => {
         status: 404,
       });
     }
-    if (!product) {
+    if (!user) {
       ErrorService.createError({
         name: "Error buscando producto",
         cause: productErrorProdNotFound(),
@@ -88,7 +88,6 @@ const purchase = async (req, res, next) => {
         prodsWithNoStock.push(prodsInCart[i].product._id);
         amountOfProdsWithoutStock =
           prodsInCart[i].product.price * prodsInCart[i].qty;
-        console.log(amountOfProdsWithoutStock);
       } else if (stock >= 0) {
         product.stock = stock;
         await productsService.updateProduct(
@@ -109,15 +108,23 @@ const purchase = async (req, res, next) => {
         message: "Some products are out of stock",
       }) */
     }
+
     const ticket = await ticketService.findTicketBy(cid);
     const ticketAmount = ticket.amount;
     const newAmount = ticketAmount - amountOfProdsWithoutStock;
-    const newTicket = await ticketService.updateTicket(
+    await ticketService.updateTicket(
       { _id: ticket._id },
       { amount: newAmount }
     );
-
+    const newTicket = await ticketService.findTicketBy(cid);
     await ticketService.deleteTicket({ _id: ticket._id });
+    
+    if(newAmount === 0){
+      return res.send({ status: "error", error:"No se pudo realizar la compra, producto/s fuera de stock"})
+    }
+    if(ticketAmount !== newAmount) {
+      return res.send({ status: "success", message:"Compra realizada, algunos productos estan sin stock"})
+    }
 
     res.send({ status: "success", payload: newTicket });
   } catch (error) {
