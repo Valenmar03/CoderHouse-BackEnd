@@ -5,25 +5,50 @@
     {{#if prod}}
     {{#each prod}}
     <div class="cart-card">
-        <img src="./Images/{{this.product.category}}.jpg" alt="{{this.product.category}}" style="height: 100px; width:100px">
+        <img src="/Images/{{this.product.category}}.jpg" alt="{{this.product.category}}" style="height: 100px; width:100px">
         <h2>{{{this.product.description}}}</h2>
         <p>Stock: {{{this.product.stock}}}</p>
         <p>Precio: {{{this.product.price}}}</p>
         <div class="qty">
         <p>Cantidad: {{{this.qty}}}</p>
             <div>
-                <button class="qty-btn">+</button>
-                <button class="qty-btn">-</button>
+                <button class="qty-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </button>
+                <button class="qty-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
+                        <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                        <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                    </svg>
+                </button>
             </div>
 
         </div>
     </div>
     {{/each}}
-    <div id="buy-btn">
-        <button class="buy-btn">Finalizar comprar</button>
+    <div id="buy-btn-container">
+        <button id="open-modal" class="open-modal">Finalizar comprar</button>
+        {{!-- <a href="/carts/{{cart._id}}/purchase" class="buy-link"></a> --}}
     </div>
+
+    <section class="modal">
+        <div class="modal-container">
+            <h2 class="modal-title">Finalizar compra</h2>
+            <p class="modal-paragraph">Desea generar el comprobante?</p>
+            <div class="modal-btns">
+                <button id="buy-btn" class="modal-btn" value="{{cart._id}}">Generar comprobante</button>
+                <button id="modal-close" class="modal-btn">Cerrar modal</button>
+
+            </div>
+        </div>
+    </section>
 
     {{else}}
      <p>Carrito vacío</p>
     {{/if}}
 </div>
+
+<script src="/js/cart.js"></script>

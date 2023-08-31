@@ -37,7 +37,7 @@ h1 {
 
 .header-btn {
     background-color: red;
-    width: 10%;
+    width: auto;
     border-radius: 10px;
     font-size: 20px;
     color: white;
@@ -45,7 +45,10 @@ h1 {
     transition: 0.5s;
     height: 50px;
     margin: 10px;
+    padding: 0px 20px;
 }
+
+
 
 .header-btn:hover {
     transform: scale(1.1);

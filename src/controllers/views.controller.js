@@ -176,6 +176,7 @@ const cartPage = async (req, res, next) => {
       css: "cart",
       title: "Carrito",
       prod: cart.products,
+      cart: cart
     });
   } catch (error) {
     next(error);

@@ -102,11 +102,6 @@ const purchase = async (req, res, next) => {
       for (let i = 0; i < prodsWithNoStock.length; i++) {
         await cartService.addProductToCart(cid, prodsWithNoStock[i], 1);
       }
-
-      /* return res.send({
-        status: "success",
-        message: "Some products are out of stock",
-      }) */
     }
 
     const ticket = await ticketService.findTicketBy(cid);

@@ -47,3 +47,5 @@
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'cart'). Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'cart'). Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'cart'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading 'amount'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading 'amount'). Status: undefined"}
