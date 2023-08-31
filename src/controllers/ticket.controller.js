@@ -34,6 +34,18 @@ const createTicket = async (req, res, next) => {
       });
     }
 
+    const tickets = await ticketService.getTickets()
+    for (let i = 0; i < tickets.length; i++) {
+      console.log(tickets[i].cart._id)
+      console.log(cart._id)
+      if(tickets[i].cart._id = cart._id){
+        const tid = tickets[i]._id
+        console.log(tid)
+        const deletedTicket = await ticketService.deleteTicket({ _id: tid })
+      }  
+    }
+
+
     const purchaser = user.email;
     let amount = 0;
     const products = cart.products;
@@ -79,7 +91,7 @@ const purchase = async (req, res, next) => {
     let prodsWithNoStock = [];
     let amountOfProdsWithoutStock = 0;
 
-    for (let i = 0; i < prodsInCart.length; i++) {
+    /* for (let i = 0; i < prodsInCart.length; i++) {
       stock = prodsInCart[i].product.stock - prodsInCart[i].qty;
       const product = await productsService.getProductById(
         prodsInCart[i].product._id
@@ -95,33 +107,55 @@ const purchase = async (req, res, next) => {
           product
         );
       }
+    } */
+
+    for (let i = 0; i < prodsInCart.length; i++) {
+      stock = prodsInCart[i].product.stock - prodsInCart[i].qty;
+      const product = await productsService.getProductById(
+        prodsInCart[i].product._id
+      );
+      if (stock < 0) {
+        prodsWithNoStock.push(prodsInCart[i].product._id);
+        amountOfProdsWithoutStock =
+          prodsInCart[i].product.price * prodsInCart[i].qty;
+      }
+    }
+    if(prodsWithNoStock.length > 0){
+      console.log(prodsWithNoStock)
+      if(cart.products.length === prodsWithNoStock.length){
+        return res.send({ status: "error", error:"El/los producto/s estan sin stock"})
+      }
+
+      let prodTitles = []
+      for (let i = 0; i < prodsWithNoStock.length; i++) {
+        const product = await productsService.getProductById({ _id: prodsWithNoStock[i]})
+        prodTitles.push(product.title)
+      }
+
+      return res.send({ status: "error", error:"Algunos de tus productos estan sin stock", payload: prodTitles})
     }
 
     const cartWithoutProds = await cartService.deleteAllProducts({ _id: cid });
-    if (prodsWithNoStock.length > 0) {
-      for (let i = 0; i < prodsWithNoStock.length; i++) {
-        await cartService.addProductToCart(cid, prodsWithNoStock[i], 1);
-      }
+    
+    stock = 0;
+
+    for (let i = 0; i < prodsInCart.length; i++) {
+      stock = prodsInCart[i].product.stock - prodsInCart[i].qty;
+      const product = await productsService.getProductById(
+        prodsInCart[i].product._id
+      );
+      
+      product.stock = stock;
+        await productsService.updateProduct(
+          prodsInCart[i].product._id,
+          product
+        );
     }
 
     const ticket = await ticketService.findTicketBy(cid);
-    const ticketAmount = ticket.amount;
-    const newAmount = ticketAmount - amountOfProdsWithoutStock;
-    await ticketService.updateTicket(
-      { _id: ticket._id },
-      { amount: newAmount }
-    );
-    const newTicket = await ticketService.findTicketBy(cid);
     await ticketService.deleteTicket({ _id: ticket._id });
-    
-    if(newAmount === 0){
-      return res.send({ status: "error", error:"No se pudo realizar la compra, producto/s fuera de stock"})
-    }
-    if(ticketAmount !== newAmount) {
-      return res.send({ status: "success", message:"Compra realizada, algunos productos estan sin stock"})
-    }
 
-    res.send({ status: "success", payload: newTicket });
+    res.send({ status: "success", payload: 'Compra realizada correctamente' });
   } catch (error) {
     next(error);
   }

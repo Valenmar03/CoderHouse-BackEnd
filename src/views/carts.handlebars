@@ -30,17 +30,17 @@
     </div>
     {{/each}}
     <div id="buy-btn-container">
-        <button id="open-modal" class="open-modal">Finalizar comprar</button>
+        <button id="open-modal" class="open-modal">Comprar</button>
         {{!-- <a href="/carts/{{cart._id}}/purchase" class="buy-link"></a> --}}
     </div>
 
     <section class="modal">
         <div class="modal-container">
-            <h2 class="modal-title">Finalizar compra</h2>
-            <p class="modal-paragraph">Desea generar el comprobante?</p>
+            <h2 id="modal-title" class="modal-title">Desea finalizar la compra?</h2>
+            <p id="modal-paragraph" class="modal-paragraph"></p>
             <div class="modal-btns">
-                <button id="buy-btn" class="modal-btn" value="{{cart._id}}">Generar comprobante</button>
-                <button id="modal-close" class="modal-btn">Cerrar modal</button>
+                <button id="buy-btn" class="modal-btn" value="{{cart._id}}">Comprar</button>
+                <button id="modal-close" class="modal-btn">Cancelar</button>
 
             </div>
         </div>

@@ -49,3 +49,10 @@
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'cart'). Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of null (reading 'amount'). Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of null (reading 'amount'). Status: undefined"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"{ _id: undefined }\" (type Object) at path \"_id\" for model \"Carts\". Status: undefined"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"{ _id: undefined }\" (type Object) at path \"_id\" for model \"Carts\". Status: undefined"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"{ _id: undefined }\" (type Object) at path \"_id\" for model \"Carts\". Status: undefined"}
+{"level":"error","message":"CastError: Cast to ObjectId failed for value \"{ _id: undefined }\" (type Object) at path \"_id\" for model \"Carts\". Status: undefined"}
+{"level":"error","message":"ReferenceError: product is not defined. Status: undefined"}

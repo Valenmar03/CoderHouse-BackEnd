@@ -43,6 +43,7 @@ const addProductIntoCart = async (req, res, next) => {
     if(!session)return res.send({status: "error", error: 'Sesion no iniciada'})
 
     const cid = session.cart;
+    console.log(session)
     const cart = await cartService.getCartById({ _id: cid });
     const product = await productsService.getProductById({ _id: pid });
 
