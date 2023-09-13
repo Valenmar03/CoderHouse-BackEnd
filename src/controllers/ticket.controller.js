@@ -91,24 +91,6 @@ const purchase = async (req, res, next) => {
     let prodsWithNoStock = [];
     let amountOfProdsWithoutStock = 0;
 
-    /* for (let i = 0; i < prodsInCart.length; i++) {
-      stock = prodsInCart[i].product.stock - prodsInCart[i].qty;
-      const product = await productsService.getProductById(
-        prodsInCart[i].product._id
-      );
-      if (stock < 0) {
-        prodsWithNoStock.push(prodsInCart[i].product._id);
-        amountOfProdsWithoutStock =
-          prodsInCart[i].product.price * prodsInCart[i].qty;
-      } else if (stock >= 0) {
-        product.stock = stock;
-        await productsService.updateProduct(
-          prodsInCart[i].product._id,
-          product
-        );
-      }
-    } */
-
     for (let i = 0; i < prodsInCart.length; i++) {
       stock = prodsInCart[i].product.stock - prodsInCart[i].qty;
       const product = await productsService.getProductById(
