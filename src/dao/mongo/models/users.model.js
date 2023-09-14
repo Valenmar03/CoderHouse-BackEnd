@@ -18,6 +18,14 @@ const schema = new mongoose.Schema({
     products: {
         type: Array, 
         default: []
+    },
+    documents: {
+        type: Array,
+        default: [],
+    },
+    last_connection: {
+        type: String,
+        deafult: Date.now().toLocaleString()
     }
 },{timestamps:true})
 

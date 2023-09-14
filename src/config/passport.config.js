@@ -74,11 +74,11 @@ const initializePassportStrategies = () => {
 
         const validPassword = await validatePassword(password, user.password);
 
-        if (!validPassword)
-          return done(null, false, { message: "Incorrect Password" });
+        if (!validPassword) return done(null, false, { message: "Incorrect Password" });
 
-        user = new ViewUserDTO(user);
-        console.log(user)
+        const date = new Date(Date.now());
+        user.last_connection = date.toLocaleString()
+        user = await userService.updateUser(user._id, user);
 
         return done(null, user);
       }

@@ -9,6 +9,7 @@ router.get('/userEmail', userController.getUserByEmailAndPass)
 router.get('/:uid', userController.getUserById)
 router.put('/:uid', userController.updateUser)
 router.delete('/:uid', userController.deleteUser)
+router.post('/:uid/documents', userController.uploadDocuments)
 
 
 export default router

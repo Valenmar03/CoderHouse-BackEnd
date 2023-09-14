@@ -103,6 +103,11 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const uploadDocuments = async (req, res) => {
+  const { uid } = req.params;
+  res.send({status: 'success', message: 'Document uploaded successfully', payload: uid});
+}
+
 export default {
   createUser,
   getAllUsers,
@@ -110,4 +115,5 @@ export default {
   getUserById,
   updateUser,
   deleteUser,
+  uploadDocuments,
 };

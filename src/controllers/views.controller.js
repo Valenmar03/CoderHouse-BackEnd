@@ -107,7 +107,7 @@ const deleteProdRequestPage = async (req, res) => {
   }
 
   const productToDelete = await productsService.getProductById({ _id: pid });
-  console.log(productToDelete);
+
 
   if (productToDelete.owner === email) {
     const product = await productsService.deleteProduct({ _id: pid });
@@ -120,12 +120,19 @@ const deleteProdRequestPage = async (req, res) => {
         status: 404,
       });
     }
+
+    const user = await userService.findUserBy({ email: email})
+    const indexToDelete = user.products.findIndex(e => e == pid)
+    user.products.splice(indexToDelete, 1)
+    
+    const newUser = await userService.updateUser(user._id, user)
+
     return res.redirect("/deleteProducts");
   }
 
   res.send({
     status: "error",
-    error: "Este no producto no es tuyo, no puedes eliminarlo",
+    error: "Este producto no es tuyo, no puedes eliminarlo",
   });
 };
 

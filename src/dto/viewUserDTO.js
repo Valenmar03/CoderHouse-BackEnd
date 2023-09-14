@@ -5,5 +5,7 @@ export default class ViewUserDTO {
         this.role =  user.role,
         this.id =  user._id,
         this.cart = user.cart
+        this.documents = user.documents
+        this.last_connection = user.last_connection
     }
 }
