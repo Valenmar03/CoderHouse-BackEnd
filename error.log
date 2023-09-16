@@ -58,3 +58,21 @@
 {"level":"error","message":"ReferenceError: product is not defined. Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"CastError: Cast to string failed for value \"{ email: 'hola' }\" (type Object) at path \"email\" for model \"Users\". Status: undefined"}
+{"level":"error","message":"CastError: Cast to string failed for value \"{ email: 'valenmrtnz8@gmail.com' }\" (type Object) at path \"email\" for model \"Users\". Status: undefined"}
+{"level":"error","message":"CastError: Cast to string failed for value \"{ email: 'valenmrtnz8@gmail.com' }\" (type Object) at path \"email\" for model \"Users\". Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'role'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'role'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'role'). Status: undefined"}
+{"level":"error","message":"ReferenceError: id is not defined. Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading 'role'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"TypeError: Assignment to constant variable.. Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading 'email'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading 'email'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading 'email'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading 'email'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading 'length'). Status: undefined"}
+{"level":"error","message":"ReferenceError: failureMessage is not defined. Status: undefined"}

@@ -4,6 +4,19 @@ import { createHash, validatePassword } from "../utils.js";
 const createUser = async (req, res) => {
   try {
     const { first_name, last_name, email, password } = req.body;
+    const regex = /[A-Za-z]+/g
+
+    const name = first_name.trim()
+    const namesArray = name.match(regex)  
+
+    if(namesArray.length > 2) return res.send({status: 'error', error: "You cant put more than 2 first names"})    
+    if(namesArray.length === 1 && name.length > namesArray[0].length) return res.send({status: 'error', error: 'Invalid characters'})
+    if(namesArray.length === 2){
+      const completeName = namesArray[0].length + namesArray[1].length
+      if(name.length - completeName  > 1) return res.send({status: 'error', error: 'You put more than one space'})
+
+    }
+
     if (!first_name || !last_name || !email || !password) {
       return res.send({ status: "error", error: "Incomplete values" });
     }
@@ -11,6 +24,7 @@ const createUser = async (req, res) => {
     const cart = await cartService.createCart();
 
     const hashedPass = await createHash(password);
+
     const user = {
       first_name,
       last_name,
@@ -22,13 +36,13 @@ const createUser = async (req, res) => {
     const createdUser = await userService.createUser(user);
     await cartService.updateCart({ _id: cart._id }, createdUser._id);
 
-    res.send({ status: "success", payload: createdUser });
-  } catch (error) {
+    res.send({ status: "success", payload: 'User created succesfully' });
+   } catch (error) {
     res.send({
       status: "error",
       error: "An user with that email already exists",
     });
-  }
+  } 
 };
 
 const getAllUsers = async (req, res) => {

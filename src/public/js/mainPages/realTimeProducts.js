@@ -55,6 +55,7 @@ form.addEventListener("submit",async (evt) => {
       'Content-Type': 'application/json'
     }
   })
+  
   const responseData = await response.json()
   console.log(responseData)
   if(responseData.error === 'Error de creacion de producto'){

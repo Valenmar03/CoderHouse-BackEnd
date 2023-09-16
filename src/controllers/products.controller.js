@@ -1,4 +1,5 @@
 import { productsService, userService } from "../services/repositories.js";
+import config from "../config/env.config.js";
 
 import { generateMockProds } from "../mocks/products.mock.js";
 import ErrorService from "../services/error.service.js";
@@ -36,18 +37,35 @@ const getProductById = async (req, res, next) => {
 
 const addProduct = async (req, res, next) => {
   try {
-    const product = req.body;
+    const product = {
+      title: req.body.title,
+      description: req.body.description,
+      price: req.body.price,
+      stock: req.body.stock,
+      category: req.body.category,
+    };
+    const email = req.body.email;
 
-    if(product.category === ' '){
-      product.category = null
+    if (product.category === " ") {
+      product.category = null;
     }
 
-    
     const session = req.session.user;
-    if (session.role === "premium") {
+
+    if (!session) {
+      if(!email || email.trim() == "")product.owner = "admin";
+      else {
+        const user = await userService.findUserBy({ email: email });
+        if (user.role === "premium") product.owner = email;
+
+      }
+  
+
+    } else if (session.role === "premium") {
       const id = req.session.user.id;
       const user = await userService.findUserBy({ _id: id });
       product.owner = user.email;
+
     }
 
     product.code = Math.floor(Math.random() * 1000000 + 1);
@@ -68,9 +86,20 @@ const addProduct = async (req, res, next) => {
         status: 400,
       });
     }
+
     const newProduct = await productsService.addProducts(product);
 
-    if (session.role === "premium") {
+    if (!session) {
+      if(!email || email.trim() == "") res.send({ status: "success", payload: product });
+      else{
+
+        const user = await userService.findUserBy({ email: email });
+        const id = user._id
+        user.products.push(newProduct._id);
+        const newUser = await userService.updateUser(id, user);
+      }
+
+    }else if (session.role === "premium") {
       const id = req.session.user.id;
       const user = await userService.findUserBy({ _id: id });
       user.products.push(newProduct._id);
@@ -123,20 +152,32 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
-    const productToDelete = await productsService.getProductById({ _id: pid})
+    const email = req.body.email;
+    const productToDelete = await productsService.getProductById({ _id: pid });
 
     if (!productToDelete) {
       ErrorService.createError({
         name: "Error buscando producto",
         cause: productErrorProdNotFound(),
-        message: "Producto no encontrado",
+        message: "Product not found",
         code: EErrors.NOT_FOUND,
         status: 404,
       });
     }
-    const deletedProduct = await productsService.deleteProduct({ _id: pid });
-    
-    res.send({ status: "success", message: "Product deleted succesfully" });
+
+    if(!email || email.trim() === '' ) return res.send({status: 'error', error: 'Incomplete email value'})
+    const user = await userService.findUserBy({ email: email });
+    if(!user) return res.send({status: 'error', error: 'User not found'});
+
+    if (user.email === productToDelete.owner || email === config.adminEmail) {
+      const deletedProduct = await productsService.deleteProduct({ _id: pid });
+      res.send({ status: "success", message: "Product deleted succesfully" });
+    } else {
+      return res.send({
+        status: "error",
+        error: "This isn´t your product, you can´t delete it",
+      });
+    }
   } catch (error) {
     next(error);
   }
