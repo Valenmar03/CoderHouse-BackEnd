@@ -43,8 +43,11 @@ const addProduct = async (req, res, next) => {
       price: req.body.price,
       stock: req.body.stock,
       category: req.body.category,
+      thumbnail: req.body.thumbnail
     };
     const email = req.body.email;
+    console.log(req.file)
+    console.log(product)
 
     if (product.category === " ") {
       product.category = null;
@@ -87,7 +90,7 @@ const addProduct = async (req, res, next) => {
       });
     }
 
-    const newProduct = await productsService.addProducts(product);
+    /* const newProduct = await productsService.addProducts(product);
 
     if (!session) {
       if(!email || email.trim() == "") res.send({ status: "success", payload: product });
@@ -104,7 +107,7 @@ const addProduct = async (req, res, next) => {
       const user = await userService.findUserBy({ _id: id });
       user.products.push(newProduct._id);
       const newUser = await userService.updateUser(id, user);
-    }
+    } */
 
     res.send({ status: "success", payload: product });
   } catch (error) {

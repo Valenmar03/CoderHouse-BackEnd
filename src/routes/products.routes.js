@@ -1,11 +1,15 @@
 import { Router } from "express";
 import productsController from "../controllers/products.controller.js";
+import multer from 'multer'
+import __dirname from '../utils.js'
+
+const uploader = multer({dest: `${__dirname}/public/Images`})
 
 const router = Router();
 
 router.get("/", productsController.getProducts);
 router.get("/:pid", productsController.getProductById);
-router.post("/", productsController.addProduct);
+router.post("/", uploader.single('thumbnail'),  productsController.addProduct);
 router.put("/:pid", productsController.updateProduct);
 router.delete("/:pid", productsController.deleteProduct);
 router.post('/mockingproducts', productsController.mockProds)
