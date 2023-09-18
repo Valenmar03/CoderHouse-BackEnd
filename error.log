@@ -85,3 +85,5 @@
 {"level":"error","message":"ReferenceError: thumbanil is not defined. Status: undefined"}
 {"level":"error","message":"ReferenceError: thumbanil is not defined. Status: undefined"}
 {"level":"error","message":"ReferenceError: thumbnail is not defined. Status: undefined"}
+{"level":"error","message":"ValidationError: Products validation failed: stock: Cast to Number failed for value \"hola\" (type string) at path \"stock\". Status: undefined"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}

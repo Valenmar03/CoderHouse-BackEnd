@@ -46,8 +46,6 @@ const addProduct = async (req, res, next) => {
       thumbnail: req.body.thumbnail
     };
     const email = req.body.email;
-    console.log(req.file)
-    console.log(product)
 
     if (product.category === " ") {
       product.category = null;
@@ -60,7 +58,6 @@ const addProduct = async (req, res, next) => {
       else {
         const user = await userService.findUserBy({ email: email });
         if (user.role === "premium") product.owner = email;
-
       }
   
 
@@ -68,7 +65,6 @@ const addProduct = async (req, res, next) => {
       const id = req.session.user.id;
       const user = await userService.findUserBy({ _id: id });
       product.owner = user.email;
-
     }
 
     product.code = Math.floor(Math.random() * 1000000 + 1);
@@ -89,8 +85,13 @@ const addProduct = async (req, res, next) => {
         status: 400,
       });
     }
+    
+    if(product.price < 1 || product.stock < 1) return res.send({status: 'error', error: 'Negative numbres aren´t allowed'})
 
-    /* const newProduct = await productsService.addProducts(product);
+    if(!isNaN(product.price) || !isNaN(product.stock)) return res.send({status: 'error', error: 'Invalid data type for stock or price'})
+
+
+    const newProduct = await productsService.addProducts(product);
 
     if (!session) {
       if(!email || email.trim() == "") res.send({ status: "success", payload: product });
@@ -107,7 +108,7 @@ const addProduct = async (req, res, next) => {
       const user = await userService.findUserBy({ _id: id });
       user.products.push(newProduct._id);
       const newUser = await userService.updateUser(id, user);
-    } */
+    }
 
     res.send({ status: "success", payload: product });
   } catch (error) {
