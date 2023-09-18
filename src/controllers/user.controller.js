@@ -1,4 +1,4 @@
-import { userService, cartService } from "../services/repositories.js";
+import { userService, cartService, productsService } from "../services/repositories.js";
 import { createHash, validatePassword } from "../utils.js";
 
 const createUser = async (req, res) => {
@@ -122,6 +122,40 @@ const uploadDocuments = async (req, res) => {
   res.send({status: 'success', message: 'Document uploaded successfully', payload: uid});
 }
 
+const upgradeUser = async (req, res) => {
+  const { uid } = req.params
+  const user = await userService.findUserBy({ _id: uid });
+
+  if(user.role == 'admin') return res.send({status: 'error', error: 'You are the admin'})
+  if(user.role == 'premium') return res.send({status: 'error', error: 'Your account has already been upgraded'})
+
+  user.role = 'premium'
+
+  const premiumUser = await userService.updateUser({ _id: uid}, user)
+
+  res.send({ status: 'success', payload: user})
+}
+
+const downgradeUser = async (req, res) => {
+  const { uid } = req.params
+  const user = await userService.findUserBy({ _id: uid });
+
+  if(user.role == 'admin') return res.send({status: 'error', error: 'You are the admin'})
+  if(user.role == 'user') return res.send({status: 'error', error: 'Your account has already been downgraded'})
+
+  
+  for(let i = 0; i < user.products.length; i++) {
+    const deleteProduct = await productsService.deleteProduct({ _id: user.products[i]})
+  }
+  
+  user.role = 'user'
+  user.products = []
+
+  const downgradeUser = await userService.updateUser({ _id: uid}, user)
+
+  res.send({ status: 'success', payload: user})
+}
+
 export default {
   createUser,
   getAllUsers,
@@ -130,4 +164,7 @@ export default {
   updateUser,
   deleteUser,
   uploadDocuments,
+  upgradeUser,
+  downgradeUser,
+
 };
