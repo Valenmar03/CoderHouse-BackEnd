@@ -47,7 +47,17 @@ const createUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   const users = await userService.getUsers();
-  res.send({ status: "success", payload: users });
+  const detailUsers = []
+  for (let i = 0; i < users.length; i++) {
+    const detailUser = {
+      name: `${users[i].first_name} ${users[i].last_name}`,
+      email: users[i].email,
+      role: users[i].role,
+    }
+    
+    detailUsers.push(detailUser);
+  }
+  res.send({ status: "success", payload: detailUsers });
 };
 
 const getUserByEmailAndPass = async (req, res) => {
