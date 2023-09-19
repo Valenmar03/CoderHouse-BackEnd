@@ -212,9 +212,11 @@ const profilePage = async (req, res) => {
 };
 
 const adminUsersPage = async (req, res) => {
+  const users = await userService.getUsers()
   res.render("adminUsers",{
     title: `Administracion de usuarios`,
-
+    user: users,
+    css: "adminUsers",
   }) 
 }
 

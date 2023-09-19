@@ -1,0 +1,62 @@
+h1 {
+    margin-left: 10px;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.users-card{
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 2px;
+    border-radius: 5px;
+    margin: 10px;
+    width: 20%;
+    font-size:x-large;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-around;
+}
+
+.role {
+    background-color: rgb(88, 255, 255);
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    transition: 0.2s;
+    padding: 10px;
+}
+.role:hover {
+    transform: scale(1.1);
+}
+
+.delete {
+    background-color: red;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    transition: 0.2s;
+    padding: 10px;
+    border: 1px solid white;
+    color: white;
+}
+.delete:hover {
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+}
+
+
+button {
+    border-radius: 2px;
+    border: 1px solid black;
+    width: 30%;
+    height: 80%;
+
+}
