@@ -211,6 +211,13 @@ const profilePage = async (req, res) => {
   });
 };
 
+const adminUsersPage = async (req, res) => {
+  res.render("adminUsers",{
+    title: `Administracion de usuarios`,
+
+  }) 
+}
+
 const registerPage = async (req, res) => {
   res.render("registerLogin/register", {
     title: "Registrate",
@@ -288,6 +295,7 @@ export default {
   productDetailPage,
   cartPage,
   profilePage,
+  adminUsersPage,
   registerPage,
   loginPage,
   logoutPage,

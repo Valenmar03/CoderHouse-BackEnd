@@ -25,6 +25,11 @@ export const privacy = (types) => {
       case "NO_AUTH":
         if (!user) next();
         else res.redirect("/");
+        break
+      case "ADMIN":
+        if(user.role === 'admin') next()
+        else res.redirect("/")
+        break;
     }
   };
 };

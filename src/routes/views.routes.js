@@ -21,5 +21,6 @@ router.get('/upgradeUser',privacy('USER'), viewsController.upgradeUserPage)
 router.get('/changeRole', privacy('USER-PREMIUM'), viewsController.changeRolePage)
 router.get('/deleteproducts', privacy('PREMIUM-ADMIN'), viewsController.deleteProductsPage)
 router.get('/deleteProdRequest/:pid', privacy('PREMIUM-ADMIN'), viewsController.deleteProdRequestPage)
+router.get('/adminUsers', privacy("ADMIN"), viewsController.adminUsersPage)
 
 export default router;

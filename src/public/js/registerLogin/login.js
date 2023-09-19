@@ -20,7 +20,7 @@ form.addEventListener("submit", async (event) => {
     responseData.status === "success" &&
     responseData.message === "Admin is login"
   ) {
-    window.location.replace("/realTimeProducts");
+    window.location.replace("/profile");
   } else if (responseData.status === "success") {
     window.location.replace("/");
   }else if (responseData.status === "error") {
