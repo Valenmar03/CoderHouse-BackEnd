@@ -2,13 +2,19 @@
 
 <h1>{{user.name}}</h1>
 
-<a href="/api/mailing/sendChangePass">Cambiar contraseña</a>
+<a href="/api/mailing/sendChangePass"> <button class="profile-btns">Cambiar contraseña</button></a>
 
+<div>
+    {{#if admin}}
+        <a href="/adminUsers"><button class="profile-btns">Usuarios</button></a>
+        <a href="/realTimeProducts"><button class="profile-btns">Crear productos</button></a>
+    {{else}}
+        {{#if premium}}
+            <a href="/realTimeProducts"><button class="profile-btns">Vender Producto</button></a>
 
-{{#if premium}}
-    <a href="/realTimeProducts"><button>Vender Producto</button></a>
-
-    <a href="/changeRole"><button>No quiero ser premium</button></a>
-{{else}}
-    <a href="/upgradeUser"><button>Hazte premium!</button></a>
-{{/if}}
+            <a href="/changeRole"><button class="profile-btns">No quiero ser premium</button></a>
+        {{else}}
+            <a href="/upgradeUser"><button class="profile-btns">Hazte premium!</button></a>
+        {{/if}}
+    {{/if}}
+</div>

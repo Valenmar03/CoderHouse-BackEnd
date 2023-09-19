@@ -193,6 +193,10 @@ const cartPage = async (req, res, next) => {
 const profilePage = async (req, res) => {
   const user = req.session.user;
   let premium;
+  let admin
+  if(user.role === 'admin'){
+    admin = true
+  }
   if (user.role === "premium") {
     premium = true;
   } else {
@@ -201,7 +205,9 @@ const profilePage = async (req, res) => {
   res.render("profile", {
     title: `Perfil de ${user.name}`,
     user: user,
+    css: "profile",
     premium: premium,
+    admin: admin
   });
 };
 

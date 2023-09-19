@@ -1,0 +1,11 @@
+.profile-btns {
+    background-color: rgb(88, 255, 255);
+    border-radius: 5px;
+    border: none;
+    transition: 0.2s;
+    padding: 10px;
+    margin: 10px;
+}
+.profile-btns:hover {
+    transform: scale(1.1);
+}
