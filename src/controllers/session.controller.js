@@ -4,7 +4,7 @@ const register = async (req, res) => {
 }
 
 const registerFail = (req, res) => {
-    res.status(400).send({ status: "error", error: req.session.message });
+    res.status(400).send({ status: "error", error: req.session.messages[req.session.messages.length - 1] });
 }
 
 const login = async (req, res) => {
@@ -23,6 +23,7 @@ const login = async (req, res) => {
 }
 
 const loginFail = (req, res) => {
+  console.log(req.session.messages)
     res.status(400).send({
       status: "error",
       error: req.session.messages[req.session.messages.length - 1],

@@ -1,5 +1,5 @@
 const form = document.getElementById("registerForm");
-const completeValues = document.getElementById("complete-values");
+const errorMsg = document.getElementById("complete-values");
 
 form.addEventListener("submit", async (evt) => {
   evt.preventDefault();
@@ -29,7 +29,15 @@ form.addEventListener("submit", async (evt) => {
 
   if (responseData.status === "success") {
     window.location.replace("/login");
-  }else if(responseData.status === 'error'){
-    completeValues.innerText = 'Completa todos los campos!'
+  }else if(responseData.error === 'Missing credentials'){
+    errorMsg.innerText = 'Completa todos los campos!'
+  }else if(responseData.error === 'User already exists'){
+    errorMsg.innerText = 'Ya existe un usuario con este correo'
+  }else if(responseData.error === 'Invalid characters'){
+    errorMsg.innerText = 'Caracteres invalidos'
+  }else if(responseData.error === 'You cant put more than 2 first names'){
+    errorMsg.innerText = 'No puede ingresar mas de dos nombres'
+  }else if(responseData.error === 'You put more than one space'){
+    errorMsg.innerText = 'Error ingresando nombre. Revisalo!'
   }
 });

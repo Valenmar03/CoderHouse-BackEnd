@@ -18,11 +18,8 @@ const initializePassportStrategies = () => {
         try {
           const { first_name, last_name } = req.body;
 
-          if (!first_name || !password || !email || !last_name) {
-            return res
-              .status(400)
-              .send({ status: "error", error: "Incomplete values" });
-          }
+          if (!first_name || !password || !email || !last_name)
+            return done(null, false, { message: "Incomplete values" });
 
           const exists = await userService.findUserBy({ email });
           if (exists)
@@ -30,18 +27,33 @@ const initializePassportStrategies = () => {
 
           const hashedPassword = await createHash(password);
 
-          const cart = await cartService.createCart()
+          const regex = /[A-Za-z]+/g;
+
+          const name = first_name.trim();
+          const namesArray = name.match(regex);
+
+          if (namesArray.length > 2)
+            return done(null, false, { message: "You cant put more than 2 first names" });
+          if (namesArray.length === 1 && name.length > namesArray[0].length)
+            return done(null, false, { message: "Invalid characters" });
+          if (namesArray.length === 2) {
+            const completeName = namesArray[0].length + namesArray[1].length;
+            if (name.length - completeName > 1)
+              return done(null,false,{ message: "You put more than one space"});
+          }
+
+          const cart = await cartService.createCart();
 
           const user = {
             first_name,
             last_name,
             email,
             password: hashedPassword,
-            cart: cart._id
+            cart: cart._id,
           };
 
           const result = await userService.createUser(user);
-          await cartService.updateCart(cart._id, result._id)
+          await cartService.updateCart(cart._id, result._id);
           done(null, result, { message: "User created successfully" });
         } catch (error) {
           done(error);
@@ -69,15 +81,16 @@ const initializePassportStrategies = () => {
 
         let user;
         user = await userService.findUser({ email });
-        if (!user)
-          return done(null, false, { message: "Incorrect Credentials" });
+
+        if (!user) return done(null, false, { message: "Incorrect Credentials" });
 
         const validPassword = await validatePassword(password, user.password);
 
-        if (!validPassword) return done(null, false, { message: "Incorrect Password" });
+        if (!validPassword)
+          return done(null, false, { message: "Incorrect Password" });
 
         const date = new Date(Date.now());
-        user.last_connection = date.toLocaleString()
+        user.last_connection = date.toLocaleString();
         user = await userService.updateUser(user._id, user);
 
         return done(null, user);

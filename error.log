@@ -87,3 +87,12 @@
 {"level":"error","message":"ReferenceError: thumbnail is not defined. Status: undefined"}
 {"level":"error","message":"ValidationError: Products validation failed: stock: Cast to Number failed for value \"hola\" (type string) at path \"stock\". Status: undefined"}
 {"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
