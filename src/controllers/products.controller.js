@@ -1,6 +1,8 @@
-import { productsService, userService } from "../services/repositories.js";
 import config from "../config/env.config.js";
+import nodemailer from "nodemailer";
+import envConfig from "../config/env.config.js";
 
+import { productsService, userService } from "../services/repositories.js";
 import { generateMockProds } from "../mocks/products.mock.js";
 import ErrorService from "../services/error.service.js";
 import {
@@ -8,6 +10,15 @@ import {
   productErrorProdNotFound,
 } from "../constants/productsErrors.js";
 import EErrors from "../constants/EErrors.js";
+
+const transport = nodemailer.createTransport({
+  service: "gmail",
+  port: 3000,
+  auth: {
+    user: envConfig.sendEmail,
+    pass: envConfig.sendPass,
+  },
+});
 
 const getProducts = async (req, res) => {
   const category = req.query.category;
@@ -156,7 +167,7 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
-    const email = req.body.email;
+    const email = req.session.user.email
     const productToDelete = await productsService.getProductById({ _id: pid });
 
     if (!productToDelete) {
@@ -169,17 +180,42 @@ const deleteProduct = async (req, res, next) => {
       });
     }
 
-    if(!email || email.trim() === '' ) return res.send({status: 'error', error: 'Incomplete email value'})
+    if(email === config.adminEmail){
+      const deletedProduct = await productsService.deleteProduct({ _id: pid })
+
+      const user = await userService.findUserBy({ email: productToDelete.owner });
+
+      const products = user.products
+
+      for(let i = 0; i < products.length; i++) {
+        if(products[i] == pid){
+          user.products.splice(i, 1)
+        }
+      }
+
+      const newUser = await userService.updateUser({ _id: user._id }, user)
+
+      const result = await transport.sendMail({
+        from: `Tienda de ropa <${envConfig.sendEmail}>`,
+        to: productToDelete.owner,
+        subject: "Eliminacion de cuenta",
+        html: `
+          <p>Un administrador ha eliminado tu producto (${productToDelete.title})</p>`,
+      })
+
+      return res.send({ status: "success", message: newUser })
+    }
+
     const user = await userService.findUserBy({ email: email });
     if(!user) return res.send({status: 'error', error: 'User not found'});
 
-    if (user.email === productToDelete.owner || email === config.adminEmail) {
-      const deletedProduct = await productsService.deleteProduct({ _id: pid });
-      res.send({ status: "success", message: "Product deleted succesfully" });
+    if (user.email === productToDelete.owner) {
+      const deletedProduct = await productsService.deleteProduct({ _id: pid })
+      return res.send({ status: "success", message: "Product deleted succesfully" });
     } else {
       return res.send({
         status: "error",
-        error: "This isn´t your product, you can´t delete it",
+        error: "This isn't your product, you can't delete it",
       });
     }
   } catch (error) {

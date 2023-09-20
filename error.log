@@ -97,3 +97,5 @@
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
 {"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"ReferenceError: Cannot access 'user' before initialization. Status: undefined"}
+{"level":"error","message":"Error buscando producto: Product not found. Status: 404"}
