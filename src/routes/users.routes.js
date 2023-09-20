@@ -11,6 +11,7 @@ router.put('/:uid', userController.updateUser)
 router.delete('/:uid', userController.deleteUser)
 router.put('/premium/:uid', userController.upgradeUser)
 router.put('/downgrade/:uid', userController.downgradeUser)
+router.post('/changeRole', userController.changeRole)
 router.post('/:uid/documents', userController.uploadDocuments)
 
 

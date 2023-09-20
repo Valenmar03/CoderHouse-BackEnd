@@ -7,12 +7,26 @@
         {{#each user}}
             <div class="users-card">
                 <p>{{this.first_name}} {{this.last_name}}</p>
+                <p class="email">{{this.email}}</p>
                 <p>Rol: {{this.role}}</p>
                 <div class="btns">
-                    <button class="role">Modificar rol</button>
-                    <button class="delete">Eliminar</button>
+                    <button id="open-modal-role" class="role">Modificar rol</button>
+                    <button id="open-modal-delete" class="delete">Eliminar</button>
                 </div>
             </div>
         {{/each}}
     </div>
 </div>
+
+    <section class="modal">
+        <div class="modal-container">
+            <h2 id="modal-title" class="modal-title"></h2>
+            <p id="modal-paragraph" class="modal-paragraph"></p>
+            <div class="modal-btns">
+                <button id="delete-user" class="modal-btn"></button>
+                <button id="modal-close-role" class="modal-btn">Cerrar</button>
+            </div>
+        </div>
+    </section>
+
+<script src="/js/usersAdmin.js"></script>
