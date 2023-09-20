@@ -1,9 +1,21 @@
+import nodemailer from "nodemailer";
+import envConfig from "../config/env.config.js";
+
 import {
   userService,
   cartService,
   productsService,
 } from "../services/repositories.js";
 import { createHash, validatePassword } from "../utils.js";
+
+const transport = nodemailer.createTransport({
+  service: "gmail",
+  port: 3000,
+  auth: {
+    user: envConfig.sendEmail,
+    pass: envConfig.sendPass,
+  },
+});
 
 const createUser = async (req, res) => {
   try {
@@ -130,6 +142,11 @@ const deleteUser = async (req, res) => {
     if (!user) return res.send({ status: "error", error: "User not found" });
 
     const cid = user.cart;
+    for (let i = 0; i < user.products.length; i++) {
+      const deleteProduct = await productsService.deleteProduct({
+        _id: user.products[i],
+      });
+    }
     const deletedUser = await userService.deleteUser({ _id: uid });
     const deletedCart = await cartService.deleteCart({ _id: cid });
 
@@ -229,13 +246,37 @@ const changeRole = async (req, res) => {
 };
 
 const deleteFront = async (req, res) => {
-  const email = req.body.email;
-
-  const user = await userService.findUserBy({ email: email });
-
-  console.log(user)
-
-  res.send({ status: "success" })
+  try {
+    const email = req.body.email;
+  
+    const user = await userService.findUserBy({ email: email });
+  
+    if(!user) return res.send({ status: "error", error: "User not found" })
+  
+    
+    for (let i = 0; i < user.products.length; i++) {
+      const deleteProduct = await productsService.deleteProduct({
+        _id: user.products[i],
+      });
+    }
+    
+    const deletedUser = await userService.deleteUser({ _id: user._id });
+    const deletedCart = await cartService.deleteCart({ _id: user.cart });
+    
+    const result = await transport.sendMail({
+      from: `Tienda de ropa <${envConfig.sendEmail}>`,
+      to: user.email,
+      subject: "Eliminacion de cuenta",
+      html: `
+        <p>Un administrador ha eliminado tu cuenta por incumplimiento de normas</p>`,
+    })
+    
+    res.send({ status: "success" })
+    
+  } catch (error) {
+    console.log('No se encontro la direccion de correo')
+    res.send({ status: 'success' })
+  }
 }
 
 export default {

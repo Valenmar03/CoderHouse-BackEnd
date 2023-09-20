@@ -96,3 +96,4 @@
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'length'). Status: undefined"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}

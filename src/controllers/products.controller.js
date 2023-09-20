@@ -86,9 +86,9 @@ const addProduct = async (req, res, next) => {
       });
     }
     
-    if(product.price < 1 || product.stock < 1) return res.send({status: 'error', error: 'Negative numbres aren´t allowed'})
+    if(product.price < 1 || product.stock < 1) return res.send({status: 'error', error: "Negative numbres aren't allowed"})
 
-    if(!isNaN(product.price) || !isNaN(product.stock)) return res.send({status: 'error', error: 'Invalid data type for stock or price'})
+    if(isNaN(product.price) || isNaN(product.stock)) return res.send({status: 'error', error: 'Invalid data type for stock or price'})
 
 
     const newProduct = await productsService.addProducts(product);

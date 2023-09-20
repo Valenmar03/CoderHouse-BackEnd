@@ -2,6 +2,7 @@ const socket = io();
 const form = document.getElementById("addProductForm");
 const logoutBtn = document.getElementById("logout-btn");
 const button = document.getElementById("prod-button");
+const errorMsg = document.getElementById('error-msg')
 
 socket.on("products-list", (data) => {
   const ul = document.getElementById("product-list");
@@ -59,9 +60,12 @@ form.addEventListener("submit",async (evt) => {
   const responseData = await response.json()
   console.log(responseData)
   if(responseData.error === 'Error de creacion de producto'){
-    const errorMsg = document.getElementById('error-msg')
     errorMsg.innerText = 'Completa todos los campos!'
   } else if(responseData.status === 'success'){
     window.location.reload()
+  } else if(responseData.error == 'Invalid data type for stock or price'){
+    errorMsg.innerText = 'Datos invalidos'
+  } else if(responseData.error == "Negative numbres aren't allowed"){
+    errorMsg.innerText = 'El precio y stock deben ser mayores a 0'
   }
 });
