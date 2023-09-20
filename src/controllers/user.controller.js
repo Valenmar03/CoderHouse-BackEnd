@@ -216,7 +216,7 @@ const changeRole = async (req, res) => {
 
     const downgradeUser = await userService.updateUser({ _id: user._id }, user);
 
-    return res.send({ status: "success", message: "New role: user" });
+    return res.send({ status: "success", message: "New role: user", payload: user.email });
   }
 
   if (user.role == "user") {
@@ -227,6 +227,16 @@ const changeRole = async (req, res) => {
     return res.send({ status: "success", message: "New role: premium", payload: user.email });
   }
 };
+
+const deleteFront = async (req, res) => {
+  const email = req.body.email;
+
+  const user = await userService.findUserBy({ email: email });
+
+  console.log(user)
+
+  res.send({ status: "success" })
+}
 
 export default {
   createUser,
@@ -239,4 +249,5 @@ export default {
   upgradeUser,
   downgradeUser,
   changeRole,
+  deleteFront, 
 };
