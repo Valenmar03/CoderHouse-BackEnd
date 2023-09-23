@@ -28,6 +28,19 @@ const getCartById = async (req, res, next) => {
         status: 404,
       });
     }
+
+    const products = cart.products
+
+    for (let i = 0; i < products.length; i++) {
+      if(!products[i].product){
+        products.splice(i, 1)
+      }
+    }
+
+    cart.products = products
+
+    const newCart = await cartService.updateAllCart(cid, cart)
+
     res.send({ status: "success", payload: cart });
   } catch (error) {
     next(error);

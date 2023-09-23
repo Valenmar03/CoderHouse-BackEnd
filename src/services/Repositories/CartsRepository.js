@@ -12,6 +12,10 @@ export default class CartRepository {
         return this.dao.update(cartId, userId)
     }
 
+    updateAllCart(cartId, cart){
+        return this.dao.updateCart(cartId, cart)
+    }
+
     getCarts(params){
         return this.dao.get(params);
     }

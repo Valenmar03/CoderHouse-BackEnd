@@ -180,8 +180,14 @@ const deleteProduct = async (req, res, next) => {
       });
     }
 
+
+
     if(email === config.adminEmail){
       const deletedProduct = await productsService.deleteProduct({ _id: pid })
+
+      if(productToDelete.owner === 'admin'){
+        return res.send({ status: "success", message: 'Product deleted succesfully' })
+      }
 
       const user = await userService.findUserBy({ email: productToDelete.owner });
 
@@ -203,7 +209,7 @@ const deleteProduct = async (req, res, next) => {
           <p>Un administrador ha eliminado tu producto (${productToDelete.title})</p>`,
       })
 
-      return res.send({ status: "success", message: newUser })
+      return res.send({ status: "success", message: 'Product deleted succesfully' })
     }
 
     const user = await userService.findUserBy({ email: email });

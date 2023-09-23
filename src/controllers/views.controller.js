@@ -179,6 +179,18 @@ const cartPage = async (req, res, next) => {
       });
     }
 
+    const products = cart.products
+
+    for (let i = 0; i < products.length; i++) {
+      if(!products[i].product){
+        products.splice(i, 1)
+      }
+    }
+
+    cart.products = products
+
+    const newCart = await cartService.updateAllCart(cid, cart)
+
     res.render("carts", {
       css: "cart",
       title: "Carrito",

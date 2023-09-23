@@ -19,6 +19,10 @@ export default class CartManagerMongo {
     return cartModel.findById(cartId).populate("products.product").lean();
   };
 
+  updateCart = (cartId, cart) => {
+    return cartModel.findByIdAndUpdate(cartId, cart).lean();
+  }
+
   addProduct = async (cartId, productId, quantity) => {
     const product = await productModel.findById(productId).lean();
 
