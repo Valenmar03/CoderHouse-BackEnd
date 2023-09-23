@@ -70,7 +70,7 @@ for (let i = 0; i < lessQtyBtn.length; i++) {
   lessQtyBtn[i].addEventListener("click", async (evt)=> {
       const string = qty[i].innerHTML
       const stringArray = string.split(" ")
-      const prodQty = stringArray[1];
+      const prodQty = parseInt(stringArray[1]);
       
       const newProdQty = prodQty - 1
 
@@ -81,7 +81,6 @@ for (let i = 0; i < lessQtyBtn.length; i++) {
 
         const cid = document.getElementById('cart-id').innerHTML
 
-        console.log(cid);
         const response = await fetch(`/api/carts/${cid}/products/${pid}`, {
           method: "DELETE",
           headers: {
@@ -101,7 +100,7 @@ const moreQtyBtn = document.getElementsByClassName("more-btn");
 
 for (let i = 0; i < moreQtyBtn.length; i++) {
   
-  moreQtyBtn[i].addEventListener("click", (evt)=> {
+  moreQtyBtn[i].addEventListener("click", async (evt)=> {
       const string = qty[i].innerHTML
       const stringArray = string.split(" ")
       const prodQty = parseInt(stringArray[1]);

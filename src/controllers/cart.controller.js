@@ -92,6 +92,8 @@ const addProductIntoCart = async (req, res, next) => {
 
 const updateProductOnCart = async (req, res, next) => {
   try {
+    console.log(req.params)
+    console.log(req.body)
     const paramId = Object.values(req.params);
     const cartId = paramId[0];
     const productId = paramId[1];

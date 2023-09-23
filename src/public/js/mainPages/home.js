@@ -36,14 +36,6 @@ for (let i = 0; i < addToCartbtn.length; i++) {
         addCart[i].outerHTML = ''
     } else if(responseData.error === 'Sesion no iniciada'){
       window.location.replace('/login')
-    }else if(responseData.status === 'success'){
-      const string = stock[i].innerHTML
-      console.log(stock[i])
-      console.log(string)
-      const array = string.split(' ')
-      const qty = parseInt(array[1])
-      
-      stock[i].innerText = 'Stock: ' + qty - 1
     }
   });
 }
