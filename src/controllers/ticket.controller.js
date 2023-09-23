@@ -152,17 +152,17 @@ const purchase = async (req, res, next) => {
     const user = await userService.findUserBy({ _id: uid })
     console.log(user)
 
+    
+    const ticket = await ticketService.findTicketBy(cid);
+    console.log(ticket)
+    console.log(cart)
     const result = await transport.sendMail({
       from: `Tienda de ropa <${envConfig.sendEmail}>`,
       to: user.email,
       subject: "Compra realizada exitosamente",
       html: `
-        <p>Un administrador ha eliminado tu cuenta por incumplimiento de normas</p>`,
+        <p>Total: ${ticket.amount}</p>`,
     })
-
-    const ticket = await ticketService.findTicketBy(cid);
-    console.log(ticket)
-    console.log(cart)
     //await ticketService.deleteTicket({ _id: ticket._id });
 
     res.send({ status: "success", message: 'Compra realizada correctamente', payload: ticket });
