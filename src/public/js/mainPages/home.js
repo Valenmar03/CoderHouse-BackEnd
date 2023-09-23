@@ -5,6 +5,7 @@ const profileBtn = document.getElementById("profile-btn");
 const addToCartbtn = document.getElementsByClassName("add-to-cart");
 const errorMsg = document.getElementsByClassName('error-msg')
 const addCart = document.getElementsByClassName('add-to-cart')
+const stock = document.getElementsByClassName('stock')
 
 for (let i = 0; i < addToCartbtn.length; i++) {
   addToCartbtn[i].addEventListener("click", async (evt) => {
@@ -27,7 +28,7 @@ for (let i = 0; i < addToCartbtn.length; i++) {
     });
     const responseData = await response.json();
     console.log(responseData);
-    if(responseData.error === 'No hay mas stock de este producto'){
+    if(responseData.error === 'No hay mas stock de este producto' || responseData.error === 'No hay mas stock'){
         errorMsg[i].innerText = 'No hay mas stock'
         addCart[i].outerHTML = ''
     } else if (responseData.error === 'No puede agregar un producto que te pertenece'){
@@ -35,6 +36,14 @@ for (let i = 0; i < addToCartbtn.length; i++) {
         addCart[i].outerHTML = ''
     } else if(responseData.error === 'Sesion no iniciada'){
       window.location.replace('/login')
+    }else if(responseData.status === 'success'){
+      const string = stock[i].innerHTML
+      console.log(stock[i])
+      console.log(string)
+      const array = string.split(' ')
+      const qty = parseInt(array[1])
+      
+      stock[i].innerText = 'Stock: ' + qty - 1
     }
   });
 }

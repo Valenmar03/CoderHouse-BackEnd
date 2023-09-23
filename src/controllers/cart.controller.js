@@ -71,6 +71,8 @@ const addProductIntoCart = async (req, res, next) => {
         error: "No puede agregar un producto que te pertenece",
       });
     }
+    
+    if(product.stock == 0) return res.send({status: "error", error:'No hay mas stock'})
 
     for (let i = 0; i < cart.products.length; i++) {
       if (cart.products[i].product._id == pid && cart.products[i].qty > stock) {

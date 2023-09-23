@@ -183,7 +183,8 @@ const cartPage = async (req, res, next) => {
       css: "cart",
       title: "Carrito",
       prod: cart.products,
-      cart: cart
+      cart: cart,
+      cid: cid
     });
   } catch (error) {
     next(error);

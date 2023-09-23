@@ -99,3 +99,27 @@
 {"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
 {"level":"error","message":"ReferenceError: Cannot access 'user' before initialization. Status: undefined"}
 {"level":"error","message":"Error buscando producto: Product not found. Status: 404"}
+{"level":"error","message":"ReferenceError: user is not defined. Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of null (reading '_id'). Status: undefined"}
+{"level":"error","message":"ReferenceError: Cannot access 'tickets' before initialization. Status: undefined"}
+{"level":"error","message":"Error buscando carrito: Carrito no encontrado. Status: 404"}
+{"level":"error","message":"Error: Parse error on line 21:\n...\"less-btn\" value=\"{{}} {{this.product._i\n-----------------------^\nExpecting 'ID', 'STRING', 'NUMBER', 'BOOLEAN', 'UNDEFINED', 'NULL', 'DATA', got 'CLOSE'. Status: undefined"}
+{"level":"error","message":"Error buscando carrito: Carrito no encontrado. Status: 404"}
+{"level":"error","message":"Error: Parse error on line 21:\n...\"less-btn\" value=\"{{}} {{this.product._i\n-----------------------^\nExpecting 'ID', 'STRING', 'NUMBER', 'BOOLEAN', 'UNDEFINED', 'NULL', 'DATA', got 'CLOSE'. Status: undefined"}
+{"level":"error","message":"Error buscando carrito: Carrito no encontrado. Status: 404"}
+{"level":"error","message":"Error buscando carrito: Carrito no encontrado. Status: 404"}
+{"level":"error","message":"Error buscando carrito: Carrito no encontrado. Status: 404"}

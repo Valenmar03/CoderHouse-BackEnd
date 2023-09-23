@@ -46,7 +46,7 @@
                                 <h2>{{this.title}}</h2>
                                 <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
                                 <p>Precio: ${{this.price}}</p>
-                                <p>Stock: {{this.stock}}</p>
+                                <p class="stock">Stock: {{this.stock}}</p>
                         </a>
                         <p id="error-msg" class="error-msg" style="color: red;"></p>
                         <button id="add-to-cart" class="add-to-cart" value="{{this._id}} {{this.stock}}" >Agregar al carrito</button>

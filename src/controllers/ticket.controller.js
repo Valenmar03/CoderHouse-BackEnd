@@ -9,6 +9,19 @@ import { productErrorProdNotFound } from "../constants/productsErrors.js";
 import { cartErrorNotFound } from "../constants/cartErrors.js";
 import ErrorService from "../services/error.service.js";
 
+import nodemailer from "nodemailer";
+import envConfig from "../config/env.config.js";
+
+
+const transport = nodemailer.createTransport({
+  service: "gmail",
+  port: 3000,
+  auth: {
+    user: envConfig.sendEmail,
+    pass: envConfig.sendPass,
+  },
+});
+
 const createTicket = async (req, res, next) => {
   try {
     const { cid } = req.params;
@@ -36,7 +49,6 @@ const createTicket = async (req, res, next) => {
 
     const tickets = await ticketService.getTickets()
     for (let i = 0; i < tickets.length; i++) {
-      console.log(tickets[i].cart._id)
       console.log(cart._id)
       if(tickets[i].cart._id = cart._id){
         const tid = tickets[i]._id
@@ -134,10 +146,26 @@ const purchase = async (req, res, next) => {
         );
     }
 
-    const ticket = await ticketService.findTicketBy(cid);
-    await ticketService.deleteTicket({ _id: ticket._id });
+    const uid = cart.user
+    console.log(uid)
 
-    res.send({ status: "success", payload: 'Compra realizada correctamente' });
+    const user = await userService.findUserBy({ _id: uid })
+    console.log(user)
+
+    const result = await transport.sendMail({
+      from: `Tienda de ropa <${envConfig.sendEmail}>`,
+      to: user.email,
+      subject: "Compra realizada exitosamente",
+      html: `
+        <p>Un administrador ha eliminado tu cuenta por incumplimiento de normas</p>`,
+    })
+
+    const ticket = await ticketService.findTicketBy(cid);
+    console.log(ticket)
+    console.log(cart)
+    //await ticketService.deleteTicket({ _id: ticket._id });
+
+    res.send({ status: "success", message: 'Compra realizada correctamente', payload: ticket });
   } catch (error) {
     next(error);
   }
