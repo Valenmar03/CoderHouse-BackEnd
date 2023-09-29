@@ -11,6 +11,9 @@ const homePage = async (req, res) => {
   const { page = 1 } = req.query;
   const sort = req.query.sort;
   const category = req.query.category;
+  console.log(req.session.user)
+  let admin
+  if(req.session.user.role = 'admin') admin = true
   const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, ...rest } =
     await productsService.getProducts(page, sort, category);
 
@@ -19,6 +22,7 @@ const homePage = async (req, res) => {
     css: "home",
     title: "Home",
     prod: products,
+    admin,
     user: req.session.user,
     page: rest.page,
     hasPrevPage,
