@@ -73,9 +73,8 @@ const restorePass = async (req, res) => {
   if(!req.session.user){
     return res.send({status: 'error', error: 'El link de cambio de contraseña expiro'})
   }
-  console.log(req.session)
   const email = req.session.user.email
-  const passwords = req.body.passwords
+  const passwords = req.body
   
   const user = await userService.findUser({ email })
   if(!user){

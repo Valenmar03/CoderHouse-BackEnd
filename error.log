@@ -132,3 +132,17 @@
 {"level":"error","message":"TypeError: Cannot read properties of null (reading 'products'). Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of null (reading 'code'). Status: undefined"}
 {"level":"error","message":"TypeError: products[i].splice is not a function. Status: undefined"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"ReferenceError: thumbnail is not defined. Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'email'). Status: undefined"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"Error de creacion de producto: Falta completar campos. Status: 400"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
+{"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}

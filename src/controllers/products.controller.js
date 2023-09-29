@@ -54,8 +54,10 @@ const addProduct = async (req, res, next) => {
       price: req.body.price,
       stock: req.body.stock,
       category: req.body.category,
-      thumbnail: req.body.thumbnail
+      thumbnail: [req.file.originalname]
     };
+
+
     const email = req.body.email;
 
     if (product.category === " ") {
@@ -145,7 +147,6 @@ const updateProduct = async (req, res, next) => {
       !product.title ||
       !product.description ||
       !product.price ||
-      !product.code ||
       !product.category ||
       !product.stock
     ) {

@@ -18,7 +18,7 @@ const login = async (req, res) => {
     if (req.session.user.role === "admin") {
       res.send({ status: "success", message: "Admin is login" });
     } else {
-      res.send({ status: "success" });
+      res.send({ status: "success", message: 'Logued' });
     }
 }
 

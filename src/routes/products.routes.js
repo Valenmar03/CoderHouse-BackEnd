@@ -9,7 +9,7 @@ const router = Router();
 
 router.get("/", productsController.getProducts);
 router.get("/:pid", productsController.getProductById);
-router.post("/", uploader.single('thumbnail'),  productsController.addProduct);
+router.post("/", uploader.single('thumbnail'), productsController.addProduct);
 router.put("/:pid", productsController.updateProduct);
 router.delete("/:pid", productsController.deleteProduct);
 router.post('/mockingproducts', productsController.mockProds)
