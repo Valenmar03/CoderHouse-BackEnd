@@ -46,24 +46,47 @@
         </form>
 
         <div class="cards-contenedor">
-                        
-                {{#if prod}}
-                {{#each prod}}
-                 <div class="cards">
-                        <a href="/products/{{this._id}}" style="color: black; text-decoration:none">
-                                <h2>{{this.title}}</h2>
-                                <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
-                                <p>Precio: ${{this.price}}</p>
-                                <p class="stock">Stock: {{this.stock}}</p>
-                        </a>
-                        <p id="error-msg" class="error-msg" style="color: red;"></p>
-                        <button id="add-to-cart" class="add-to-cart" value="{{this._id}} {{this.stock}}" >Agregar al carrito</button>
-                </div>
-                                
-                {{/each}}
+
+                {{#if admin}}
+                
+                        {{#if prod}}
+                        {{#each prod}}
+                        <div class="cards">
+                                <a href="/products/{{this._id}}" style="color: black; text-decoration:none">
+                                        <h2>{{this.title}}</h2>
+                                        <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
+                                        <p>Precio: ${{this.price}}</p>
+                                        <p class="stock">Stock: {{this.stock}}</p>
+                                </a>
+                        </div>
+                                        
+                        {{/each}}
+                        {{else}}
+                                <p>No se encontraron productos</p>
+                        {{/if}}
                 {{else}}
-                        <p>No se encontraron productos</p>
+                
+                        {{#if prod}}
+                        {{#each prod}}
+                        <div class="cards">
+                                <a href="/products/{{this._id}}" style="color: black; text-decoration:none">
+                                        <h2>{{this.title}}</h2>
+                                        <img src="./Images/{{this.category}}.jpg" alt="{{this.title}}" id="prod-img">
+                                        <p>Precio: ${{this.price}}</p>
+                                        <p class="stock">Stock: {{this.stock}}</p>
+                                </a>
+                                <p id="error-msg" class="error-msg" style="color: red;"></p>
+                                <button id="add-to-cart" class="add-to-cart" value="{{this._id}} {{this.stock}}" >Agregar al carrito</button>
+                        </div>
+                                        
+                        {{/each}}
+                        {{else}}
+                                <p>No se encontraron productos</p>
+                        {{/if}}
+
                 {{/if}}
+                        
+                
                         
         </div>
 
