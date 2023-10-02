@@ -54,7 +54,6 @@ const addProduct = async (req, res, next) => {
       price: req.body.price,
       stock: req.body.stock,
       category: req.body.category,
-      thumbnail: [req.file.originalname]
     };
 
 
