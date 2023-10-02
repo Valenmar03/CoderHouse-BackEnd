@@ -167,7 +167,10 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
+    if(!req.session.user) return res.send({ status: 'error', error: 'Login to delete product'})
+    
     const email = req.session.user.email
+
     const productToDelete = await productsService.getProductById({ _id: pid });
 
     if (!productToDelete) {

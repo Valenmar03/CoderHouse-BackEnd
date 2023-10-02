@@ -30,4 +30,6 @@ router.get("/github", passport.authenticate("github"), (req, res) => {});
 
 router.get("/githubcallback", passport.authenticate("github"), sessionController.github);
 
+router.get("/logout", sessionController.logout);
+
 export default router;

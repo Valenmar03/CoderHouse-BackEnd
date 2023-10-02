@@ -147,3 +147,8 @@
 {"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
 {"level":"error","message":"Error: Cannot set headers after they are sent to the client. Status: undefined"}
 {"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'originalname'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'email'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'email'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'email'). Status: undefined"}
+{"level":"error","message":"TypeError: Cannot read properties of undefined (reading 'email'). Status: undefined"}
+{"level":"error","message":"Error buscando producto: Producto no encontrado. Status: 404"}
